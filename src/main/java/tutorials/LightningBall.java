@@ -10,7 +10,6 @@ import java.util.List;
 public class LightningBall extends SpriteObject implements ICollidableWithGameObjects {
 
     private TutorialWorld world;
-
     final int speed = 1;
 
     public LightningBall(TutorialWorld world) {
@@ -19,9 +18,6 @@ public class LightningBall extends SpriteObject implements ICollidableWithGameOb
         this.world = world;
     }
 
-
-
-
     @Override
     public void update() {
         if (x < 0) {
@@ -29,10 +25,7 @@ public class LightningBall extends SpriteObject implements ICollidableWithGameOb
         } else if (x > world.getWidth() - this.getWidth()){
             setDirectionSpeed(270, speed);
         }
-
-
     }
-
 
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> list) {
@@ -42,7 +35,5 @@ public class LightningBall extends SpriteObject implements ICollidableWithGameOb
                 world.deleteGameObject(this);
             }
         }
-
-
     }
 }

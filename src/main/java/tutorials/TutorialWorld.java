@@ -24,13 +24,13 @@ public class TutorialWorld extends GameEngine {
 
     @Override
     public void setupGame() {
-        loadSounds();
         int worldWidth = 500;
         int worldHeight = 500;
 
+        loadSounds();
         initializeTileMap();
 
-        // Als je geluiden wilt gebruiken in de gameobject dan moet je
+        // Als je geluiden wilt gebruiken bij een game object dan moet je
         // ze maken voordat je de gameobjecten initialiseert.
 
         // In setupGame() moeten de game objecten toegevoegd worden.
@@ -45,9 +45,8 @@ public class TutorialWorld extends GameEngine {
         addGameObject(lightningBall, 0, 50);
 
         View view = new View(worldWidth, worldHeight);
-        //view.setBackground(loadImage(TutorialWorld.MEDIA_URL.concat("tutorial_background.png")));
-
         setView(view); // Als deze niet aangeroepen wordt, crasht de applicatie.
+
         size(worldWidth, worldHeight);
     }
 
@@ -56,15 +55,12 @@ public class TutorialWorld extends GameEngine {
         jumpSound = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/jump_11.wav"));
         backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/8BitMenuMusicSlow.wav"));
         backgroundMusic.loop(-1);
-
-
     }
 
     @Override
     public void update() {
-        //System.out.println("TutorialWorld");
-        // Dit doet nog helemaal niks.
 
+        // Dit doet nog helemaal niks.
     }
 
     private void initializeTileMap() {
@@ -88,8 +84,6 @@ public class TutorialWorld extends GameEngine {
                 {-1, -1, -1, -1, -1, -1, -1,},
         };
 
-
         tileMap = new TileMap(tileSize, tileTypes, tilesMap);
     }
-
 }

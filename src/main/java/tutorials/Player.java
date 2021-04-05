@@ -17,8 +17,6 @@ public class Player extends SpriteObject implements ICollidableWithTiles {
     private Sound sound;
 
     public Player(TutorialWorld world, Sound sound) {
-        // Met `.concat()` plak je 2 strings aan elkaar.
-        // De methode returned een nieuwe String terug.
         super(new Sprite(TutorialWorld.MEDIA_URL.concat("/sprites/characters/player.png")));
         this.world = world;
         this.sound = sound;
@@ -33,8 +31,6 @@ public class Player extends SpriteObject implements ICollidableWithTiles {
 
     @Override
     public void update() { // Dit is een goede plek om beweging van een karakter bij te houden.
-
-        //System.out.println(this.getSpeed());
     }
 
     @Override
@@ -49,7 +45,6 @@ public class Player extends SpriteObject implements ICollidableWithTiles {
             sound.cue(0);
             sound.play();
         }
-
     }
 
     @Override
