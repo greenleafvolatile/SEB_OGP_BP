@@ -38,3 +38,6 @@ src/main/java/nl/han/ica/oopdprocessingenginehan/logger/Log.log
 
 # Visual Studio Code
 .vscode
+
+# Log files
+oopg.log
