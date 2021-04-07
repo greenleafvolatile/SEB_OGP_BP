@@ -28,6 +28,7 @@ public class TutorialWorld extends GameEngine {
         int worldHeight = 500;
 
         loadSounds();
+        loadAlarms();
         initializeTileMap();
 
         // Als je geluiden wilt gebruiken bij een game object dan moet je
@@ -50,17 +51,23 @@ public class TutorialWorld extends GameEngine {
         size(worldWidth, worldHeight);
     }
 
-    public void loadSounds() {
+    private void loadSounds() {
 
         jumpSound = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/jump_11.wav"));
         backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/8BitMenuMusicSlow.wav"));
         backgroundMusic.loop(-1);
     }
 
+    private void loadAlarms() {
+        LightningBallSpawner lightningSpawner = new LightningBallSpawner(this, 1);
+        lightningSpawner.triggerAlarm("New Disc");
+    }
+
     @Override
     public void update() {
 
-        // Dit doet nog helemaal niks.
+        System.out.println("Speeds: " + player.getSpeed());
+        System.out.println("y: " + player.getY());
     }
 
     private void initializeTileMap() {
