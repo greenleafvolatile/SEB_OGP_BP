@@ -5,6 +5,8 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
+import nl.han.ica.oopg.view.CenterFollowingViewport;
+import nl.han.ica.oopg.view.EdgeFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import tutorials.tiles.FloorTile;
 
@@ -42,11 +44,16 @@ public class TutorialWorld extends GameEngine {
         player = new Player(this, jumpSound);
         lightningBall = new LightningBall(this);
 
+        CenterFollowingViewport viewPort = new CenterFollowingViewport(player, worldWidth, worldHeight, 0, 0);
+
         addGameObject(player, 200, 0);
         addGameObject(lightningBall, 0, 50);
 
+
         View view = new View(worldWidth, worldHeight);
+        view.setViewport(viewPort);
         setView(view); // Als deze niet aangeroepen wordt, crasht de applicatie.
+
 
         size(worldWidth, worldHeight);
     }
@@ -54,13 +61,13 @@ public class TutorialWorld extends GameEngine {
     private void loadSounds() {
 
         jumpSound = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/jump_11.wav"));
-        backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/8BitMenuMusicSlow.wav"));
-        backgroundMusic.loop(-1);
+        //backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/8BitMenuMusicSlow.wav"));
+        //backgroundMusic.loop(-1);
     }
 
     private void loadAlarms() {
-        LightningBallSpawner lightningSpawner = new LightningBallSpawner(this, 1);
-        lightningSpawner.triggerAlarm("New Disc");
+        //LightningBallSpawner lightningSpawner = new LightningBallSpawner(this, 1);
+        // lightningSpawner.triggerAlarm("New Disc");
     }
 
     @Override
