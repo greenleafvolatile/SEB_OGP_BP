@@ -3,8 +3,8 @@ package Super_Mario_Speed_Runner;
 import processing.core.PApplet;
 
 /**
- * This method represent a button that the
- * user can click on the left moues button.
+ * This method represents a button that the
+ * user can click on with the left mouse button.
  *
  * @author Christiaan Wiggers & Daan Pol.
  * @version 1.0
