@@ -11,7 +11,7 @@ import processing.core.PApplet;
  * @since 04-11-2021
  *
  */
-public class UIButton extends UIComponent {
+public final class UIButton extends UIComponent {
 
     private final float buttonWidth, buttonHeight, buttonColor, textColor;
     private final String buttonText;
