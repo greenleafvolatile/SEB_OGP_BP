@@ -3,7 +3,6 @@ package super_mario_speed_runner;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.view.View;
 
-import java.awt.event.KeyEvent;
 
 public class MainApp extends GameEngine {
 
@@ -39,9 +38,8 @@ public class MainApp extends GameEngine {
     }
 
 
-
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(int keyCode, char key) {
 
         if (keyCode == this.LEFT) {
 
@@ -55,6 +53,24 @@ public class MainApp extends GameEngine {
             System.out.println("Pressed right");
             stateManager.setGameState(GameState.GAME);
         }
+
     }
+
+    /*@Override
+    public void keyPressed(KeyEvent e) { // Wrong method override
+
+        if (keyCode == this.LEFT) {
+
+            System.out.println("Pressed left");
+            stateManager.setGameState(GameState.START);
+
+        }
+
+        if (keyCode == this.RIGHT) {
+
+            System.out.println("Pressed right");
+            stateManager.setGameState(GameState.GAME);
+        }
+    }*/
 
 }
