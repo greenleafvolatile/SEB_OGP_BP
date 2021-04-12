@@ -26,13 +26,6 @@ public abstract class UIComponent {
 
     }
 
-    /**
-     * This is a method for the sake of mouse processing.
-     * @param mouseX the x-position of the mouse pointer.
-     * @param mouseY the y-position of the mouse pointer.
-     * @return true if the mouse pointer is inside the shape of the ui component else false.
-     */
-    protected abstract boolean contains(float mouseX, float mouseY);
 
 
     /**
