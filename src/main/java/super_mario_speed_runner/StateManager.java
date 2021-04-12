@@ -23,6 +23,8 @@ public class StateManager {
 
     public void drawState() {
 
+        this.app.deleteAllGameOBjects();
+
         switch (gameState) {
 
             case START:

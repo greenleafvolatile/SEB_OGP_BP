@@ -10,8 +10,8 @@ public class Game {
         this.app = app;
         //System.out.println("GAME");
 
-        TextObject to = new TextObject("Game.", 40);
+        TextObject to = new TextObject("Game", 40);
         to.setForeColor(255, 255, 255, 255);
-        app.addGameObject(to, 100, 100);
+        app.addGameObject(to, 100, 300);
     }
 }

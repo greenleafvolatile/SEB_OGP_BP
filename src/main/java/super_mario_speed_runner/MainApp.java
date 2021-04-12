@@ -34,7 +34,6 @@ public class MainApp extends GameEngine {
     @Override
     public void update() {
 
-        this.background(0);
         stateManager.drawState();
 
     }
@@ -43,21 +42,18 @@ public class MainApp extends GameEngine {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        super.keyPressed(e);
 
         if (keyCode == this.LEFT) {
-            //loop();
 
             System.out.println("Pressed left");
-            //deleteAllGameOBjects();
             stateManager.setGameState(GameState.START);
-            stateManager.drawState();
 
-        } else if (keyCode == this.RIGHT) {
+        }
+
+        if (keyCode == this.RIGHT) {
+
             System.out.println("Pressed right");
-            //deleteAllGameOBjects();
             stateManager.setGameState(GameState.GAME);
-            stateManager.drawState();
         }
     }
 
