@@ -3,7 +3,7 @@ package super_mario_speed_runner;
 public class StateManager {
 
     private MainApp app;
-    private Menu menu;
+    private StartMenu menu;
     private GameState gameState = GameState.START;
     //private int gameState = 1;
 
@@ -26,12 +26,12 @@ public class StateManager {
         switch (gameState) {
 
             case START:
-                new Menu(this.app);
+                new StartMenu(this.app);
                 break;
 
 
-            case END:
-                new Play(this.app);
+            case GAME:
+                new Game(this.app);
                 break;
         }
 

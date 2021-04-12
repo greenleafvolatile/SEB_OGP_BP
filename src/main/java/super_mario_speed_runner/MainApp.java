@@ -28,11 +28,14 @@ public class MainApp extends GameEngine {
         View view = new View(screenWidth, screenHeight);
         setView(view);
 
-        stateManager.drawState();
+        //stateManager.drawState();
     }
 
     @Override
     public void update() {
+
+        this.background(0);
+        stateManager.drawState();
 
     }
 
@@ -42,14 +45,17 @@ public class MainApp extends GameEngine {
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e);
 
-        if (keyCode == LEFT) {
-            loop();
-            deleteAllGameOBjects();
+        if (keyCode == this.LEFT) {
+            //loop();
+
+            System.out.println("Pressed left");
+            //deleteAllGameOBjects();
             stateManager.setGameState(GameState.START);
             stateManager.drawState();
 
-        } else if (keyCode == RIGHT) {
-            deleteAllGameOBjects();
+        } else if (keyCode == this.RIGHT) {
+            System.out.println("Pressed right");
+            //deleteAllGameOBjects();
             stateManager.setGameState(GameState.GAME);
             stateManager.drawState();
         }
