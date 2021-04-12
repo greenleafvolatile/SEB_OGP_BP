@@ -21,9 +21,6 @@ public class MainApp extends GameEngine {
 
         size(screenWidth, screenHeight);
 
-        Player player = new Player(this);
-        addGameObject(player, 0, 0);
-
         View view = new View(screenWidth, screenHeight);
         setView(view);
     }
