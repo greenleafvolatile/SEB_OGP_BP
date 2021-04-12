@@ -5,6 +5,8 @@ import nl.han.ica.oopg.view.View;
 
 public class MainApp extends GameEngine {
 
+    public static String MEDIA_URL = "src/main/java/mario/media/";
+
     public static void main(String[] args) {
         MainApp app = new MainApp();
 
