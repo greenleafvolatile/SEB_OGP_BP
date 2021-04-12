@@ -13,8 +13,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     private MainApp app;
 
-    public Player(MainApp app, int totalFrames) {
-        super(new Sprite(MainApp.MEDIA_URL.concat("/sprites/characters/mario.png")), 7);
+    public Player(MainApp app) {
+        super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.app = app;
     }
 
