@@ -21,21 +21,17 @@ public class MainApp extends GameEngine {
         int screenWidth = 1024;
         int screenHeight = 768;
 
-        this.stateManager = new StateManager(this);
-
         size(screenWidth, screenHeight);
 
         View view = new View(screenWidth, screenHeight);
         setView(view);
 
-        //stateManager.drawState();
+        this.stateManager = new StateManager(this);
+        stateManager.drawState();
     }
 
     @Override
     public void update() {
-
-        stateManager.drawState();
-
     }
 
     @Override
@@ -53,6 +49,8 @@ public class MainApp extends GameEngine {
             System.out.println("Pressed right");
             stateManager.setGameState(GameState.GAME);
         }
+
+        stateManager.drawState();
     }
 
 }
