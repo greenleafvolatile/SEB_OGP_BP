@@ -4,18 +4,19 @@ public class StateManager {
 
     private MainApp app;
     private Menu menu;
-    private int gameState = 1;
+    private GameState gameState;
+    //private int gameState = 1;
 
 
     public StateManager(MainApp app) {
         this.app = app;
     }
 
-    public int getGameState() {
+    public GameState getGameState() {
         return gameState;
     }
 
-    public void setGameState(int gameState) {
+    public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 
@@ -24,12 +25,12 @@ public class StateManager {
 
         switch (gameState) {
 
-            case 1:
+            case START:
                 new Menu(this.app);
                 break;
 
 
-            case 2:
+            case END:
                 new Play(this.app);
                 break;
         }

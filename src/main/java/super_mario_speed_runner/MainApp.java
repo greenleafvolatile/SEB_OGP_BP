@@ -45,12 +45,12 @@ public class MainApp extends GameEngine {
         if (keyCode == LEFT) {
             loop();
             deleteAllGameOBjects();
-            stateManager.setGameState(2);
+            stateManager.setGameState(GameState.START);
             stateManager.drawState();
 
         } else if (keyCode == RIGHT) {
             deleteAllGameOBjects();
-            stateManager.setGameState(1);
+            stateManager.setGameState(GameState.GAME);
             stateManager.drawState();
         }
     }
