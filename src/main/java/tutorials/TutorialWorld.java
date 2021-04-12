@@ -17,7 +17,7 @@ public class TutorialWorld extends GameEngine {
     private LightningBall lightningBall;
 
     // Deze regel maakt het makkelijker om te refereren naar je plaatjes.
-    public static String MEDIA_URL = "src/main/java/Super_Mario_Speed_Runner.media/";
+    public static String MEDIA_URL = "src/main/java/tutorials/media/";
 
     public static void main(String[] args) {
         TutorialWorld tw = new TutorialWorld();
@@ -61,8 +61,8 @@ public class TutorialWorld extends GameEngine {
     private void loadSounds() {
 
         jumpSound = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/jump_11.wav"));
-        //backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("/sounds/8BitMenuMusicSlow.wav"));
-        //backgroundMusic.loop(-1);
+        backgroundMusic = new Sound(this, TutorialWorld.MEDIA_URL.concat("sounds/8BitMenuMusicSlow.wav"));
+        backgroundMusic.loop(-1);
     }
 
     private void loadAlarms() {
@@ -80,7 +80,7 @@ public class TutorialWorld extends GameEngine {
     private void initializeTileMap() {
 
         // load sprites
-        Sprite floorSprite = new Sprite(TutorialWorld.MEDIA_URL.concat("sprites/tiles/platformPack_tile001.png"));
+        Sprite floorSprite = new Sprite(TutorialWorld.MEDIA_URL.concat("sprites/ground/ground.png"));
 
         TileType<FloorTile> floorTileType = new TileType<>(FloorTile.class, floorSprite);
 

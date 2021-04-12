@@ -13,7 +13,7 @@ public class LightningBall extends SpriteObject implements ICollidableWithGameOb
     final int speed = 1;
 
     public LightningBall(TutorialWorld world) {
-        super(new Sprite(TutorialWorld.MEDIA_URL.concat("sprites/tiles/platformPack_tile012.png")));
+        super(new Sprite(TutorialWorld.MEDIA_URL.concat("sprites/enemies/lightningBall.png")));
         this.setDirectionSpeed(90, speed);
         this.world = world;
     }
