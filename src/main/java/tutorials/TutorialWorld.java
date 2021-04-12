@@ -17,7 +17,7 @@ public class TutorialWorld extends GameEngine {
     private LightningBall lightningBall;
 
     // Deze regel maakt het makkelijker om te refereren naar je plaatjes.
-    public static String MEDIA_URL = "src/main/java/media/";
+    public static String MEDIA_URL = "src/main/java/Super_Mario_Speed_Runner.media/";
 
     public static void main(String[] args) {
         TutorialWorld tw = new TutorialWorld();
