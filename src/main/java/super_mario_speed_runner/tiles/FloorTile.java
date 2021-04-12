@@ -3,9 +3,9 @@ package super_mario_speed_runner.tiles;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 
-public class MarioTile extends Tile {
+public class FloorTile extends Tile {
 
-    public MarioTile (Sprite sprite) {
+    public FloorTile(Sprite sprite) {
         super(sprite);
     }
 }
