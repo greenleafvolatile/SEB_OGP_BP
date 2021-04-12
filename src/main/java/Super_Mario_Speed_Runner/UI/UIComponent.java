@@ -1,4 +1,4 @@
-package Super_Mario_Speed_Runner;
+package Super_Mario_Speed_Runner.UI;
 
 import processing.core.PApplet;
 
