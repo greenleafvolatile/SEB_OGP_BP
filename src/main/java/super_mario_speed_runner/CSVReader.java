@@ -12,13 +12,13 @@ import java.util.concurrent.Callable;
 
 public class CSVReader {
 
-    private final String path = MainApp.MEDIA_URL + "maps/map.csv";
+    private static final String PATH_TO_FILE = MainApp.MEDIA_URL + "maps/map.csv";
 
-    public int[][] readFile() {
+    public static int[][] readFile() {
 
         int[][] map = null;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) { // Auto close input stream with try-with-resources.
+        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) { // Auto close input stream with try-with-resources.
 
             map = new int[getNumberOfLines()][];
 
@@ -56,7 +56,7 @@ public class CSVReader {
 
     }
 
-    private int[] toIntArray(String[] array) {
+    private static int[] toIntArray(String[] array) {
         int[] result = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = Integer.parseInt(array[i]);
@@ -64,11 +64,11 @@ public class CSVReader {
         return result;
     }
 
-    private int getNumberOfLines() throws IOException {
+    private static int getNumberOfLines() throws IOException {
 
         int numberOfLines = 0;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) {
 
             while (reader.readLine() != null) {
 
@@ -79,8 +79,7 @@ public class CSVReader {
     }
 
     public static void main(String[] args) {
-        CSVReader reader = new CSVReader();
-        int[][] map = reader.readFile();
+        int[][] map = CSVReader.readFile();
         for (int[] ints : map) {
             for (int anInt : ints) {
                 System.out.print(anInt);
