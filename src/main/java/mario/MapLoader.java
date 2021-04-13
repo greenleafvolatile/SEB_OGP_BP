@@ -1,4 +1,4 @@
-package super_mario_speed_runner;
+package mario;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public final class MapLoader {
 
-    private static final String PATH_TO_FILE = MainApp.MEDIA_URL + "map.csv";
+    private static final String PATH_TO_FILE = MainApp.MEDIA_URL + "maps/map.csv";
 
     /***
      * Used to import a TileMap in CSV format

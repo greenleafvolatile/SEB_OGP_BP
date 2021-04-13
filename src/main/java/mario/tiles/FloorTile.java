@@ -1,4 +1,4 @@
-package super_mario_speed_runner.tiles;
+package mario.tiles;
 
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
