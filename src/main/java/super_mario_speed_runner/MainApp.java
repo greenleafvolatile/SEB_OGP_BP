@@ -5,7 +5,7 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.View;
-import tutorials.tiles.FloorTile;
+import super_mario_speed_runner.tiles.FloorTile;
 
 public class MainApp extends GameEngine {
 
@@ -21,7 +21,7 @@ public class MainApp extends GameEngine {
     @Override
     public void setupGame() {
         int screenWidth = 1024;
-        int screenHeight = 960;
+        int screenHeight = 768;
 
         size(screenWidth, screenHeight);
 
