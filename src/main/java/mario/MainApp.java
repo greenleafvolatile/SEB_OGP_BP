@@ -1,15 +1,15 @@
-package super_mario_speed_runner;
+package mario;
 
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.View;
-import super_mario_speed_runner.tiles.FloorTile;
+import mario.tiles.FloorTile;
 
 public class MainApp extends GameEngine {
 
-    public static String MEDIA_URL = "src/main/java/super_mario_speed_runner/media/";
+    public static String MEDIA_URL = "src/main/java/mario/media/";
 
     public static void main(String[] args) {
         MainApp app = new MainApp();

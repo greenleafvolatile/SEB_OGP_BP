@@ -1,4 +1,4 @@
-package super_mario_speed_runner;
+package mario;
 
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
