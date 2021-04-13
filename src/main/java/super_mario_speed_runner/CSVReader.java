@@ -22,24 +22,16 @@ public class CSVReader {
 
             map = new int[getNumberOfLines()][];
 
-            String line;
+            //String line;
+            for (int i = 0; i < map.length; i++) {
+                map[i] = toIntArray(reader.readLine().split(","));
+            }
 
-            /*int lineCount = 0;
+            /* int lineCount = 0;
             List<String[]> lines = new ArrayList<>();
-            int[][] data = new int[0][]; */
-            int index = 0;
+            int[][] data = new int[0][];
 
             while ((line = reader.readLine()) != null) {
-
-                String[] array = line.split(",");
-
-                int[] arrayToInt = new int[array.length];
-
-                for (int i = 0; i < array.length; i++) {
-                    arrayToInt[i] = Integer.parseInt(array[i]);
-                }
-
-                map[index++] = arrayToInt;
 
                 /*++lineCount;
 
@@ -52,9 +44,9 @@ public class CSVReader {
                 }
 
                 System.arraycopy(data, 0, map, 0, lineCount - 1);//copy previously read values to new array
-                data = map;//set new array as csv data*/
+                data = map;//set new array as csv data
 
-            }
+            }*/
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,6 +54,14 @@ public class CSVReader {
 
         return map;
 
+    }
+
+    private int[] toIntArray(String[] array) {
+        int[] result = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            result[i] = Integer.parseInt(array[i]);
+        }
+        return result;
     }
 
     private int getNumberOfLines() throws IOException {
