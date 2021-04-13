@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class CSVReader {
+public final class CSVReader {
 
     private static final String PATH_TO_FILE = MainApp.MEDIA_URL + "maps/map.csv";
 
@@ -57,7 +57,7 @@ public class CSVReader {
     }
 
     private static int[] toIntArray(String[] array) {
-        int[] result = new int[array.length];
+        final int[] result = new int[array.length];
         for (int i = 0; i < array.length; i++) {
             result[i] = Integer.parseInt(array[i]);
         }
