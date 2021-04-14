@@ -45,6 +45,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             setDirectionSpeed(270, this.movementSpeed);
         } else if (key == ' ') {
             setDirectionSpeed(360, 5);
+            this.jumpSound.cue(0);
+            this.jumpSound.play();
         }
     }
 
