@@ -19,8 +19,8 @@ public class MainApp extends GameEngine {
     private Player player;
     private Map map;
 
-    private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl0.csv"))};
-    private int level = 0;
+    private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl1.csv"))};
+    private int level = 1;
 
     public static void main(String[] args) {
 
@@ -73,7 +73,7 @@ public class MainApp extends GameEngine {
 
     private void initializeMap() {
 
-        this.map = new Map(mapFiles[level]);
+        this.map = new Map(mapFiles[level - 1]);
         TileMap tileMap = new TileMap(MarioTile.getTileSize(), map.getTileTypes(), map.getTilesMap());
         this.setTileMap(tileMap);
     }
