@@ -5,6 +5,7 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
+import nl.han.ica.oopg.view.CenterFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import mario.tiles.FloorTile;
 
@@ -31,7 +32,10 @@ public class MainApp extends GameEngine {
         initializeTileMap();
         createGameObjects();
 
+        //CenterFollowingViewport centerFollowingViewport = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 0);
+
         View view = new View(screenWidth, screenHeight);
+        //view.setViewport(centerFollowingViewport);
         setView(view);
     }
 
@@ -41,6 +45,7 @@ public class MainApp extends GameEngine {
     }
 
     public void createGameObjects() {
+
         player = new Player(this);
         addGameObject(player, 5);
     }
@@ -82,8 +87,10 @@ public class MainApp extends GameEngine {
         };
 
 
-        int tileSize = 64;
+        int tileSize = 32;
         int[][] tilesMap = MapLoader.loadMap();
         tileMap = new TileMap(tileSize, tileTypes, tilesMap);
     }
+
+
 }
