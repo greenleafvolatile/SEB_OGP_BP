@@ -12,6 +12,8 @@ public class MainApp extends GameEngine {
 
     public static String MEDIA_URL = "src/main/java/mario/media/";
 
+    private Player player;
+
     public static void main(String[] args) {
         MainApp app = new MainApp();
 
@@ -27,6 +29,7 @@ public class MainApp extends GameEngine {
         size(screenWidth, screenHeight);
 
         initializeTileMap();
+        createGameObjects();
 
         View view = new View(screenWidth, screenHeight);
         setView(view);
@@ -35,6 +38,11 @@ public class MainApp extends GameEngine {
     @Override
     public void update() {
 
+    }
+
+    public void createGameObjects() {
+        player = new Player(this);
+        addGameObject(player, 5);
     }
 
 
