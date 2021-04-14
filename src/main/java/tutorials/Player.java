@@ -47,6 +47,7 @@ public class Player extends SpriteObject implements ICollidableWithTiles {
         }
     }
 
+
     @Override
     public void keyReleased(int keyCode, char key) {
         this.setSpeed(0);
