@@ -10,12 +10,17 @@ import nl.han.ica.oopg.view.CenterFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import mario.tiles.FloorTile;
 
+import java.io.File;
+
 public class MainApp extends GameEngine {
 
     public static String MEDIA_URL = "src/main/java/mario/media/";
 
     private Player player;
     private Map map;
+
+    private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl0.csv"))};
+    private int level = 0;
 
     public static void main(String[] args) {
 
@@ -68,7 +73,7 @@ public class MainApp extends GameEngine {
 
     private void initializeMap() {
 
-        this.map = new Map();
+        this.map = new Map(mapFiles[level]);
         TileMap tileMap = new TileMap(MarioTile.getTileSize(), map.getTileTypes(), map.getTilesMap());
         this.setTileMap(tileMap);
     }

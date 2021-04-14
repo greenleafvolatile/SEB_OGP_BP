@@ -1,24 +1,24 @@
 package mario;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 public final class MapLoader {
 
-    private static final String PATH_TO_FILE = MainApp.MEDIA_URL + "maps/map.csv";
 
     /***
      * Used to import a TileMap in CSV format
      * @return integer 2D array
      */
-    public static int[][] loadMap() {
+    public static int[][] loadMap(File file) {
 
         int[][] map = null;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) { // Auto close input stream with try-with-resources.
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) { // Auto close input stream with try-with-resources.
 
-            map = new int[getNumberOfLines()][];
+            map = new int[getNumberOfLines(file)][];
 
             for (int i = 0; i < map.length; i++) {
                 map[i] = toIntArray(reader.readLine().split(","));
@@ -44,11 +44,11 @@ public final class MapLoader {
 
     }
 
-    private static int getNumberOfLines() throws IOException {
+    private static int getNumberOfLines(File file) throws IOException {
 
         int numberOfLines = 0;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
             while (reader.readLine() != null) {
                 numberOfLines++;
