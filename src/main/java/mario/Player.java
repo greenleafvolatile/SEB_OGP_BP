@@ -15,12 +15,13 @@ import java.util.List;
 public class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
     private MainApp app;
+    private final float gravity;
 
     public Player(MainApp app) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.app = app;
 
-        final float gravity = 0.2f;
+        this.gravity = 0.2f;
         this.setGravity(gravity);
     }
 
