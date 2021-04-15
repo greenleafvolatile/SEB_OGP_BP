@@ -2,6 +2,7 @@ package mario;
 
 import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
+import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
@@ -77,7 +78,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
         for (CollidedTile tile : collidedTiles) {
 
-            if (tile.getTile() instanceof FloorTile) {
+            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
                 if (tile.getCollisionSide() == CollisionSide.LEFT) {
                     vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
