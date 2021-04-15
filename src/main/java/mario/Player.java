@@ -74,46 +74,39 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
-        PVector vector;
-
         for (CollidedTile tile : collidedTiles) {
+
+            PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+            PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
                 switch (tile.getCollisionSide()) {
 
                     case LEFT:
-                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                        setX(vector.x - width);
+                        setX(tilePixelLocation.x - width);
                         break;
 
                     case RIGHT:
-                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                        setX(vector.x + this.app.getTileMap().getTileSize());
+                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
                         break;
 
                     case TOP:
-                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                        setY(vector.y - height);
+                        setY(tilePixelLocation.y - height);
                         break;
 
                     case BOTTOM:
-                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                        this.setY(vector.y + getHeight());
+                        this.setY(tilePixelLocation.y + getHeight());
                         break;
 
                 }
-
                 // Prevents endless speed increasing
                 this.setySpeed(0);
-
             }
             
             if (tile.getTile() instanceof KeyTile) {
                 try {
-                    vector = this.app.getTileMap().getTileIndex(tile.getTile());
-                    this.app.getTileMap().setTile((int) vector.x, (int) vector.y, -1);
-
+                    this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
