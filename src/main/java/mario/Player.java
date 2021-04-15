@@ -3,6 +3,7 @@ package mario;
 import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
 import nl.han.ica.oopg.collision.CollidedTile;
+import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
@@ -20,7 +21,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private final float gravity;
     private final Sound jumpSound;
 
-    private int movementSpeed = 1;
+    private int movementSpeed = 5;
 
     public Player(MainApp app) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
@@ -75,16 +76,30 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         PVector vector;
 
         for (CollidedTile tile : collidedTiles) {
+
             if (tile.getTile() instanceof FloorTile) {
 
-                try {
+                if (tile.getCollisionSide() == CollisionSide.LEFT) {
                     vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    this.setY(vector.y - getHeight());
-
-                } catch (TileNotFoundException e) {
-                    e.printStackTrace();
+                    setX(vector.x - width);
                 }
 
+                if (tile.getCollisionSide() == CollisionSide.RIGHT) {
+                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                    setX(vector.x + this.app.getTileMap().getTileSize());
+                }
+
+                if (tile.getCollisionSide() == CollisionSide.TOP) {
+                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                    setY(vector.y - height);
+                }
+
+                if (tile.getCollisionSide() == CollisionSide.BOTTOM) {
+                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                    this.setY(vector.y + getHeight());
+                }
+
+                // Prevents endless speed increasing
                 this.setySpeed(0);
             }
             
