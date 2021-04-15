@@ -80,28 +80,33 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
-                if (tile.getCollisionSide() == CollisionSide.LEFT) {
-                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    setX(vector.x - width);
-                }
+                switch (tile.getCollisionSide()) {
 
-                if (tile.getCollisionSide() == CollisionSide.RIGHT) {
-                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    setX(vector.x + this.app.getTileMap().getTileSize());
-                }
+                    case LEFT:
+                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                        setX(vector.x - width);
+                        break;
 
-                if (tile.getCollisionSide() == CollisionSide.TOP) {
-                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    setY(vector.y - height);
-                }
+                    case RIGHT:
+                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                        setX(vector.x + this.app.getTileMap().getTileSize());
+                        break;
 
-                if (tile.getCollisionSide() == CollisionSide.BOTTOM) {
-                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    this.setY(vector.y + getHeight());
+                    case TOP:
+                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                        setY(vector.y - height);
+                        break;
+
+                    case BOTTOM:
+                        vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+                        this.setY(vector.y + getHeight());
+                        break;
+
                 }
 
                 // Prevents endless speed increasing
                 this.setySpeed(0);
+
             }
             
             if (tile.getTile() instanceof KeyTile) {
