@@ -7,5 +7,5 @@ public class DoorTile extends MarioTile {
     public DoorTile(Sprite sprite) {
         super(sprite);
     }
-    
+
 }

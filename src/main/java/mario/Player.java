@@ -1,6 +1,7 @@
 package mario;
 
 import mario.tiles.FloorTile;
+import mario.tiles.KeyTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -85,6 +86,16 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 }
 
                 this.setySpeed(0);
+            }
+            
+            if (tile.getTile() instanceof KeyTile) {
+                try {
+                    vector = this.app.getTileMap().getTileIndex(tile.getTile());
+                    this.app.getTileMap().setTile((int) vector.x, (int) vector.y, -1);
+
+                } catch (TileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
