@@ -55,8 +55,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         switch (intValue) {
 
-            case PConstants.LEFT  :
-            case PConstants.RIGHT : move(intValue);
+            case PConstants.LEFT  : moveLeft();
+                                    break;
+            case PConstants.RIGHT : moveRight();
                                     break;
             case Player.SPACE_BAR  :jump();
                                     break;
@@ -123,17 +124,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     }
 
-    private void move(int direction) {
+    private void moveLeft() {
 
-        if (direction == PConstants.RIGHT)  {
-
-            setDirectionSpeed(90, this.walkingSpeed);
-        } else if (direction == PConstants.LEFT) {
-
-            setDirectionSpeed(270, this.walkingSpeed);
-        }
+        setDirectionSpeed(270, this.walkingSpeed);
         this.nextFrame();
     }
+
+    private void moveRight() {
+
+        setDirectionSpeed(90, this.walkingSpeed);
+        this.nextFrame();
+    }
+
 
     @Override
     public void keyReleased(int intValue, char charValue) {
