@@ -100,7 +100,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void doVerticalJump() {
 
-        this.setDirectionSpeed(360, 8);
+        this.setDirectionSpeed(360, jumpingSpeed);
     }
 
 
