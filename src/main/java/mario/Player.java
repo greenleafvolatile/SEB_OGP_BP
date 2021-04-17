@@ -28,8 +28,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private List<Key> keys = new ArrayList<>();
 
     {
-        this.keys.add(new Key(37)); // left arrow.
-        this.keys.add(new Key(39)); // right arrow.
+        this.keys.add(new Key(MainApp.LEFT));
+        this.keys.add(new Key(MainApp.RIGHT));
     }
 
     public Player(MainApp app) {
@@ -58,6 +58,16 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         move(intValue);
     }
 
+    private boolean isDoublekey() {
+
+        for (Key key : keys) {
+            if (key.isPressed()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void move(int direction) {
 
         if (direction == app.RIGHT)  {
@@ -66,30 +76,38 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         } else if (direction == app.LEFT) {
 
             setDirectionSpeed(270, this.walkingSpeed);
-        } else if (direction == 32) {
+        } else if (direction == MainApp.JUMP) {
+
+            this.jump = true;
 
             if (onFloorTile) {
 
-                for (Key key : keys) {
-                    if (key.getKeyValue() == 39 && key.isPressed()) {
-                        this.setDirectionSpeed(45, 10);
-                    } else if (key.getKeyValue() == 37 && key.isPressed()) {
-                        this.setDirectionSpeed(315, 10);
+                if (isDoublekey()) {
 
-                    } else {
+                    for (Key key : keys) {
 
-                        this.setDirectionSpeed(360, 8);
-                        this.setCurrentFrameIndex(3);
-                        this.jump = true;
-                        this.jumpSound.cue(0);
-                        this.jumpSound.play();
-                        this.onFloorTile = false;
+                        if (key.getKeyValue() == MainApp.RIGHT && key.isPressed()) {
+
+                            this.setDirectionSpeed(45, 10);
+
+                        } else if (key.getKeyValue() == MainApp.LEFT && key.isPressed()) {
+
+                            this.setDirectionSpeed(315, 10);
+
+                        }
                     }
 
+                } else {
+
+                    this.setDirectionSpeed(360, 8);
                 }
 
-            }
+                this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
 
+                this.onFloorTile = false;
+                this.jumpSound.cue(0);
+                this.jumpSound.play();
+            }
         }
 
         if (onFloorTile) {
@@ -129,11 +147,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
                 if (jump) {
                     this.setCurrentFrameIndex(0);
-                    for (Key key : keys) {
-                        if (key.getKeyValue() == 32) {
-                            key.setPressed(false);
-                        }
-                    }
                     jump = false;
                 }
 
@@ -172,13 +185,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void update() {
-        /*for (Key key : keys) {
-            if (key.isPressed()) {
-
-                }
-
-            }
-        }*/
+        System.out.println(onFloorTile);
 
     }
 }
