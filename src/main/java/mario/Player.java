@@ -14,56 +14,90 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import processing.core.PVector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
     private final MainApp app;
-    private final float gravity;
-    private final Sound jumpSound;
 
-    private int movementSpeed = 5;
+    private Sound jumpSound;
+    private int walkingSpeed = 5;
+    private boolean jump;
+    private boolean onFloorTile;
+    private List<Key> keys = new ArrayList<>();
+
+    {
+        this.keys.add(new Key(37)); // left arrow.
+        this.keys.add(new Key(39)); // right arrow.
+        this.keys.add(new Key(32)); // space bar.
+    }
 
     public Player(MainApp app) {
+
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
-        this.app = app;
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
-        this.gravity = 0.2f;
-        this.setGravity(gravity);
+        this.app = app;
         initPlayer();
 
     }
 
     private void initPlayer() {
-        this.setSpeed(this.movementSpeed);
-        this.setGravity(this.gravity);
+        this.setSpeed(this.walkingSpeed);
+        this.setGravity(0.2f);
     }
 
-    @Override
-    public void keyPressed(int keyCode, char key) {
 
-        if (keyCode == app.RIGHT) {
-            setDirectionSpeed(90, this.movementSpeed);
-        } else if (keyCode == app.LEFT) {
-            setDirectionSpeed(270, this.movementSpeed);
-        } else if (key == ' ') {
-            setDirectionSpeed(360, 5);
-            this.jumpSound.cue(0);
-            this.jumpSound.play();
+    @Override
+    public void keyPressed(int intValue, char charValue) {
+
+        for (Key key : keys) {
+            if (key.getKeyValue() == intValue) {
+                key.setPressed(true);
+            }
         }
+        move(intValue);
+    }
+
+    private void move(int direction) {
+
+        if (direction == app.RIGHT)  {
+
+            setDirectionSpeed(90, this.walkingSpeed);
+        } else if (direction == app.LEFT) {
+
+            setDirectionSpeed(270, this.walkingSpeed);
+        } else if (direction == 32) {
+
+            if (onFloorTile) {
+
+                this.setDirectionSpeed(360, 8);
+                this.setCurrentFrameIndex(3);
+                this.jump = true;
+                this.jumpSound.cue(0);
+                this.jumpSound.play();
+                this.onFloorTile = false;
+
+            }
+
+        }
+
+        if (onFloorTile) {
+            this.nextFrame();
+        }
+
     }
 
     @Override
-    public void keyReleased(int keyCode, char key) {
+    public void keyReleased(int intValue, char charValue) {
+
+        for (Key key : keys) {
+            if (key.getKeyValue() == intValue) {
+                key.setPressed(false);
+            }
+        }
         this.setSpeed(0);
 
-        /*if (keyCode == app.RIGHT) {
-            setDirectionSpeed(0, 0);
-        } else if (keyCode == app.LEFT) {
-            setDirectionSpeed(0, 0);
-        } else if (key == ' ') {
-            setDirectionSpeed(0, 0);
-        }*/
     }
 
     @Override
@@ -80,6 +114,15 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
+
+                if (tile.getTile() instanceof  FloorTile) {
+
+                    this.onFloorTile = true;
+                    if (jump) {
+                        this.setCurrentFrameIndex(0);
+                        jump = false;
+                    }
+                }
 
                 switch (tile.getCollisionSide()) {
 
@@ -116,6 +159,20 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void update() {
+        /*System.out.println(this.getSpeed());
+        for (Key key : keys) {
+            if (key.isPressed()) {
+                if (key.getKeyValue() == 32) {
+                    System.out.println("Jumping");
+                    move(32);
+                }
+                if (key.getKeyValue() == app.RIGHT) {
+                    move(app.RIGHT);
+
+                }
+
+            }
+        }*/
 
     }
 }
