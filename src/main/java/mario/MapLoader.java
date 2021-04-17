@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public final class MapLoader {
 
+    private MapLoader(){}
 
     /***
      * Used to import a TileMap in CSV format

@@ -18,8 +18,8 @@ public class MainApp extends GameEngine {
 
     private Player player;
     private Map map;
-
     private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl1.csv"))};
+    private TileType[] tileTypes;
     private int level = 1;
 
     public static void main(String[] args) {
@@ -32,12 +32,13 @@ public class MainApp extends GameEngine {
     public void setupGame() {
         int screenWidth = 1204;
         int screenHeight = 640;
-
         size(screenWidth, screenHeight);
+
+        this.tileTypes = TileTypeLoader.loadTileTypes();
 
         createGameObjects();
 
-        initializeMap();
+        initMap();
 
         createViewCenterViewport(this.map.getMapWidth(), this.map.getMapHeight() , screenWidth, screenHeight);
     }
@@ -71,10 +72,10 @@ public class MainApp extends GameEngine {
     }
 
 
-    private void initializeMap() {
+    private void initMap() {
 
         this.map = new Map(mapFiles[level - 1]);
-        TileMap tileMap = new TileMap(MarioTile.getTileSize(), map.getTileTypes(), map.getTilesMap());
+        TileMap tileMap = new TileMap(MarioTile.getTileSize(), this.tileTypes, map.getTilesMap());
         this.setTileMap(tileMap);
     }
 }
