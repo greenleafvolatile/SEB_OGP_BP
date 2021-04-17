@@ -2,6 +2,7 @@ package mario;
 
 import mario.tiles.*;
 import nl.han.ica.oopg.objects.Sprite;
+import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;
 
 import java.io.File;
@@ -12,8 +13,7 @@ public class Map {
     private final int mapHeight;
     private final int mapWidth;
 
-    @SuppressWarnings("rawtypes")
-    private TileType[] tileTypes;
+    private TileType<Tile>[] tileTypes;
 
 
     public Map(File mapFile) {
