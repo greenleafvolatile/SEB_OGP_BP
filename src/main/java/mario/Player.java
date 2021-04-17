@@ -1,7 +1,10 @@
 package mario;
 
 import mario.tiles.FloorTile;
+import mario.tiles.KeyTile;
+import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
+import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
@@ -19,7 +22,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private final float gravity;
     private final Sound jumpSound;
 
-    private int movementSpeed = 1;
+    private int movementSpeed = 5;
 
     public Player(MainApp app) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
@@ -71,20 +74,42 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
-        PVector vector;
-
         for (CollidedTile tile : collidedTiles) {
-            if (tile.getTile() instanceof FloorTile) {
 
+            PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
+            PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
+
+            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
+
+                switch (tile.getCollisionSide()) {
+
+                    case LEFT:
+                        setX(tilePixelLocation.x - width);
+                        break;
+
+                    case RIGHT:
+                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
+                        break;
+
+                    case TOP:
+                        setY(tilePixelLocation.y - height);
+                        break;
+
+                    case BOTTOM:
+                        this.setY(tilePixelLocation.y + getHeight());
+                        break;
+
+                }
+                // Prevents endless speed increasing
+                this.setySpeed(0);
+            }
+            
+            if (tile.getTile() instanceof KeyTile) {
                 try {
-                    vector = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-                    this.setY(vector.y - getHeight());
-
+                    this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
-
-                this.setySpeed(0);
             }
         }
     }
