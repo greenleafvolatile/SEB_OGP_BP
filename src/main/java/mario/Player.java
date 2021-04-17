@@ -19,6 +19,8 @@ import java.util.List;
 
 public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
+    private static final int JUMP = 32;
+
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
@@ -56,7 +58,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             case PConstants.LEFT  :
             case PConstants.RIGHT : move(intValue);
                                     break;
-            case PConstants.UP     : jump();
+            case Player.JUMP     : jump();
                                     break;
         }
     }
@@ -137,7 +139,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     public void keyReleased(int intValue, char charValue) {
 
         this.setKeyPressed(intValue, false);
-        if (intValue != PConstants.UP) this.setSpeed(0);
+        if (intValue != Player.JUMP) this.setSpeed(0);
 
     }
 
