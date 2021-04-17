@@ -59,7 +59,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                                     break;
             case PConstants.RIGHT : moveRight();
                                     break;
-            case Player.SPACE_BAR  :jump();
+            case Player.SPACE_BAR  :if (onFloorTile) jump();
                                     break;
         }
     }
@@ -85,18 +85,13 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void jump() {
 
-        if (this.onFloorTile) {
+        if (this.pressedDoubleKey()) {
 
-            if (this.pressedDoubleKey()) {
+            this.doDirectionalJump();
+        } else {
 
-                this.doDirectionalJump();
-            } else {
-
-                this.doVerticalJump();
-            }
+            this.doVerticalJump();
         }
-
-
 
         this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
         this.jump = true;
