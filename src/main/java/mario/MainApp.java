@@ -14,6 +14,8 @@ import java.io.File;
 
 public class MainApp extends GameEngine {
 
+    public static final int JUMP = 32;
+
     public static String MEDIA_URL = "src/main/java/mario/media/";
 
     private Player player;
