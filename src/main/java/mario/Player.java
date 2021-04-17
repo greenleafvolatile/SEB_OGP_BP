@@ -4,7 +4,6 @@ import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
 import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
-import nl.han.ica.oopg.collision.CollisionSide;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
@@ -12,31 +11,33 @@ import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
+import processing.core.PConstants;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
+public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
-    private final MainApp app;
+    private static final int SPACE_BAR = 32;
+
     private final Sound jumpSound;
+    private final MainApp app;
+    private final List<Key> keys = new ArrayList<>();
 
     private int walkingSpeed = 5;
+    private int jumpingSpeed = 8;
+
     private boolean jump;
     private boolean onFloorTile;
-    private List<Key> keys = new ArrayList<>();
-
-    {
-        this.keys.add(new Key(MainApp.LEFT));
-        this.keys.add(new Key(MainApp.RIGHT));
-    }
 
     public Player(MainApp app) {
 
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
+        this.keys.add(new Key(PConstants.LEFT));
+        this.keys.add(new Key(PConstants.RIGHT));
         initPlayer();
 
     }
@@ -50,15 +51,29 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     @Override
     public void keyPressed(int intValue, char charValue) {
 
-        for (Key key : keys) {
-            if (key.getKeyValue() == intValue) {
-                key.setPressed(true);
-            }
+        this.setKeyPressed(intValue, true);
+
+        switch (intValue) {
+
+            case PConstants.LEFT  : moveLeft();
+                                    break;
+            case PConstants.RIGHT : moveRight();
+                                    break;
+            case Player.SPACE_BAR  :if (onFloorTile) jump();
+                                    break;
         }
-        move(intValue);
     }
 
-    private boolean isDoublekey() {
+    private void setKeyPressed(int intValue, boolean pressed) {
+
+        for (Key key : keys) {
+            if (key.getKeyValue() == intValue) {
+                key.setPressed(pressed);
+            }
+        }
+    }
+
+    private boolean pressedDoubleKey() {
 
         for (Key key : keys) {
             if (key.isPressed()) {
@@ -68,70 +83,71 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         return false;
     }
 
-    private void move(int direction) {
+    private void jump() {
 
-        final int jumpingSpeed = 8;
+        this.jump = true;
 
-        if (direction == MainApp.RIGHT)  {
+        if (this.pressedDoubleKey()) {
 
-            setDirectionSpeed(90, this.walkingSpeed);
-        } else if (direction == MainApp.LEFT) {
+            this.doDirectionalJump();
+        } else {
 
-            setDirectionSpeed(270, this.walkingSpeed);
-        } else if (direction == MainApp.JUMP) {
-
-            this.jump = true;
-
-            if (onFloorTile) {
-
-                if (isDoublekey()) {
-
-                    for (Key key : keys) {
-
-                        if (key.getKeyValue() == MainApp.RIGHT && key.isPressed()) {
-
-                            this.setDirectionSpeed(30, jumpingSpeed);
-
-                        } else if (key.getKeyValue() == MainApp.LEFT && key.isPressed()) {
-
-                            this.setDirectionSpeed(320, jumpingSpeed);
-
-                        }
-                    }
-
-                } else {
-
-                    this.setDirectionSpeed(360, 8);
-                }
-
-                this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
-
-                this.onFloorTile = false;
-                this.jumpSound.cue(0);
-                this.jumpSound.play();
-            }
+            this.doVerticalJump();
         }
 
-        if (onFloorTile) {
-            this.nextFrame();
+        this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
+        this.onFloorTile = false;
+        this.jumpSound.cue(0);
+        this.jumpSound.play();
+    }
+
+    private void doVerticalJump() {
+
+        this.setDirectionSpeed(360, jumpingSpeed);
+    }
+
+
+    public void doDirectionalJump() {
+
+        for (Key key : keys) {
+
+            if (key.getKeyValue() == PConstants.RIGHT && key.isPressed()) {
+
+                this.setDirectionSpeed(30, jumpingSpeed);
+
+            } else if (key.getKeyValue() == PConstants.LEFT && key.isPressed()) {
+
+                this.setDirectionSpeed(320, jumpingSpeed);
+
+            }
         }
 
     }
 
+    private void moveLeft() {
+
+        setDirectionSpeed(270, this.walkingSpeed);
+        this.nextFrame();
+    }
+
+    private void moveRight() {
+
+        setDirectionSpeed(90, this.walkingSpeed);
+        this.nextFrame();
+    }
+
+
     @Override
     public void keyReleased(int intValue, char charValue) {
 
-        for (Key key : keys) {
-            if (key.getKeyValue() == intValue) {
-                key.setPressed(false);
-            }
-        }
-        if (intValue != MainApp.JUMP) this.setSpeed(0);
+        this.setKeyPressed(intValue, false);
+        if (intValue != Player.SPACE_BAR) this.setSpeed(0);
 
     }
 
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> list) {
+        // Empty method.
 
     }
 
@@ -185,8 +201,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         }
     }
 
-    @Override
     public void update() {
+        // Empty method.
 
     }
 }
