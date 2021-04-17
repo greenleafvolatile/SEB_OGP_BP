@@ -1,31 +1,18 @@
 package mario;
 
-import mario.tiles.*;
+import mario.tiles.DoorTile;
+import mario.tiles.FloorTile;
+import mario.tiles.KeyTile;
+import mario.tiles.LavaTile;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;
 
-import java.io.File;
+public class TileTypeLoader {
 
-public class Map {
+    private TileTypeLoader(){}
 
-    private final int[][] tilesMap;
-    private final int mapHeight;
-    private final int mapWidth;
-
-    private TileType<Tile>[] tileTypes;
-
-
-    public Map(File mapFile) {
-
-        this.tilesMap = MapLoader.loadMap(mapFile);
-        this.mapWidth = tilesMap[0].length * MarioTile.getTileSize();
-        this.mapHeight = tilesMap.length * MarioTile.getTileSize();
-        this.initMap();
-
-    }
-
-    private void initMap() {
+    public static TileType[] loadTileTypes() {
 
         Sprite boxSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/box.png"); // 0
         Sprite groundSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/ground.png"); // 1
@@ -47,8 +34,8 @@ public class Map {
         TileType<FloorTile> platformBlueTileType = new TileType<>(FloorTile.class, platformBlueSprite); // 7
         TileType<KeyTile> keyTileType = new TileType<>(KeyTile.class, keySprite); // 8
 
-
-        this.tileTypes = new TileType[]{
+        @SuppressWarnings("rawtypes")
+        TileType[] tileTypes = new TileType[]{
                 boxTileType,
                 groundTileType,
                 lavaTileType,
@@ -59,22 +46,6 @@ public class Map {
                 platformBlueTileType,
                 keyTileType
         };
-
-    }
-
-    public int[][] getTilesMap() {
-        return tilesMap;
-    }
-
-    public int getMapHeight() {
-        return mapHeight;
-    }
-
-    public int getMapWidth() {
-        return mapWidth;
-    }
-
-    public TileType[] getTileTypes() {
         return tileTypes;
     }
 }
