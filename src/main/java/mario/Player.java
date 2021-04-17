@@ -85,6 +85,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void jump() {
 
+        this.jump = true;
+
         if (this.pressedDoubleKey()) {
 
             this.doDirectionalJump();
@@ -94,7 +96,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
 
         this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
-        this.jump = true;
         this.onFloorTile = false;
         this.jumpSound.cue(0);
         this.jumpSound.play();
