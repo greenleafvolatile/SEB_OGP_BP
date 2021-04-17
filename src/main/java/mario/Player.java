@@ -72,10 +72,10 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
         final int jumpingSpeed = 8;
 
-        if (direction == app.RIGHT)  {
+        if (direction == MainApp.RIGHT)  {
 
             setDirectionSpeed(90, this.walkingSpeed);
-        } else if (direction == app.LEFT) {
+        } else if (direction == MainApp.LEFT) {
 
             setDirectionSpeed(270, this.walkingSpeed);
         } else if (direction == MainApp.JUMP) {
@@ -187,7 +187,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void update() {
-        System.out.println(onFloorTile);
 
     }
 }
