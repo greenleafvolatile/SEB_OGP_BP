@@ -20,8 +20,8 @@ import java.util.List;
 public class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
     private final MainApp app;
+    private final Sound jumpSound;
 
-    private Sound jumpSound;
     private int walkingSpeed = 5;
     private boolean jump;
     private boolean onFloorTile;
@@ -70,6 +70,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     private void move(int direction) {
 
+        final int jumpingSpeed = 8;
+
         if (direction == app.RIGHT)  {
 
             setDirectionSpeed(90, this.walkingSpeed);
@@ -88,11 +90,11 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
                         if (key.getKeyValue() == MainApp.RIGHT && key.isPressed()) {
 
-                            this.setDirectionSpeed(45, 10);
+                            this.setDirectionSpeed(30, jumpingSpeed);
 
                         } else if (key.getKeyValue() == MainApp.LEFT && key.isPressed()) {
 
-                            this.setDirectionSpeed(315, 10);
+                            this.setDirectionSpeed(320, jumpingSpeed);
 
                         }
                     }
@@ -124,7 +126,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 key.setPressed(false);
             }
         }
-        if (intValue != 32) this.setSpeed(0);
+        if (intValue != MainApp.JUMP) this.setSpeed(0);
 
     }
 
