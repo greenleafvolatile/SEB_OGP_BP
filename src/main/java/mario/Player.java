@@ -17,9 +17,7 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
-
-    private static final int JUMP = 32;
+public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects, MarioConstants{
 
     private final Sound jumpSound;
     private final MainApp app;
@@ -58,7 +56,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             case PConstants.LEFT  :
             case PConstants.RIGHT : move(intValue);
                                     break;
-            case Player.JUMP     : jump();
+            case MarioConstants.SPACE_BAR     : jump();
                                     break;
         }
     }
@@ -139,7 +137,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     public void keyReleased(int intValue, char charValue) {
 
         this.setKeyPressed(intValue, false);
-        if (intValue != Player.JUMP) this.setSpeed(0);
+        if (intValue != MarioConstants.SPACE_BAR) this.setSpeed(0);
 
     }
 
