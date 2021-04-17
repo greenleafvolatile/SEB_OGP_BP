@@ -58,7 +58,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             case PConstants.LEFT  :
             case PConstants.RIGHT : move(intValue);
                                     break;
-            case Player.SPACE_BAR     : jump();
+            case Player.SPACE_BAR  :jump();
                                     break;
         }
     }
