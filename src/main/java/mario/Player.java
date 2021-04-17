@@ -85,14 +85,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void jump() {
 
-        if (this.onFloorTile && this.pressedDoubleKey()) {
+        if (this.onFloorTile) {
 
-            this.doDirectionalJump();
+            if (this.pressedDoubleKey()) {
 
-        } else {
+                this.doDirectionalJump();
+            } else {
 
-            this.doVerticalJump();
+                this.doVerticalJump();
+            }
         }
+
+
 
         this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
         this.jump = true;
