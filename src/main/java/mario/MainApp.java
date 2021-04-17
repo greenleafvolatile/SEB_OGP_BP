@@ -7,6 +7,7 @@ import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
+import nl.han.ica.oopg.view.EdgeFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import mario.tiles.FloorTile;
 
@@ -56,15 +57,17 @@ public class MainApp extends GameEngine {
      */
     private void createViewCenterViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight) {
 
-        CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
-        viewPort.setTolerance(50, 0, 50, 50);
+        EdgeFollowingViewport viewPort = new EdgeFollowingViewport(player, screenWidth, screenHeight, 0, screenHeight / 2f - this.player.getImage().height);
+        viewPort.setTolerance(0, 0, screenWidth / 4, screenWidth / 4);
         View view = new View(viewPort, worldWidth, worldHeight);
         setView(view);
         size(screenWidth, screenHeight);
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
+
 
     public void createGameObjects() {
 
@@ -76,6 +79,7 @@ public class MainApp extends GameEngine {
     private void initializeMap() {
 
         this.map = new Map(mapFiles[level - 1]);
+        System.out.println(map.getMapWidth());
         TileMap tileMap = new TileMap(MarioTile.getTileSize(), map.getTileTypes(), map.getTilesMap());
         this.setTileMap(tileMap);
     }
