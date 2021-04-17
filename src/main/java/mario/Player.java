@@ -30,7 +30,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     {
         this.keys.add(new Key(37)); // left arrow.
         this.keys.add(new Key(39)); // right arrow.
-        this.keys.add(new Key(32)); // space bar.
     }
 
     public Player(MainApp app) {
@@ -71,12 +70,23 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
             if (onFloorTile) {
 
-                this.setDirectionSpeed(360, 8);
-                this.setCurrentFrameIndex(3);
-                this.jump = true;
-                this.jumpSound.cue(0);
-                this.jumpSound.play();
-                this.onFloorTile = false;
+                for (Key key : keys) {
+                    if (key.getKeyValue() == 39 && key.isPressed()) {
+                        this.setDirectionSpeed(45, 10);
+                    } else if (key.getKeyValue() == 37 && key.isPressed()) {
+                        this.setDirectionSpeed(315, 10);
+
+                    } else {
+
+                        this.setDirectionSpeed(360, 8);
+                        this.setCurrentFrameIndex(3);
+                        this.jump = true;
+                        this.jumpSound.cue(0);
+                        this.jumpSound.play();
+                        this.onFloorTile = false;
+                    }
+
+                }
 
             }
 
@@ -96,7 +106,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 key.setPressed(false);
             }
         }
-        this.setSpeed(0);
+        if (intValue != 32) this.setSpeed(0);
 
     }
 
@@ -115,13 +125,16 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
-                if (tile.getTile() instanceof  FloorTile) {
+                this.onFloorTile = true;
 
-                    this.onFloorTile = true;
-                    if (jump) {
-                        this.setCurrentFrameIndex(0);
-                        jump = false;
+                if (jump) {
+                    this.setCurrentFrameIndex(0);
+                    for (Key key : keys) {
+                        if (key.getKeyValue() == 32) {
+                            key.setPressed(false);
+                        }
                     }
+                    jump = false;
                 }
 
                 switch (tile.getCollisionSide()) {
@@ -146,7 +159,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 // Prevents endless speed increasing
                 this.setySpeed(0);
             }
-            
+
             if (tile.getTile() instanceof KeyTile) {
                 try {
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
@@ -159,15 +172,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void update() {
-        /*System.out.println(this.getSpeed());
-        for (Key key : keys) {
+        /*for (Key key : keys) {
             if (key.isPressed()) {
-                if (key.getKeyValue() == 32) {
-                    System.out.println("Jumping");
-                    move(32);
-                }
-                if (key.getKeyValue() == app.RIGHT) {
-                    move(app.RIGHT);
 
                 }
 
