@@ -19,9 +19,9 @@ public final class UIButton extends GameObject implements IClickable {
 
     private MainApp app;
     private PImage buttonImage;
-    private float buttonWidth, buttonHeight;
+    private int buttonWidth, buttonHeight;
 
-    public UIButton(MainApp app, String pathToImage, float buttonWidth, float buttonHeight) {
+    public UIButton(MainApp app, String pathToImage, int buttonWidth, int buttonHeight) {
 
         this.app = app;
         this.buttonImage = app.loadImage(pathToImage);
@@ -31,11 +31,14 @@ public final class UIButton extends GameObject implements IClickable {
     }
     public void draw(PGraphics graphics) {
 
-        buttonImage.resize((int) buttonWidth, (int) buttonHeight);
-        graphics.image(buttonImage, this.x, this.y);
+        graphics.image(buttonImage, this.x, this.y, buttonWidth, buttonHeight);
     }
 
-    public float getButtonWidth() {
+    public PImage getButtonImage() {
+        return this.buttonImage;
+    }
+
+    public int getButtonWidth() {
         return this.buttonWidth;
     }
 

@@ -2,15 +2,20 @@ package mario;
 
 import mario.ui.UIButton;
 import mario.ui.UIComponent;
+import nl.han.ica.oopg.dashboard.Dashboard;
+import nl.han.ica.oopg.objects.Sprite;
+import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class StartMenu {
 
     private MainApp app;
     private TextObject titleObject;
+    private ArrayList<UIButton> buttons = new ArrayList<>();
 
     public StartMenu(MainApp app) {
         this.app = app;
@@ -37,15 +42,23 @@ public class StartMenu {
 
     private void addButtons() {
 
-        //ArrayList<UIButton> buttonList = new ArrayList<>();
 
-        UIButton startButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/start.png"), 200, 50);
-        UIButton highscoresButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/highscores.png"), 200, 50);
-        UIButton exitButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/exit.png"), 200, 50);
 
-        app.addGameObject(highscoresButton, app.getWidth() / 2f - highscoresButton.getButtonWidth() / 2, 150);
-        app.addGameObject(startButton, app.getWidth() / 2f - startButton.getButtonWidth() / 2, 350);
-        app.addGameObject(exitButton, app.getWidth() / 2f - exitButton.getButtonWidth() / 2f, 550);
+
+        UIButton startButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/start.png"), 200, 100);
+        UIButton highscoresButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/highscores.png"), 200, 100);
+
+        UIButton exitButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/exit.png"), 200, 100);
+
+        System.out.println(highscoresButton.getButtonImage().width);
+        System.out.println(startButton.getButtonImage().width);
+
+        app.addGameObject(highscoresButton, app.getWidth() / 2f - highscoresButton.getButtonWidth() / 2f, 150);
+        System.out.println(highscoresButton.getY());
+
+
+        app.addGameObject(startButton, app.getWidth() / 2f - startButton.getButtonWidth() / 2f, 250);
+        app.addGameObject(exitButton, app.getWidth() / 2f - exitButton.getButtonWidth() / 2f, 350);
 
     }
 
