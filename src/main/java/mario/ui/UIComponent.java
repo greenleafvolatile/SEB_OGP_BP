@@ -1,6 +1,8 @@
 package mario.ui;
 
+import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 /**
  * This class is the root class for all ui components.
@@ -10,7 +12,7 @@ import processing.core.PApplet;
  * @since: 11-04-2021
  *
  */
-public abstract class UIComponent {
+public abstract class UIComponent extends GameObject {
 
     private final float xPos, yPos;
 
@@ -31,7 +33,7 @@ public abstract class UIComponent {
     /**
      * This method draws the component.
      */
-    protected abstract void draw(PApplet app);
+    public abstract void draw(PGraphics graphics);
 
 
     protected float getxPos() {
@@ -42,5 +44,7 @@ public abstract class UIComponent {
     protected float getyPos() {
         return this.yPos;
     }
+
+    public void update(){}
 
 }

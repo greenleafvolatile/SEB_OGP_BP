@@ -1,6 +1,9 @@
 package mario.ui;
 
+import mario.MainApp;
 import processing.core.PApplet;
+import processing.core.PGraphics;
+import processing.core.PImage;
 
 /**
  * This method represents a button that the
@@ -13,40 +16,32 @@ import processing.core.PApplet;
  */
 public final class UIButton extends UIComponent implements IClickable {
 
-    private final float buttonWidth, buttonHeight, buttonColor, textColor;
-    private final String buttonText;
+    private MainApp app;
+    private PImage buttonImage;
+    private float xPos, yPos, buttonWidth, buttonHeight;
 
-    /**
-     * The UIButton constructor
-     * @param xPos the x-position of the button.
-     * @param yPos the y-position of the button.
-     * @param buttonWidth the width of the button.
-     * @param buttonHeight the height of the button.
-     * @param buttonColor the color of the button.
-     * @param textColor the color of the text on the button.
-     * @param buttonText the text on the button.
-     */
-    public UIButton(float xPos, float yPos, float buttonWidth, float buttonHeight, float buttonColor, float textColor, String buttonText) {
+    public UIButton(MainApp app, String pathToImage, float xPos, float yPos, float buttonWidth, float buttonHeight) {
 
         super(xPos, yPos);
+        this.app = app;
+        this.buttonImage = app.loadImage(pathToImage);
         this.buttonWidth = buttonWidth;
         this.buttonHeight = buttonHeight;
-        this.buttonColor = buttonColor;
-        this.textColor = textColor;
-        this.buttonText = buttonText;
 
     }
+    public void draw(PGraphics graphics) {
 
-    @Override
-    public void draw(PApplet app) {
-
+        buttonImage.resize((int) buttonWidth, (int) buttonHeight);
+        graphics.image(buttonImage, this.xPos, this.yPos);
     }
 
     @Override
     public boolean contains(float mouseX, float mouseY ) {
 
-        return mouseX >= super.getxPos() && mouseX <= super.getxPos() + this.buttonWidth && mouseY >= super.getyPos() && mouseY <= super.getyPos() + this.buttonHeight;
+        return mouseX >= this.xPos && mouseX <= this.xPos + this.buttonWidth && mouseY >= this.yPos && mouseY <= this.yPos + this.buttonHeight;
     }
+
+    public void update(){}
 
 
 
