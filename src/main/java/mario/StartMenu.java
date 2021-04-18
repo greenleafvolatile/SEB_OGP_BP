@@ -37,7 +37,7 @@ public class StartMenu {
 
     private void addButtons() {
 
-        ArrayList<UIButton> buttonList = new ArrayList<>();
+        //ArrayList<UIButton> buttonList = new ArrayList<>();
 
         UIButton startButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/start.png"), 200, 200);
         UIButton highscoresButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/highscores.png"), 200, 200);
@@ -51,7 +51,7 @@ public class StartMenu {
 
     private void createView() {
 
-        View view = new View(200, 200);
+        View view = new View(app.getWidth(), app.getHeight());
         this.app.setView(view);
     }
 
