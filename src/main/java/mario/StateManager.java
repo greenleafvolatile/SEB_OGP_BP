@@ -4,6 +4,7 @@ public class StateManager {
 
     private MainApp app;
     private StartMenu menu;
+    private Game game;
     private GameState gameState = GameState.START;
     //private int gameState = 1;
 
@@ -33,7 +34,9 @@ public class StateManager {
 
 
             case GAME:
-                new Game(this.app);
+//                this.game = new Game(this.app);
+                this.game = new Game(this.app);
+                this.game.display();
                 break;
         }
 

@@ -15,13 +15,13 @@ import java.io.File;
 public class MainApp extends GameEngine {
 
     public static final int JUMP = 32;
-
     public static String MEDIA_URL = "src/main/java/mario/media/";
 
     private Player player;
     private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl1.csv"))};
-    private TileType tileTypes;
-    private int level = 1;
+
+    private StateManager stateManager;
+
 
     public static void main(String[] args) {
 
@@ -34,10 +34,9 @@ public class MainApp extends GameEngine {
         int screenWidth = 1204;
         int screenHeight = 640;
         size(screenWidth, screenHeight);
-        createGameObjects();
 
-        initMap();
-        createViewCenterViewport(this.tileMap.getMapWidth(), this.tileMap.getMapHeight() , screenWidth, screenHeight);
+        this.stateManager = new StateManager(this);
+        stateManager.drawState();
     }
 
     /**
@@ -50,29 +49,33 @@ public class MainApp extends GameEngine {
      *
      * Based on code from Waterworld
      */
-    private void createViewCenterViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight) {
+    public void createViewCenterViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight) {
 
         CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
         viewPort.setTolerance(50, 0, 50, 50);
         View view = new View(viewPort, worldWidth, worldHeight);
         setView(view);
-        size(screenWidth, screenHeight);
     }
 
     @Override
     public void update() {}
 
-    public void createGameObjects() {
+    @Override
+    public void keyPressed() {
 
-        player = new Player(this);
-        addGameObject(player, 0, 481);
-    }
+        if (keyCode == this.LEFT) {
 
+            System.out.println("Pressed left");
+            this.stateManager.setGameState(GameState.START);
 
-    private void initMap() {
-        TileType[] tileTypes = TileTypeLoader.loadTileTypes();
-        int[][] tilesMap = MapLoader.loadMap(mapFiles[0]);
-        tileMap = new TileMap(64, tileTypes, tilesMap);
-        setTileMap(tileMap);
+        }
+
+        if (keyCode == this.RIGHT) {
+
+            System.out.println("Pressed right");
+            this.stateManager.setGameState(GameState.GAME);
+        }
+
+        this.stateManager.drawState();
     }
 }
