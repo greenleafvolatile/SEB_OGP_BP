@@ -1,5 +1,6 @@
-package super_mario_speed_runner;
+package mario;
 
+import mario.MainApp;
 import nl.han.ica.oopg.objects.TextObject;
 
 public class Game {

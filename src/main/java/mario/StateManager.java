@@ -1,4 +1,4 @@
-package super_mario_speed_runner;
+package mario;
 
 public class StateManager {
 
