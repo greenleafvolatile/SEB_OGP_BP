@@ -15,8 +15,7 @@ public class StartMenu {
     public StartMenu(MainApp app) {
         this.app = app;
 
-        View view = new View(this.app.getWidth(), this.app.getHeight());
-        this.app.setView(view);
+        this.createView();
         this.addTitle();
         this.addButtons();
     }
@@ -48,7 +47,12 @@ public class StartMenu {
         app.addGameObject(startButton, app.getWidth() / 2f - startButton.getButtonWidth() / 2, 350);
         app.addGameObject(exitButton, app.getWidth() / 2f - exitButton.getButtonWidth() / 2f, 550);
 
+    }
 
+    private void createView() {
+
+        View view = new View(200, 200);
+        this.app.setView(view);
     }
 
 
