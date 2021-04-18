@@ -1,19 +1,10 @@
 package mario;
 
 import nl.han.ica.oopg.engine.GameEngine;
-import nl.han.ica.oopg.view.CenterFollowingViewport;
-import nl.han.ica.oopg.view.View;
-
-import java.io.File;
 
 public class MainApp extends GameEngine {
 
-    public static final int JUMP = 32;
     public static String MEDIA_URL = "src/main/java/mario/media/";
-
-    private Player player;
-    private File[] mapFiles = { new File(MEDIA_URL.concat("maps/lvl1.csv"))};
-
     private StateManager stateManager;
 
 
