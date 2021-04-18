@@ -33,24 +33,6 @@ public class MainApp extends GameEngine {
         stateManager.drawState();
     }
 
-    /**
-     * Create view with center viewport
-     *
-     * @param worldWidth   Game level total width
-     * @param worldHeight  Game level total Height
-     * @param screenWidth  Total width screen
-     * @param screenHeight Total height screen
-     *
-     * Based on code from Waterworld
-     */
-    public void createViewCenterViewport(int worldWidth, int worldHeight, int screenWidth, int screenHeight) {
-
-        CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
-        viewPort.setTolerance(50, 0, 50, 50);
-        View view = new View(viewPort, worldWidth, worldHeight);
-        setView(view);
-    }
-
     @Override
     public void update() {}
 
