@@ -6,6 +6,7 @@ import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
 import nl.han.ica.oopg.view.View;
+import nl.han.ica.oopg.view.Viewport;
 import org.w3c.dom.Text;
 
 import java.io.File;
@@ -71,7 +72,7 @@ public class Game {
         return new TileMap(64, tileTypes, tilesMap);
     }
 
-    private CenterFollowingViewport centerViewport() {
+    private Viewport centerViewport() {
         int screenWidth = this.app.getWidth();
         int screenHeight = this.app.getHeight();
 
