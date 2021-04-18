@@ -1,11 +1,7 @@
 package mario;
 
-import mario.MainApp;
-import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
-import nl.han.ica.oopg.view.PGraphicsCreator;
-import nl.han.ica.oopg.view.View;
 
 import java.io.File;
 

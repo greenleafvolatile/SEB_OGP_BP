@@ -1,6 +1,5 @@
 package mario;
 
-import mario.MainApp;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 
