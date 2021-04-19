@@ -6,9 +6,9 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 
-public class StartMenu {
+public final class StartMenu {
 
-    private MainApp app;
+    private final MainApp app;
 
     public StartMenu(MainApp app) {
 
@@ -23,18 +23,20 @@ public class StartMenu {
         final int fontSize = 60;
         final String title = "SUPER MARIO SPEEDRUNNER";
 
-        app.textSize(fontSize);
-        float textWidth = app.textWidth(title);
+        this.app.textSize(fontSize);
 
         TextObject titleObject = new TextObject (title, fontSize);
         titleObject.setForeColor(255, 0, 0, 255);
-        app.addGameObject(titleObject, app.getWidth() / 2f - textWidth / 2, 100);
 
+        this.app.addGameObject(titleObject, app.getWidth() / 2f - this.app.textWidth(titleObject.getText()) / 2, 50);
     }
 
     private void addButtons() {
 
-        ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), 200, 100);
+        final int buttonWidth = 200;
+        final int buttonHeight = 100;
+
+        ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
         playButtonObject.addListener(new MouseListener() {
 
             @Override
@@ -44,7 +46,7 @@ public class StartMenu {
             }
         });
 
-        ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), 200, 100);
+        ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
         exitButtonObject.addListener(new MouseListener() {
 
             @Override
@@ -55,10 +57,8 @@ public class StartMenu {
 
         });
 
-        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 150);
-
-        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 300);
-
+        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 160);
+        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 310);
 
     }
 

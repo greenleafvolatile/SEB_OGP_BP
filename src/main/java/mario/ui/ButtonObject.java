@@ -15,14 +15,13 @@ import processing.core.PGraphics;
  */
 public final class ButtonObject extends SpriteObject {
 
-    MouseListener listener;
+    private MouseListener listener;
 
     public ButtonObject (Sprite sprite, float width, float height) {
 
         super(sprite);
         this.width = width;
         this.height = height;
-
     }
 
     @Override
@@ -35,7 +34,7 @@ public final class ButtonObject extends SpriteObject {
     public void mousePressed(int x, int y, int button) {
 
         if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + height) {
-            listener.mousePressed(x, y, button);
+            this.listener.mousePressed(x, y, button);
         }
     }
 
