@@ -1,6 +1,5 @@
 package mario.ui;
 
-import mario.MainApp;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 import processing.core.PGraphics;
@@ -16,7 +15,7 @@ import processing.core.PGraphics;
  */
 public final class ButtonObject extends SpriteObject {
 
-    Listener listener;
+    MouseListener listener;
 
     public ButtonObject (Sprite sprite, float width, float height) {
 
@@ -40,7 +39,7 @@ public final class ButtonObject extends SpriteObject {
         }
     }
 
-    public void addListener(Listener listener) {
+    public void addListener(MouseListener listener) {
         this.listener = listener;
 
     }

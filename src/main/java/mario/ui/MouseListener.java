@@ -2,7 +2,7 @@ package mario.ui;
 
 import nl.han.ica.oopg.userinput.IMouseInput;
 
-public class Listener implements IMouseInput {
+public class MouseListener implements IMouseInput {
 
 
     @Override
