@@ -11,8 +11,8 @@ public class StartMenu {
     private MainApp app;
 
     public StartMenu(MainApp app) {
-        this.app = app;
 
+        this.app = app;
         this.createView();
         this.addTitle();
         this.addButtons();
@@ -20,7 +20,7 @@ public class StartMenu {
 
     private void addTitle() {
 
-        final int fontSize = 40;
+        final int fontSize = 60;
         final String title = "SUPER MARIO SPEEDRUNNER";
 
         app.textSize(fontSize);
