@@ -1,10 +1,12 @@
 package mario;
 
-import mario.ui.ButtonObject;
-import mario.ui.MouseListener;
+import mario.ui.*;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
+import processing.core.PConstants;
+
+import javax.xml.soap.Text;
 
 public final class StartMenu {
 
@@ -14,7 +16,10 @@ public final class StartMenu {
 
         this.app = app;
         this.createView();
+
         this.addTitle();
+        this.addLabel();
+        this.addTextField();
         this.addButtons();
     }
 
@@ -25,10 +30,24 @@ public final class StartMenu {
 
         this.app.textSize(fontSize);
 
-        TextObject titleObject = new TextObject (title, fontSize);
+        TextObject titleObject = new TextObject(title, fontSize);
         titleObject.setForeColor(255, 0, 0, 255);
 
-        this.app.addGameObject(titleObject, app.getWidth() / 2f - this.app.textWidth(titleObject.getText()) / 2, 50);
+        this.app.addGameObject(titleObject, app.getWidth() / 2f - app.textWidth(title) / 2, 50);
+    }
+
+    private void addLabel() {
+
+        final int fontSize = 40;
+        String labelText = "Enter name:";
+        this.app.textSize(40);
+
+        TextObject textFieldLabel = new TextObject(labelText, 40);
+        textFieldLabel.setForeColor(255, 0, 0, 255);
+        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 160 + fontSize / 4f);
+
+
+
     }
 
     private void addButtons() {
@@ -57,8 +76,29 @@ public final class StartMenu {
 
         });
 
-        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 160);
-        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 310);
+        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 250);
+        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 360);
+
+    }
+
+    private void addTextField() {
+
+        TextFieldObject textFieldObject = new TextFieldObject( 200, 50);
+        textFieldObject.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(int intValue, char charValue) {
+
+                if (intValue == PConstants.BACKSPACE) {
+                    textFieldObject.removeChar();
+                }
+                else if (Character.isLetterOrDigit(charValue)) {
+                    textFieldObject.addChar(charValue);
+                }
+            }
+        });
+
+        this.app.addGameObject(textFieldObject, this.app.getWidth() / 2f, 160);
 
     }
 

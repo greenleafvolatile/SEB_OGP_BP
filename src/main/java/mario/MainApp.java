@@ -22,12 +22,13 @@ public class MainApp extends GameEngine {
 
         this.stateManager = new StateManager(this);
         stateManager.drawState();
+
     }
 
     @Override
     public void update() {}
 
-    @Override
+    /*@Override
     public void keyPressed() {
 
         if (keyCode == this.LEFT) {
@@ -44,5 +45,5 @@ public class MainApp extends GameEngine {
         }
 
         this.stateManager.drawState();
-    }
+    }*/
 }
