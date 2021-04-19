@@ -1,5 +1,8 @@
 package mario;
 
+import mario.enemies.Enemy;
+import mario.enemies.FlyingTurtle;
+import mario.enemies.Goomba;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.tile.TileMap;
@@ -37,6 +40,15 @@ public class Game {
     private void createObjects() {
         this.player = new Player(this.app);
         this.app.addGameObject(player, 0, 481);
+
+        Goomba goomba = new Goomba(this.app);
+        this.app.addGameObject(goomba, 1100, 513);
+
+        Enemy flyingTurtle = new FlyingTurtle(this.app);
+        this.app.addGameObject(flyingTurtle, 1100, 300);
+
+        Enemy flyingTurtle2 = new FlyingTurtle(this.app);
+        this.app.addGameObject(flyingTurtle2, 10, 300);
     }
 
     private void createDashboard() {
