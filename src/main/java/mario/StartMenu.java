@@ -1,12 +1,10 @@
 package mario;
 
 import mario.ui.ButtonObject;
-import mario.ui.Listener;
+import mario.ui.MouseListener;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
-
-import java.util.ArrayList;
 
 public class StartMenu {
 
@@ -37,7 +35,7 @@ public class StartMenu {
     private void addButtons() {
 
         ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), 200, 100);
-        playButtonObject.addListener(new Listener() {
+        playButtonObject.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button)  {
@@ -47,7 +45,7 @@ public class StartMenu {
         });
 
         ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), 200, 100);
-        exitButtonObject.addListener(new Listener() {
+        exitButtonObject.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
