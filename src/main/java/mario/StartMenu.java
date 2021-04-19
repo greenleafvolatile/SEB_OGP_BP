@@ -1,21 +1,16 @@
 package mario;
 
-import mario.ui.UIButton;
-import mario.ui.UIComponent;
-import nl.han.ica.oopg.dashboard.Dashboard;
+import mario.ui.ButtonObject;
+import mario.ui.Listener;
 import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.objects.SpriteObject;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class StartMenu {
 
     private MainApp app;
-    private TextObject titleObject;
-    private ArrayList<UIButton> buttons = new ArrayList<>();
 
     public StartMenu(MainApp app) {
         this.app = app;
@@ -33,32 +28,39 @@ public class StartMenu {
         app.textSize(fontSize);
         float textWidth = app.textWidth(title);
 
-        titleObject = new TextObject (title, fontSize);
+        TextObject titleObject = new TextObject (title, fontSize);
         titleObject.setForeColor(255, 0, 0, 255);
         app.addGameObject(titleObject, app.getWidth() / 2f - textWidth / 2, 100);
-
 
     }
 
     private void addButtons() {
 
+        ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), 200, 100);
+        playButtonObject.addListener(new Listener() {
 
+            @Override
+            public void mousePressed(int x, int y, int button)  {
+                System.out.println("Pressed play button.");
+                // To do: implement play button action.
+            }
+        });
 
+        ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), 200, 100);
+        exitButtonObject.addListener(new Listener() {
 
-        UIButton startButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/start.png"), 200, 100);
-        UIButton highscoresButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/highscores.png"), 200, 100);
+            @Override
+            public void mousePressed(int x, int y, int button) {
+                System.out.println("Pressed exit button.");
+                // To do: implement exit button action.
+            }
 
-        UIButton exitButton = new UIButton(app, app.MEDIA_URL.concat("/sprites/buttons/exit.png"), 200, 100);
+        });
 
-        System.out.println(highscoresButton.getButtonImage().width);
-        System.out.println(startButton.getButtonImage().width);
+        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 150);
 
-        app.addGameObject(highscoresButton, app.getWidth() / 2f - highscoresButton.getButtonWidth() / 2f, 150);
-        System.out.println(highscoresButton.getY());
+        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 300);
 
-
-        app.addGameObject(startButton, app.getWidth() / 2f - startButton.getButtonWidth() / 2f, 250);
-        app.addGameObject(exitButton, app.getWidth() / 2f - exitButton.getButtonWidth() / 2f, 350);
 
     }
 

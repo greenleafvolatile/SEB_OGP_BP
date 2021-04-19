@@ -14,15 +14,19 @@ import processing.core.PGraphics;
  * @since 04-11-2021
  *
  */
-public final class StartButtonObject extends SpriteObject {
+public final class ButtonObject extends SpriteObject {
 
-    public StartButtonObject(float width, float height) {
+    Listener listener;
 
-        super(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")));
+    public ButtonObject (Sprite sprite, float width, float height) {
+
+        super(sprite);
         this.width = width;
         this.height = height;
 
     }
+
+    @Override
     public void draw(PGraphics graphics) {
 
         graphics.image(this.getImage(), this.x, this.y, this.width, this.height);
@@ -30,9 +34,15 @@ public final class StartButtonObject extends SpriteObject {
 
     @Override
     public void mousePressed(int x, int y, int button) {
+
         if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + height) {
-            System.out.println("Test");
+            listener.mousePressed(x, y, button);
         }
+    }
+
+    public void addListener(Listener listener) {
+        this.listener = listener;
+
     }
 
     public void update() {}
