@@ -6,8 +6,6 @@ import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PConstants;
 
-import javax.xml.soap.Text;
-
 public final class StartMenu {
 
     private final MainApp app;
@@ -43,7 +41,7 @@ public final class StartMenu {
         this.app.textSize(40);
 
         TextObject textFieldLabel = new TextObject(labelText, 40);
-        textFieldLabel.setForeColor(255, 0, 0, 255);
+        textFieldLabel.setForeColor(0, 0, 255, 255);
         this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 160 + fontSize / 4f);
 
 
@@ -55,8 +53,8 @@ public final class StartMenu {
         final int buttonWidth = 200;
         final int buttonHeight = 100;
 
-        ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
-        playButtonObject.addListener(new MouseListener() {
+        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
+        playButton.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button)  {
@@ -65,8 +63,8 @@ public final class StartMenu {
             }
         });
 
-        ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
-        exitButtonObject.addListener(new MouseListener() {
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
+        exitButton.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -76,29 +74,29 @@ public final class StartMenu {
 
         });
 
-        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 250);
-        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 360);
+        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 250);
+        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 360);
 
     }
 
     private void addTextField() {
 
-        TextFieldObject textFieldObject = new TextFieldObject( 200, 50);
-        textFieldObject.addKeyListener(new KeyListener() {
+        TextField textField = new TextField( 200, 50);
+        textField.addKeyListener(new KeyListener() {
 
             @Override
             public void keyPressed(int intValue, char charValue) {
 
                 if (intValue == PConstants.BACKSPACE) {
-                    textFieldObject.removeChar();
+                    textField.removeChar();
                 }
                 else if (Character.isLetterOrDigit(charValue)) {
-                    textFieldObject.addChar(charValue);
+                    textField.addChar(charValue);
                 }
             }
         });
 
-        this.app.addGameObject(textFieldObject, this.app.getWidth() / 2f, 160);
+        this.app.addGameObject(textField, this.app.getWidth() / 2f, 160);
 
     }
 

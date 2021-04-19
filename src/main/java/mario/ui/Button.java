@@ -13,11 +13,11 @@ import processing.core.PGraphics;
  * @since 04-11-2021
  *
  */
-public final class ButtonObject extends SpriteObject {
+public final class Button extends SpriteObject {
 
     private MouseListener listener;
 
-    public ButtonObject (Sprite sprite, float width, float height) {
+    public Button(Sprite sprite, float width, float height) {
 
         super(sprite);
         this.width = width;

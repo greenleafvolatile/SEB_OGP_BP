@@ -4,14 +4,14 @@ import nl.han.ica.oopg.objects.GameObject;
 import processing.core.PGraphics;
 
 
-public final class TextFieldObject extends GameObject {
+public final class TextField extends GameObject {
 
     private final float fontSize;
 
     private String playerName = "";
     private KeyListener keyListener;
 
-    public TextFieldObject(int width, int height) {
+    public TextField(int width, int height) {
 
         this.width = width;
         this.height = height;
