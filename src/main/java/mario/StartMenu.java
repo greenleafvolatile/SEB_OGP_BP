@@ -41,7 +41,7 @@ public final class StartMenu {
         this.app.textSize(40);
 
         TextObject textFieldLabel = new TextObject(labelText, 40);
-        textFieldLabel.setForeColor(0, 0, 255A, 255);
+        textFieldLabel.setForeColor(0, 0, 255, 255);
         this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 160 + fontSize / 4f);
 
 
