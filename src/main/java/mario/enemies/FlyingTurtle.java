@@ -20,7 +20,7 @@ public class FlyingTurtle extends Enemy {
     @Override
     public void update() {
         playAnimation();
-        preventOffScreen();
+        preventFlyingOffScreen();
     }
 
     /***
@@ -35,7 +35,7 @@ public class FlyingTurtle extends Enemy {
     /***
      * Prevents flying offscreen
      */
-    private void preventOffScreen() {
+    private void preventFlyingOffScreen() {
         if (getX() <= 0) {
             setDirection(90);
         } else if (getX() >= this.app.getTileMap().getMapWidth()) {
