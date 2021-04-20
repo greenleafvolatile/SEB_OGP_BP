@@ -157,6 +157,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
+        Vector<Dashboard> dashboards = this.app.getDashboards();
+        GameDashboard gameDashboard = (GameDashboard) dashboards.get(0);
+
         for (CollidedTile tile : collidedTiles) {
 
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
@@ -169,6 +172,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (jump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
+                }
+
+                if(tile.getTile() instanceof LavaTile) {
+
+                    gameDashboard.removeHeart();
+                    this.app.updateGame();
                 }
 
                 switch (tile.getCollisionSide()) {
@@ -198,10 +207,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-                    Vector<Dashboard> dashboards = this.app.getDashboards();
-                    GameDashboard gameDashboard = (GameDashboard) dashboards.get(0);
                     gameDashboard.addkey();
-                    this.app.updateGame();
 
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();

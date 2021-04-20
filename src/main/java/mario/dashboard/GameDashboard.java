@@ -70,7 +70,11 @@ public final class GameDashboard extends Dashboard {
 
     public void removeHeart() {
 
-        this.hearts.remove(hearts.size() - 1);
+        if (this.hearts.size() > 0) {
+
+            this.deleteGameObject(hearts.get(hearts.size() - 1));
+            this.hearts.remove(this.hearts.size() - 1);
+        }
     }
 
     private void addKeys() {
