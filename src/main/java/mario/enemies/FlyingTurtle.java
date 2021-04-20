@@ -19,7 +19,11 @@ public class FlyingTurtle extends Enemy {
 
     @Override
     public void update() {
-        nextFrame();
+
+        // Decrease animation speed
+        if (this.app.frameCount % 2 == 0) {
+            nextFrame();
+        }
 
         // Prevents flying offscreen
         if (getX() <= 0) {
