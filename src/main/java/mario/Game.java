@@ -95,7 +95,7 @@ public class Game {
         int screenHeight = this.app.getHeight();
 
         CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
-        viewPort.setTolerance(50, 0, 50, 50);
+        viewPort.setTolerance(50, 280, 50, 50);
         return viewPort;
     }
 
@@ -104,6 +104,7 @@ public class Game {
         int worldHeight = this.tileMap.getMapHeight();
 
         View view = new View(centerViewport(), worldWidth, worldHeight);
+        view.setBackground(153, 217, 234);
         this.app.setView(view);
     }
 }
