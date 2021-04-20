@@ -25,7 +25,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
     }
 
     @Override
-    public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
+    public final void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
         for (CollidedTile tile : collidedTiles) {
 
