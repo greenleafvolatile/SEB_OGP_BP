@@ -13,7 +13,6 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import processing.core.PConstants;
 import processing.core.PVector;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +54,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         switch (intValue) {
 
-            case PConstants.LEFT  : moveLeft();
+            case PConstants.LEFT  : setDirectionSpeed(270, this.walkingSpeed); nextFrame();
                                     break;
-            case PConstants.RIGHT : moveRight();
+            case PConstants.RIGHT : setDirectionSpeed(90, this.walkingSpeed); nextFrame();
                                     break;
-            case Player.SPACE_BAR  :if (onFloorTile) jump();
+            case Player.SPACE_BAR : if (onFloorTile) jump();
                                     break;
         }
     }
@@ -107,7 +106,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
 
-    public void doDirectionalJump() {
+    private void doDirectionalJump() {
 
         for (Key key : keys) {
 
@@ -123,19 +122,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
 
     }
-
-    private void moveLeft() {
-
-        setDirectionSpeed(270, this.walkingSpeed);
-        this.nextFrame();
-    }
-
-    private void moveRight() {
-
-        setDirectionSpeed(90, this.walkingSpeed);
-        this.nextFrame();
-    }
-
 
     @Override
     public void keyReleased(int intValue, char charValue) {
