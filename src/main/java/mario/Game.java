@@ -25,7 +25,7 @@ public class Game {
     private int level = 1;
     private TileMap tileMap;
 
-    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/lvl1.csv"))};
+    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/level1.csv"))};
 
     public Game(MainApp app) {
         this.app = app;
