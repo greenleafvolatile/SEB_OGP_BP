@@ -20,7 +20,6 @@ public class StateManager {
         this.gameState = gameState;
     }
 
-
     public void drawState() {
 
         this.app.deleteAllGameOBjects();
@@ -37,7 +36,5 @@ public class StateManager {
                 this.game.display();
                 break;
         }
-
     }
-
 }
