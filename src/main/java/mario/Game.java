@@ -1,19 +1,16 @@
 package mario;
 
+import mario.dashboard.GameDashboard;
 import mario.tiles.MarioTile;
 import mario.enemies.Enemy;
 import mario.enemies.FlyingTurtle;
 import mario.enemies.Goomba;
-import nl.han.ica.oopg.dashboard.Dashboard;
-import nl.han.ica.oopg.objects.Sprite;
-import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import nl.han.ica.oopg.view.Viewport;
-import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -57,8 +54,7 @@ public class Game {
     }
 
     private void createDashboard() {
-
-        this.app.addDashboard(new MarioDashBoard(0, 0, this.app.getWidth(), this.app.getHeight()));
+        this.app.addDashboard(new GameDashboard(0, 0, this.app.getWidth(), this.app.getHeight()));
     }
 
     private TileMap initMap() {
