@@ -19,8 +19,13 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
         this.app = app;
     }
 
-    public void setMovementSpeed(int movementSpeed) {
-        setxSpeed(movementSpeed);
+    public void playAnimation() {
+        nextFrame();
+    }
+
+    @Override
+    public void update() {
+        playAnimation();
     }
 
     @Override

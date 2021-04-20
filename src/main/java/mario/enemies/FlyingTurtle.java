@@ -7,7 +7,7 @@ public class FlyingTurtle extends Enemy {
 
     public FlyingTurtle(MainApp app) {
         super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/flyingturtle.png")), 6);
-        setMovementSpeed(2);
+        setxSpeed(2);
     }
 
     @Override
@@ -19,9 +19,10 @@ public class FlyingTurtle extends Enemy {
     /***
      * Decrease animation speed based on frame count
      */
-    private void playAnimation() {
+    @Override
+    public void playAnimation() {
         if (this.app.frameCount % 2 == 0) {
-            nextFrame();
+            super.playAnimation();
         }
     }
 

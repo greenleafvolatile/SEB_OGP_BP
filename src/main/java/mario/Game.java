@@ -44,7 +44,7 @@ public class Game {
         this.player = new Player(this.app);
         this.app.addGameObject(player, 580, 802);
 
-        Goomba goomba = new Goomba(this.app);
+        Enemy goomba = new Goomba(this.app);
         this.app.addGameObject(goomba, 1100, 834);
 
         Enemy flyingTurtle = new FlyingTurtle(this.app);
