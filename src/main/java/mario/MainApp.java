@@ -16,8 +16,8 @@ public class MainApp extends GameEngine {
 
     @Override
     public void setupGame() {
-        int screenWidth = 1204;
-        int screenHeight = 640;
+        int screenWidth = 1024;
+        int screenHeight = 768;
         size(screenWidth, screenHeight);
 
         this.stateManager = new StateManager(this);
