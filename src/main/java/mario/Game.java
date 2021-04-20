@@ -25,7 +25,7 @@ public class Game {
     private int level = 1;
     private TileMap tileMap;
 
-    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/lvl1.csv"))};
+    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/level1.csv"))};
 
     public Game(MainApp app) {
         this.app = app;
@@ -42,10 +42,10 @@ public class Game {
 
     private void createObjects() {
         this.player = new Player(this.app);
-        this.app.addGameObject(player, 0, 481);
+        this.app.addGameObject(player, 580, 802);
 
         Goomba goomba = new Goomba(this.app);
-        this.app.addGameObject(goomba, 1100, 513);
+        this.app.addGameObject(goomba, 1100, 834);
 
         Enemy flyingTurtle = new FlyingTurtle(this.app);
         this.app.addGameObject(flyingTurtle, 1100, 300);
