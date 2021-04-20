@@ -31,7 +31,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
 
-            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
+            if (tile.getTile() instanceof FloorTile) {
 
                 switch (tile.getCollisionSide()) {
 
