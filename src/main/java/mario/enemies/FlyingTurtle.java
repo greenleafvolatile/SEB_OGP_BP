@@ -10,14 +10,10 @@ import processing.core.PVector;
 
 import java.util.List;
 
-public class FlyingTurtle extends Enemy implements ICollidableWithTiles {
-
-    private final MainApp app;
+public class FlyingTurtle extends Enemy {
 
     public FlyingTurtle(MainApp app) {
-        super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/flyingturtle.png")), 6);
-        this.app = app;
-
+        super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/flyingturtle.png")), 6);
         setMovementSpeed(2);
     }
 
@@ -34,32 +30,4 @@ public class FlyingTurtle extends Enemy implements ICollidableWithTiles {
 
     }
 
-    @Override
-    public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
-
-        for (CollidedTile tile : collidedTiles) {
-
-            PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-
-            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
-
-                switch (tile.getCollisionSide()) {
-
-                    case LEFT:
-                        setX(tilePixelLocation.x - width);
-                        setDirection(270);
-                        break;
-
-                    case RIGHT:
-                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
-                        setDirection(90);
-                        break;
-
-                    case TOP:
-                        setY(tilePixelLocation.y - height);
-                        break;
-                }
-            }
-        }
-    }
 }

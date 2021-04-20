@@ -10,15 +10,11 @@ import processing.core.PVector;
 
 import java.util.List;
 
-public class Goomba extends Enemy implements ICollidableWithTiles {
-
-    private final MainApp app;
+public class Goomba extends Enemy {
 
     public Goomba(MainApp app) {
-        super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/goomba.png")), 8);
+        super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/goomba.png")), 8);
         setMovementSpeed(5);
-
-        this.app = app;
     }
 
     @Override
@@ -26,32 +22,5 @@ public class Goomba extends Enemy implements ICollidableWithTiles {
         nextFrame();
     }
 
-    @Override
-    public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
-        for (CollidedTile tile : collidedTiles) {
-
-            PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
-
-            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
-
-                switch (tile.getCollisionSide()) {
-
-                    case LEFT:
-                        setX(tilePixelLocation.x - width);
-                        setDirection(270);
-                        break;
-
-                    case RIGHT:
-                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
-                        setDirection(90);
-                        break;
-
-                    case TOP:
-                        setY(tilePixelLocation.y - height);
-                        break;
-                }
-            }
-        }
-    }
 }
