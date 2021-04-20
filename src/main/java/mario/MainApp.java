@@ -26,23 +26,4 @@ public class MainApp extends GameEngine {
 
     @Override
     public void update() {}
-
-    @Override
-    public void keyPressed() {
-
-        if (keyCode == this.LEFT) {
-
-            System.out.println("Pressed left");
-            this.stateManager.setGameState(GameState.START);
-
-        }
-
-        if (keyCode == this.RIGHT) {
-
-            System.out.println("Pressed right");
-            this.stateManager.setGameState(GameState.GAME);
-        }
-
-        this.stateManager.drawState();
-    }
 }
