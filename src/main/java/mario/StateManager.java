@@ -5,7 +5,7 @@ public class StateManager {
     private MainApp app;
     private StartMenu menu;
     private Game game;
-    private GameState gameState = GameState.GAME;
+    private GameState gameState = GameState.START;
 
 
     public StateManager(MainApp app) {
