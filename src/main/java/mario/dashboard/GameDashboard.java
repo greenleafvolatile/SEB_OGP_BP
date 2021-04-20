@@ -34,16 +34,17 @@ public final class GameDashboard extends Dashboard {
     public GameDashboard(float x, float y, float width, float height) {
 
         super(x, y, width, height);
-        graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
+        this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.init();
     }
 
     private void init() {
 
         fontSize = 32;
+        graphics.textSize(fontSize);
         this.addLabel("Player:", xMargin, yMargin, fontSize, 255, 255, 255);
-        this.addLabel("00:00:00", (int) this.width / 2  - 50, yMargin, fontSize, 255, 255, 255);
-        this.addLabel("Keys:", (int) this.width - 110, yMargin, fontSize, 255, 255, 255);
+        this.addLabel("00:00:00", (int) (this.width / 2 - graphics.textWidth("00:00:00") / 2f), yMargin, fontSize, 255, 255, 255);
+        this.addLabel("Keys:", (int) (this.width - xMargin - graphics.textWidth("Keys")), yMargin, fontSize, 255, 255, 255);
         this.addHearts();
         this.addKeys();
     }
@@ -84,7 +85,7 @@ public final class GameDashboard extends Dashboard {
 
     public void addkey() {
 
-        this.keys.add(new DashboardKey());
-        System.out.println(keys.size());
+        this.addGameObject(new DashboardKey(), 200, 200);
+
     }
 }

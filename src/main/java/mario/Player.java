@@ -201,6 +201,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     Vector<Dashboard> dashboards = this.app.getDashboards();
                     GameDashboard gameDashboard = (GameDashboard) dashboards.get(0);
                     gameDashboard.addkey();
+                    this.app.updateGame();
 
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
