@@ -1,9 +1,10 @@
 package mario;
 
-import mario.tiles.MarioTile;
+import mario.enemies.Enemy;
+import mario.enemies.FlyingTurtle;
+import mario.enemies.Goomba;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
-import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
@@ -19,7 +20,6 @@ public class Game {
 
     private MainApp app;
     private Player player;
-    private int level = 1;
     private TileMap tileMap;
 
     private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/lvl1.csv"))};
@@ -40,6 +40,15 @@ public class Game {
     private void createObjects() {
         this.player = new Player(this.app);
         this.app.addGameObject(player, 0, 481);
+
+        Goomba goomba = new Goomba(this.app);
+        this.app.addGameObject(goomba, 1100, 513);
+
+        Enemy flyingTurtle = new FlyingTurtle(this.app);
+        this.app.addGameObject(flyingTurtle, 1100, 300);
+
+        Enemy flyingTurtle2 = new FlyingTurtle(this.app);
+        this.app.addGameObject(flyingTurtle2, 10, 300);
     }
 
     private void createDashboard() {
@@ -70,12 +79,9 @@ public class Game {
     }
 
     private TileMap initMap() {
-
-        @SuppressWarnings("unchecked")
-        TileType<Tile>[] tileTypes =  loadTileTypes();
-
-        int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
-        return new TileMap(MarioTile.getTileSize(), tileTypes, tilesMap);
+        TileType[] tileTypes =  loadTileTypes();
+        int[][] tilesMap = MapLoader.loadMap(mapFiles[0]);
+        return new TileMap(64, tileTypes, tilesMap);
     }
 
     private Viewport centerViewport() {
