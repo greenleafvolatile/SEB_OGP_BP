@@ -203,6 +203,5 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     public void update() {
         // Empty method.
-
     }
 }
