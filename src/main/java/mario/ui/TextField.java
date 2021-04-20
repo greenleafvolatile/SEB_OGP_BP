@@ -26,7 +26,7 @@ public final class TextField extends GameObject {
         graphics.rect(this.x, this.y, this.width, this.height);
         graphics.fill(0, 0, 0);
 
-        if (graphics.textWidth(this.playerName) < this.width) {
+        if (graphics.textWidth(this.playerName) < this.width) { // Dit zou in een ternary statement kunnen.
 
             graphics.text(this.playerName, x, this.y + this.height - this.fontSize);
 

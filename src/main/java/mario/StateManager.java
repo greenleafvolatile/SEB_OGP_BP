@@ -5,7 +5,8 @@ public class StateManager {
     private MainApp app;
     private StartMenu menu;
     private Game game;
-    private GameState gameState = GameState.START;
+    private GameState gameState = GameState.GAME;
+
 
 
     public StateManager(MainApp app) {
@@ -19,7 +20,6 @@ public class StateManager {
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
-
 
     public void drawState() {
 
