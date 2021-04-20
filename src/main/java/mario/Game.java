@@ -104,6 +104,7 @@ public class Game {
         int worldHeight = this.tileMap.getMapHeight();
 
         View view = new View(centerViewport(), worldWidth, worldHeight);
+        view.setBackground(153, 217, 234);
         this.app.setView(view);
     }
 }
