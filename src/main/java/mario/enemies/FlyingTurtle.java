@@ -19,19 +19,28 @@ public class FlyingTurtle extends Enemy {
 
     @Override
     public void update() {
+        playAnimation();
+        preventOffScreen();
+    }
 
-        // Decrease animation speed
+    /***
+     * Decrease animation speed based on frame count
+     */
+    private void playAnimation() {
         if (this.app.frameCount % 2 == 0) {
             nextFrame();
         }
+    }
 
-        // Prevents flying offscreen
+    /***
+     * Prevents flying offscreen
+     */
+    private void preventOffScreen() {
         if (getX() <= 0) {
             setDirection(90);
         } else if (getX() >= this.app.getTileMap().getMapWidth()) {
             setDirection(270);
         }
-
     }
 
 }
