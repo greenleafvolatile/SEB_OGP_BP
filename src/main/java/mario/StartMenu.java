@@ -1,10 +1,10 @@
 package mario;
 
-import mario.ui.ButtonObject;
-import mario.ui.MouseListener;
+import mario.ui.*;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
+import processing.core.PConstants;
 
 public final class StartMenu {
 
@@ -14,7 +14,10 @@ public final class StartMenu {
 
         this.app = app;
         this.createView();
+
         this.addTitle();
+        this.addLabel();
+        this.addTextField();
         this.addButtons();
     }
 
@@ -25,10 +28,24 @@ public final class StartMenu {
 
         this.app.textSize(fontSize);
 
-        TextObject titleObject = new TextObject (title, fontSize);
+        TextObject titleObject = new TextObject(title, fontSize);
         titleObject.setForeColor(255, 0, 0, 255);
 
-        this.app.addGameObject(titleObject, app.getWidth() / 2f - this.app.textWidth(titleObject.getText()) / 2, 50);
+        this.app.addGameObject(titleObject, app.getWidth() / 2f - app.textWidth(title) / 2, 50);
+    }
+
+    private void addLabel() {
+
+        final int fontSize = 40;
+        String labelText = "Enter name:";
+        this.app.textSize(40);
+
+        TextObject textFieldLabel = new TextObject(labelText, 40);
+        textFieldLabel.setForeColor(0, 0, 255, 255);
+        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 160 + fontSize / 4f);
+
+
+
     }
 
     private void addButtons() {
@@ -36,8 +53,8 @@ public final class StartMenu {
         final int buttonWidth = 200;
         final int buttonHeight = 100;
 
-        ButtonObject playButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
-        playButtonObject.addListener(new MouseListener() {
+        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
+        playButton.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button)  {
@@ -46,8 +63,8 @@ public final class StartMenu {
             }
         });
 
-        ButtonObject exitButtonObject = new ButtonObject(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
-        exitButtonObject.addListener(new MouseListener() {
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
+        exitButton.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -57,8 +74,29 @@ public final class StartMenu {
 
         });
 
-        this.app.addGameObject(playButtonObject, this.app.getWidth() / 2f - playButtonObject.getWidth() / 2f, 160);
-        this.app.addGameObject(exitButtonObject, this.app.getWidth() / 2f - exitButtonObject.getWidth() / 2f, 310);
+        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 250);
+        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 360);
+
+    }
+
+    private void addTextField() {
+
+        TextField textField = new TextField( 200, 50);
+        textField.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(int intValue, char charValue) {
+
+                if (intValue == PConstants.BACKSPACE) {
+                    textField.removeChar();
+                }
+                else if (Character.isLetterOrDigit(charValue)) {
+                    textField.addChar(charValue);
+                }
+            }
+        });
+
+        this.app.addGameObject(textField, this.app.getWidth() / 2f, 160);
 
     }
 

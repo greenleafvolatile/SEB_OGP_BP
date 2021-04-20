@@ -8,7 +8,7 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;
 
-public class TileTypeLoader {
+public final class TileTypeLoader {
 
     private TileTypeLoader(){}
 
@@ -46,6 +46,7 @@ public class TileTypeLoader {
                 platformBlueTileType,
                 keyTileType
         };
+
         return tileTypes;
     }
 }

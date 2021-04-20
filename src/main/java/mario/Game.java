@@ -1,7 +1,9 @@
 package mario;
 
+import mario.tiles.MarioTile;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
+import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
@@ -17,6 +19,7 @@ public class Game {
 
     private MainApp app;
     private Player player;
+    private int level = 1;
     private TileMap tileMap;
 
     private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/lvl1.csv"))};
@@ -67,9 +70,12 @@ public class Game {
     }
 
     private TileMap initMap() {
-        TileType[] tileTypes =  loadTileTypes();
-        int[][] tilesMap = MapLoader.loadMap(mapFiles[0]);
-        return new TileMap(64, tileTypes, tilesMap);
+
+        @SuppressWarnings("unchecked")
+        TileType<Tile>[] tileTypes =  loadTileTypes();
+
+        int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
+        return new TileMap(MarioTile.getTileSize(), tileTypes, tilesMap);
     }
 
     private Viewport centerViewport() {
