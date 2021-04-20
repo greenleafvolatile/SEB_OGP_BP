@@ -95,7 +95,7 @@ public class Game {
         int screenHeight = this.app.getHeight();
 
         CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
-        viewPort.setTolerance(50, 200, 50, 50);
+        viewPort.setTolerance(50, 280, 50, 50);
         return viewPort;
     }
 
