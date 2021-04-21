@@ -72,6 +72,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     jump();
                 }
                 break;
+
         }
     }
 
@@ -116,15 +117,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
     private void doDirectionalJump() {
-
         for (Key key : keys) {
-
             if (key.getKeyValue() == RIGHT && key.isPressed()) {
                 setDirectionSpeed(30, jumpingSpeed);
             } else if (key.getKeyValue() == LEFT && key.isPressed()) {
                 setDirectionSpeed(320, jumpingSpeed);
             }
-
         }
     }
 
@@ -187,8 +185,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     jump = false;
                 }
 
-                if(tile.getTile() instanceof LavaTile) {
-
+                if (tile.getTile() instanceof LavaTile) {
                     this.gameDashboard.removeHeart();
                     resetPlayer();
                 }
@@ -212,8 +209,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                         break;
 
                 }
-                // Prevents endless speed increasing
-                this.setySpeed(0);
+
+                this.setySpeed(0); // Prevents endless speed increasing
 
             } else if (tile.getTile() instanceof KeyTile) {
 
