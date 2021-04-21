@@ -36,8 +36,8 @@ public class StateManager {
 
 
             case GAME:
-                this.game = new Game(this.app);
-                this.game.display();
+                //this.game = new Game(this.app, String playerName);
+                //this.game.display();
                 break;
         }
 
