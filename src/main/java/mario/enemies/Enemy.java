@@ -2,7 +2,6 @@ package mario.enemies;
 
 import mario.MainApp;
 import mario.tiles.FloorTile;
-import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
@@ -20,8 +19,13 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
         this.app = app;
     }
 
-    public void setMovementSpeed(int movementSpeed) {
-        setxSpeed(movementSpeed);
+    public void playAnimation() {
+        nextFrame();
+    }
+
+    @Override
+    public void update() {
+        playAnimation();
     }
 
     @Override
