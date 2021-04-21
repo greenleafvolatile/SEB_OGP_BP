@@ -18,37 +18,25 @@ public final class StartMenu {
         this.app = app;
         this.manager = manager;
         this.createView();
-        this.addTitle();
+        this.addLogo();
         this.addLabel();
         this.addTextField();
         this.addButtons();
     }
 
-    private void addTitle() {
-
-        final int fontSize = 60;
-        final String title = "SUPER MARIO SPEEDRUNNER";
-
-        this.app.textSize(fontSize);
-
-        TextObject titleObject = new TextObject(title, fontSize);
-        titleObject.setForeColor(255, 0, 0, 255);
-
-        this.app.addGameObject(titleObject, app.getWidth() / 2f - app.textWidth(title) / 2, 50);
+    private void addLogo() {
+        Image logo = new Image(new Sprite(MainApp.MEDIA_URL.concat("logo.png")));
+        this.app.addGameObject(logo, app.getWidth() / 2f - 225, 50);
     }
 
     private void addLabel() {
-
         final int fontSize = 40;
         String labelText = "Enter name:";
         this.app.textSize(40);
 
         TextObject textFieldLabel = new TextObject(labelText, 40);
         textFieldLabel.setForeColor(0, 0, 255, 255);
-        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 150 + fontSize / 4f);
-
-
-
+        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 200 + fontSize / 4f);
     }
 
     private void addButtons() {
@@ -102,7 +90,7 @@ public final class StartMenu {
             }
         });
 
-        this.app.addGameObject(textField, this.app.getWidth() / 2f, 160);
+        this.app.addGameObject(textField, this.app.getWidth() / 2f, 210);
 
     }
 
