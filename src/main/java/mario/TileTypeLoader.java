@@ -1,9 +1,6 @@
 package mario;
 
-import mario.tiles.DoorTile;
-import mario.tiles.FloorTile;
-import mario.tiles.KeyTile;
-import mario.tiles.LavaTile;
+import mario.tiles.*;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;
@@ -29,10 +26,10 @@ public final class TileTypeLoader {
         TileType<FloorTile> boxTileType = new TileType<>(FloorTile.class, boxSprite); // 0
         TileType<FloorTile> groundTileType = new TileType<>(FloorTile.class, groundSprite); // 1
         TileType<LavaTile> lavaTileType = new TileType<>(LavaTile.class, lavaSprite); // 2
-        TileType<FloorTile> doorYellowTopTileType = new TileType<>(FloorTile.class, doorYellowTopSprite); // 3
-        TileType<FloorTile> doorYellowBottomTileType = new TileType<>(FloorTile.class, doorYellowBottomSprite); // 4
-        TileType<DoorTile> noLockDoorBottomTileType = new TileType<>(DoorTile.class, noLockDoorBottomSprite); // 5
-        TileType<DoorTile> noLockDoorTopTileType = new TileType<>(DoorTile.class, noLockDoorTopSprite); // 6
+        TileType<DoorTile> doorYellowTopTileType = new TileType<>(DoorTile.class, doorYellowTopSprite); // 3
+        TileType<DoorTile> doorYellowBottomTileType = new TileType<>(DoorTile.class, doorYellowBottomSprite); // 4
+        TileType<BackgroundTile> noLockDoorBottomTileType = new TileType<>(BackgroundTile.class, noLockDoorBottomSprite); // 5
+        TileType<BackgroundTile> noLockDoorTopTileType = new TileType<>(BackgroundTile.class, noLockDoorTopSprite); // 6
         TileType<FloorTile> platformBlueTileType = new TileType<>(FloorTile.class, platformBlueSprite); // 7
         TileType<KeyTile> keyTileType = new TileType<>(KeyTile.class, keySprite); // 8
         TileType<FloorTile> groundLayerType = new TileType<>(FloorTile.class, groundLayerSprite); // 9

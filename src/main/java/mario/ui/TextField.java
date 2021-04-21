@@ -63,4 +63,8 @@ public final class TextField extends GameObject {
             playerName = playerName.substring(0, playerName.length() - 1);
         }
     }
+
+    public String getPlayerName() {
+        return this.playerName;
+    }
 }

@@ -5,11 +5,13 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PConstants;
+import processing.core.PImage;
 
 public final class StartMenu {
 
     private final MainApp app;
     private final StateManager manager;
+    private TextField textField;
 
     public StartMenu(MainApp app, StateManager manager) {
 
@@ -60,8 +62,9 @@ public final class StartMenu {
             @Override
             public void mousePressed(int x, int y, int button)  {
 
-                System.out.println("Pressed play button.");
-                StartMenu.this.manager.setGameState(GameState.GAME);
+                //StartMenu.this.manager.setGameState(GameState.GAME);
+                StartMenu.this.app.deleteAllGameOBjects();
+                new Game(StartMenu.this.app, StartMenu.this.textField.getPlayerName());
 
 
             }
@@ -72,8 +75,7 @@ public final class StartMenu {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                System.out.println("Pressed exit button.");
-                // To do: implement exit button action.
+                System.exit(0);
             }
 
         });
@@ -85,7 +87,7 @@ public final class StartMenu {
 
     private void addTextField() {
 
-        TextField textField = new TextField( 200, 50);
+        this.textField = new TextField( 200, 50);
         textField.addKeyListener(new KeyListener() {
 
             @Override
@@ -106,7 +108,12 @@ public final class StartMenu {
 
     private void createView() {
 
-        View view = new View(app.getWidth(), app.getHeight());
+        View view = new View(this.app.getWidth(), this.app.getHeight());
+
+        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/test.png"));
+        image.resize(this.app.getWidth(), this.app.getHeight());
+        view.setBackground(image);
+
         this.app.setView(view);
     }
 

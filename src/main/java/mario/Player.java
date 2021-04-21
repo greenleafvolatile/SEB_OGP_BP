@@ -2,6 +2,7 @@ package mario;
 
 import mario.dashboard.GameDashboard;
 import mario.enemies.Enemy;
+import mario.tiles.DoorTile;
 import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
 import mario.tiles.LavaTile;
@@ -31,6 +32,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private int walkingSpeed = 5;
     private int jumpingSpeed = 8;
+    private int numberOfkeysPickedUp = 0;
 
     private boolean jump;
     private boolean onFloorTile;
@@ -214,9 +216,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 }
                 // Prevents endless speed increasing
                 this.setySpeed(0);
-            }
 
-            if (tile.getTile() instanceof KeyTile) {
+            } else if (tile.getTile() instanceof KeyTile) {
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
@@ -225,6 +226,14 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
+            } else if (tile.getTile() instanceof DoorTile) {
+
+                if (this.numberOfkeysPickedUp == 5)  {
+
+                    System.out.println("Mario wins!");
+                    // show end game menu.
+                }
+
             }
         }
     }
