@@ -9,12 +9,13 @@ import processing.core.PConstants;
 public final class StartMenu {
 
     private final MainApp app;
+    private final StateManager manager;
 
-    public StartMenu(MainApp app) {
+    public StartMenu(MainApp app, StateManager manager) {
 
         this.app = app;
+        this.manager = manager;
         this.createView();
-
         this.addTitle();
         this.addLabel();
         this.addTextField();
@@ -58,8 +59,11 @@ public final class StartMenu {
 
             @Override
             public void mousePressed(int x, int y, int button)  {
+
                 System.out.println("Pressed play button.");
-                // To do: implement play button action.
+                StartMenu.this.manager.setGameState(GameState.GAME);
+
+
             }
         });
 

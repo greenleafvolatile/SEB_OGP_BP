@@ -83,11 +83,15 @@ public class GameDashboard extends Dashboard {
         }
     }
 
+    public int getNumberOfHearts() {
+        return this.hearts.size();
+    }
+
 
     public void addkey() {
 
         this.numberOfKeys++;
         KeySprite key = new KeySprite();
-        this.addGameObject(key, (int) (this.width - xMargin - key.getWidth()) * numberOfKeys, (int) (yMargin + fontSize + key.getHeight() / 2f));
+        this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeys), (int) (yMargin + fontSize + key.getHeight() / 2f));
     }
 }

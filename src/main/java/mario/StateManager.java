@@ -5,12 +5,13 @@ public class StateManager {
     private MainApp app;
     private StartMenu menu;
     private Game game;
-    private GameState gameState = GameState.GAME;
+    private GameState gameState = GameState.START;
 
 
 
     public StateManager(MainApp app) {
         this.app = app;
+        this.drawState();
     }
 
     public GameState getGameState() {
@@ -19,6 +20,8 @@ public class StateManager {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+        drawState();
+
     }
 
     public void drawState() {
@@ -28,7 +31,7 @@ public class StateManager {
         switch (gameState) {
 
             case START:
-                new StartMenu(this.app);
+                new StartMenu(this.app, this);
                 break;
 
 
