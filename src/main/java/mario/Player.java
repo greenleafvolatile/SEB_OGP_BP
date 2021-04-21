@@ -156,7 +156,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
-
                     this.app.deleteGameObject(object);
 
                 } else {
@@ -190,7 +189,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 if(tile.getTile() instanceof LavaTile) {
 
-                    //this.resetPlayer();
+                    this.gameDashboard.removeHeart();
+                    this.resetPlayer();
                 }
 
                 switch (tile.getCollisionSide()) {
