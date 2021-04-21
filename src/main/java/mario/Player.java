@@ -1,6 +1,7 @@
 package mario;
 
 import mario.dashboard.GameDashboard;
+import mario.enemies.Enemy;
 import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
 import mario.tiles.LavaTile;
@@ -26,6 +27,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
+    private final GameDashboard gameDashboard;
 
     private int walkingSpeed = 5;
     private int jumpingSpeed = 8;
@@ -38,6 +40,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
+        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
         this.keys.add(new Key(PConstants.LEFT));
         this.keys.add(new Key(PConstants.RIGHT));
         initPlayer();
@@ -123,7 +126,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             }
         }
-
     }
 
     @Override
@@ -134,17 +136,33 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     }
 
+    private void resetPlayer() {
+
+        this.gameDashboard.removeHeart();
+        if (this.gameDashboard.getNumberOfHearts() == 0) {
+            // Show endgame screen.
+        }
+        this.setSpeed(0);
+        this.setX(508);
+        this.setY(802);
+
+    }
+
     @Override
     public void gameObjectCollisionOccurred(List<GameObject> list) {
-        // Empty method.
+
+        for (GameObject object : list) {
+
+            if (object instanceof Enemy) {
+                this.resetPlayer();
+            }
+        }
 
     }
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
-        Vector<Dashboard> dashboards = this.app.getDashboards();
-        GameDashboard gameDashboard = (GameDashboard) dashboards.get(0);
 
         for (CollidedTile tile : collidedTiles) {
 
@@ -156,14 +174,14 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 this.onFloorTile = true;
 
                 if (jump) {
+
                     this.setCurrentFrameIndex(0);
                     jump = false;
                 }
 
                 if(tile.getTile() instanceof LavaTile) {
 
-                    gameDashboard.removeHeart();
-                    this.app.updateGame();
+                    this.resetPlayer();
                 }
 
                 switch (tile.getCollisionSide()) {
@@ -201,6 +219,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             }
         }
     }
+
 
     public void update() {
         // Empty method.

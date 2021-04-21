@@ -32,10 +32,10 @@ public class Game {
     }
 
     public void display() {
+        createDashboard();
         createObjects();
         initMap();
         createView();
-        createDashboard();
     }
 
     private void createObjects() {
