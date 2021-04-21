@@ -211,8 +211,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 }
 
-//                this.setySpeed(0); // Prevents endless speed increasing
-
             } else if (tile.getTile() instanceof KeyTile) {
 
                 try {
