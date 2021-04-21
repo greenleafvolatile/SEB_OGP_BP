@@ -138,7 +138,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void resetPlayer() {
 
-        this.gameDashboard.removeHeart();
         if (this.gameDashboard.getNumberOfHearts() == 0) {
             // Show endgame screen.
         }
@@ -154,7 +153,17 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         for (GameObject object : list) {
 
             if (object instanceof Enemy) {
-                this.resetPlayer();
+
+
+                if (this.getY() + this.getHeight() <= object.getCenterY()) {
+
+                    this.app.deleteGameObject(object);
+
+                } else {
+
+                    this.gameDashboard.removeHeart();
+                    this.resetPlayer();
+                }
             }
         }
 
@@ -181,7 +190,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 if(tile.getTile() instanceof LavaTile) {
 
-                    this.resetPlayer();
+                    //this.resetPlayer();
                 }
 
                 switch (tile.getCollisionSide()) {
