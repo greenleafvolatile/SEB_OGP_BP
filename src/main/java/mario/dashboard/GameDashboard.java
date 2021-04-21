@@ -1,7 +1,5 @@
 package mario.dashboard;
 
-import mario.Key;
-import mario.dashboard.DashboardHeart;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;
@@ -10,25 +8,24 @@ import processing.core.PGraphics;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class GameDashboard extends Dashboard {
+public class GameDashboard extends Dashboard {
 
     private final int xMargin = 40;
     private final int yMargin = 20;
 
-    private final List<DashboardHeart> hearts = new ArrayList<>();
-    private final List<DashboardKey> keys = new ArrayList<>();
+    private final List<HeartSprite> hearts = new ArrayList<>();
+    private final List<KeySprite> keys = new ArrayList<>();
 
     private int fontSize;
+    private int numberOfKeys = 0;
+
     private PGraphics graphics;
 
     {
         final int numberOfHearts = 3;
-        for (int i = 0; i < numberOfHearts; i++) hearts.add(new DashboardHeart());
-
-        // for testing
-        final int numberOfKeys = 3;
-        for (int i = 0; i < numberOfKeys; i++) keys.add(new DashboardKey());
-
+        for (int i = 0; i < numberOfHearts; i++) {
+            hearts.add(new HeartSprite());
+        }
     }
 
     public GameDashboard(float x, float y, float width, float height) {
@@ -40,31 +37,40 @@ public final class GameDashboard extends Dashboard {
 
     private void init() {
 
-        fontSize = 32;
-        graphics.textSize(fontSize);
+        this.fontSize = 32;
+        this.graphics.textSize(fontSize);
+
+        String timerLabelText = "00:00:00";
+        String keysLabelText = "keys:";
+
         this.addLabel("Player:", xMargin, yMargin, fontSize, 255, 255, 255);
-        this.addLabel("00:00:00", (int) (this.width / 2 - graphics.textWidth("00:00:00") / 2f), yMargin, fontSize, 255, 255, 255);
-        this.addLabel("Keys:", (int) (this.width - xMargin - graphics.textWidth("Keys")), yMargin, fontSize, 255, 255, 255);
+        this.addLabel(timerLabelText, (int) (this.width / 2 - this.graphics.textWidth(timerLabelText) / 2f), yMargin, fontSize, 255, 255, 255);
+        this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
+
         this.addHearts();
-        this.addKeys();
     }
 
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
 
         final int alpha = 255;
+
         TextObject textObject = new TextObject(text, fontSize);
         textObject.setForeColor(red, green, blue, alpha);
+
         this.addGameObject(textObject, xPos, yPos);
     }
 
     private void addHearts() {
 
+        final int y = yMargin + fontSize;
+
         int x = xMargin;
-        int y = yMargin + fontSize;
-        for (DashboardHeart dashboardHeart : this.hearts) {
-            this.addGameObject(dashboardHeart, x, y);
-            x += dashboardHeart.getWidth();
+
+        for (HeartSprite heartSprite : this.hearts) {
+
+            this.addGameObject(heartSprite, x, y + (int) (heartSprite.getHeight() / 2f));
+            x += heartSprite.getWidth();
         }
     }
 
@@ -77,19 +83,11 @@ public final class GameDashboard extends Dashboard {
         }
     }
 
-    private void addKeys() {
-
-        int x = (int) this.width - xMargin;
-        int y = yMargin + fontSize;
-        for (DashboardKey key : this.keys) {
-            this.addGameObject(key, x, y);
-            x -= key.getWidth();
-        }
-    }
 
     public void addkey() {
 
-        this.addGameObject(new DashboardKey(), 200, 200);
-
+        this.numberOfKeys++;
+        KeySprite key = new KeySprite();
+        this.addGameObject(key, (int) (this.width - xMargin - key.getWidth()) * numberOfKeys, (int) (yMargin + fontSize + key.getHeight() / 2f));
     }
 }
