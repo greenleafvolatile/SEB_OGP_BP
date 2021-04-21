@@ -110,8 +110,7 @@ public final class StartMenu {
 
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
-        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/test.png"));
-        image.resize(this.app.getWidth(), this.app.getHeight());
+        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/mario_background_one.jpg"));
         view.setBackground(image);
 
         this.app.setView(view);
