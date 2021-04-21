@@ -9,17 +9,14 @@ import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
-import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
-import processing.core.PConstants;
 import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
@@ -30,23 +27,21 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final List<Key> keys = new ArrayList<>();
     private final GameDashboard gameDashboard;
 
-    private int walkingSpeed = 5;
-    private int jumpingSpeed = 8;
-    private int numberOfkeysPickedUp = 0;
+    private final int walkingSpeed = 5;
+    private final int jumpingSpeed = 8;
+    private int keysCollected = 0;
 
     private boolean jump;
     private boolean onFloorTile;
 
     public Player(MainApp app) {
-
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
         this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
-        this.keys.add(new Key(PConstants.LEFT));
-        this.keys.add(new Key(PConstants.RIGHT));
+        this.keys.add(new Key(LEFT));
+        this.keys.add(new Key(RIGHT));
         initPlayer();
-
     }
 
     private void initPlayer() {
@@ -62,12 +57,21 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         switch (intValue) {
 
-            case PConstants.LEFT  : setDirectionSpeed(270, this.walkingSpeed); nextFrame();
-                                    break;
-            case PConstants.RIGHT : setDirectionSpeed(90, this.walkingSpeed); nextFrame();
-                                    break;
-            case Player.SPACE_BAR : if (onFloorTile) jump();
-                                    break;
+            case LEFT:
+                setDirectionSpeed(270, this.walkingSpeed);
+                nextFrame();
+                break;
+
+            case RIGHT:
+                setDirectionSpeed(90, this.walkingSpeed);
+                nextFrame();
+                break;
+
+            case SPACE_BAR:
+                if (onFloorTile) {
+                    jump();
+                }
+                break;
         }
     }
 
@@ -95,11 +99,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.jump = true;
 
         if (this.pressedDoubleKey()) {
-
-            this.doDirectionalJump();
+            doDirectionalJump();
         } else {
-
-            this.doVerticalJump();
+            doVerticalJump();
         }
 
         this.setCurrentFrameIndex(3); // Change sprite index to jump motion.
@@ -109,8 +111,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void doVerticalJump() {
-
-        this.setDirectionSpeed(360, jumpingSpeed);
+        setDirectionSpeed(360, jumpingSpeed);
     }
 
 
@@ -118,15 +119,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         for (Key key : keys) {
 
-            if (key.getKeyValue() == PConstants.RIGHT && key.isPressed()) {
-
-                this.setDirectionSpeed(30, jumpingSpeed);
-
-            } else if (key.getKeyValue() == PConstants.LEFT && key.isPressed()) {
-
-                this.setDirectionSpeed(320, jumpingSpeed);
-
+            if (key.getKeyValue() == RIGHT && key.isPressed()) {
+                setDirectionSpeed(30, jumpingSpeed);
+            } else if (key.getKeyValue() == LEFT && key.isPressed()) {
+                setDirectionSpeed(320, jumpingSpeed);
             }
+
         }
     }
 
@@ -134,7 +132,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     public void keyReleased(int intValue, char charValue) {
 
         this.setKeyPressed(intValue, false);
-        if (intValue != Player.SPACE_BAR) this.setSpeed(0);
+
+        if (intValue != Player.SPACE_BAR) {
+            this.setSpeed(0);
+        }
 
     }
 
@@ -156,23 +157,21 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             if (object instanceof Enemy) {
 
-
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
-
                 } else {
-
                     this.gameDashboard.removeHeart();
-                    this.resetPlayer();
+                    resetPlayer();
                 }
+
             }
+
         }
 
     }
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
-
 
         for (CollidedTile tile : collidedTiles) {
 
@@ -184,7 +183,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 this.onFloorTile = true;
 
                 if (jump) {
-
                     this.setCurrentFrameIndex(0);
                     jump = false;
                 }
@@ -192,7 +190,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if(tile.getTile() instanceof LavaTile) {
 
                     this.gameDashboard.removeHeart();
-                    this.resetPlayer();
+                    resetPlayer();
                 }
 
                 switch (tile.getCollisionSide()) {
@@ -218,22 +216,19 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 this.setySpeed(0);
 
             } else if (tile.getTile() instanceof KeyTile) {
-                try {
 
+                try {
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
                     gameDashboard.addkey();
-
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
+
             } else if (tile.getTile() instanceof DoorTile) {
-
-                if (this.numberOfkeysPickedUp == 5)  {
-
+                if (this.keysCollected == 5)  {
                     System.out.println("Mario wins!");
                     // show end game menu.
                 }
-
             }
         }
     }
