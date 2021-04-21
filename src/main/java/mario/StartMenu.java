@@ -5,6 +5,7 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PConstants;
+import processing.core.PImage;
 
 public final class StartMenu {
 
@@ -107,7 +108,12 @@ public final class StartMenu {
 
     private void createView() {
 
-        View view = new View(app.getWidth(), app.getHeight());
+        View view = new View(this.app.getWidth(), this.app.getHeight());
+
+        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/test.png"));
+        image.resize(this.app.getWidth(), this.app.getHeight());
+        view.setBackground(image);
+
         this.app.setView(view);
     }
 
