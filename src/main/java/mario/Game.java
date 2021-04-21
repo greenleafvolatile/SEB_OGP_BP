@@ -1,18 +1,16 @@
 package mario;
 
+import mario.dashboard.GameDashboard;
 import mario.tiles.MarioTile;
 import mario.enemies.Enemy;
 import mario.enemies.FlyingTurtle;
 import mario.enemies.Goomba;
-import nl.han.ica.oopg.dashboard.Dashboard;
-import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import nl.han.ica.oopg.view.CenterFollowingViewport;
 import nl.han.ica.oopg.view.View;
 import nl.han.ica.oopg.view.Viewport;
-import org.w3c.dom.Text;
 
 import java.io.File;
 
@@ -52,33 +50,11 @@ public class Game {
 
         Enemy flyingTurtle2 = new FlyingTurtle(this.app);
         this.app.addGameObject(flyingTurtle2, 10, 300);
+
     }
 
     private void createDashboard() {
-        int screenWidth = this.app.getWidth();
-        int screenHeight = this.app.getHeight();
-
-        final int xMargin = 40;
-        final int yMargin = 20;
-
-        Dashboard dashboard = new Dashboard(0, 0, screenWidth, screenHeight);
-
-        // TEXT LEFT
-        TextObject playerName = new TextObject("Player", 32);
-        playerName.setForeColor(255, 255, 255, 255);
-        dashboard.addGameObject(playerName, xMargin, yMargin);
-
-        // TEXT MIDDLE
-        TextObject time = new TextObject("00:00:00", 32);
-        time.setForeColor(255, 255, 255, 255);
-        dashboard.addGameObject(time, screenWidth / 2 - 50, yMargin);
-
-        // TEXT RIGHT
-        TextObject keysCollected = new TextObject("Keys", 32);
-        keysCollected.setForeColor(255, 255, 255, 255);
-        dashboard.addGameObject(keysCollected, screenWidth - 110, yMargin);
-
-        this.app.addDashboard(dashboard);
+        this.app.addDashboard(new GameDashboard(0, 0, this.app.getWidth(), this.app.getHeight()));
     }
 
     private TileMap initMap() {

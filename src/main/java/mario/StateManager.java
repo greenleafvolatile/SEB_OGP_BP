@@ -8,6 +8,7 @@ public class StateManager {
     private GameState gameState = GameState.GAME;
 
 
+
     public StateManager(MainApp app) {
         this.app = app;
     }
@@ -36,5 +37,7 @@ public class StateManager {
                 this.game.display();
                 break;
         }
+
     }
+
 }

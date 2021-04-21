@@ -12,7 +12,7 @@ public final class TileTypeLoader {
 
     private TileTypeLoader(){}
 
-    public static TileType[] loadTileTypes() {
+    public static TileType<Tile>[] loadTileTypes() {
 
         Sprite boxSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/box.png"); // 0
         Sprite groundSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/ground.png"); // 1

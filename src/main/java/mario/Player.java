@@ -1,11 +1,13 @@
 package mario;
 
+import mario.dashboard.GameDashboard;
 import mario.tiles.FloorTile;
 import mario.tiles.KeyTile;
 import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
+import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.exceptions.TileNotFoundException;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
@@ -15,6 +17,7 @@ import processing.core.PConstants;
 import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
@@ -140,6 +143,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
 
+        Vector<Dashboard> dashboards = this.app.getDashboards();
+        GameDashboard gameDashboard = (GameDashboard) dashboards.get(0);
+
         for (CollidedTile tile : collidedTiles) {
 
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
@@ -152,6 +158,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (jump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
+                }
+
+                if(tile.getTile() instanceof LavaTile) {
+
+                    gameDashboard.removeHeart();
+                    this.app.updateGame();
                 }
 
                 switch (tile.getCollisionSide()) {
@@ -179,7 +191,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             if (tile.getTile() instanceof KeyTile) {
                 try {
+
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
+                    gameDashboard.addkey();
+
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
