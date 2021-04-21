@@ -53,10 +53,10 @@ public final class StartMenu {
 
     private void addButtons() {
 
-        final int buttonWidth = 200;
+        final int buttonWidth = 350;
         final int buttonHeight = 100;
 
-        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_red.png")), buttonWidth, buttonHeight);
+        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/button.png")), buttonWidth, buttonHeight);
         playButton.addListener(new MouseListener() {
 
             @Override
@@ -70,7 +70,7 @@ public final class StartMenu {
             }
         });
 
-        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_red.png")), buttonWidth, buttonHeight);
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/button.png")), buttonWidth, buttonHeight);
         exitButton.addListener(new MouseListener() {
 
             @Override
@@ -110,7 +110,7 @@ public final class StartMenu {
 
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
-        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/mario_background_one.jpg"));
+        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/menu_background.jpg"));
         view.setBackground(image);
 
         this.app.setView(view);
