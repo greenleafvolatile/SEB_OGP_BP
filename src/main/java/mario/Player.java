@@ -202,6 +202,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                     case TOP:
                         setY(tilePixelLocation.y - height);
+                        this.setySpeed(0);
                         break;
 
                     case BOTTOM:
@@ -210,7 +211,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 }
 
-                this.setySpeed(0); // Prevents endless speed increasing
+//                this.setySpeed(0); // Prevents endless speed increasing
 
             } else if (tile.getTile() instanceof KeyTile) {
 
