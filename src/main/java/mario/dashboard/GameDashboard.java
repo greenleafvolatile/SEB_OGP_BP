@@ -1,5 +1,6 @@
 package mario.dashboard;
 
+import mario.MainApp;
 import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
@@ -23,6 +24,7 @@ public class GameDashboard extends Dashboard {
     private int fontSize;
     private int numberOfKeysShown = 0;
 
+    private MainApp app;
     private Timer timer;
     private TextObject time;
 
@@ -35,12 +37,13 @@ public class GameDashboard extends Dashboard {
         }
     }
 
-    public GameDashboard(float x, float y, float width, float height, String playerName) {
+    public GameDashboard(MainApp app, float x, float y, float width, float height, String playerName) {
 
         super(x, y, width, height);
         this.playerName = playerName;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
-        this.timer = new Timer();
+        this.app = app;
+        this.timer = new Timer(this.app);
         timer.start();
         this.init();
     }
@@ -54,20 +57,22 @@ public class GameDashboard extends Dashboard {
         String keysLabelText = "keys:";
 
         this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
-        createTimeLabel();
+//        createTimeLabel();
 //        this.addLabel(this.time, (int) (this.width / 2 - this.graphics.textWidth(this.time) / 2f), yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
         this.addHearts();
     }
 
-    private void createTimeLabel() {
-        this.time = new TextObject(this.timer.getFormatedTime(), 24);
-        this.addGameObject(time, (int) (this.width / 2), yMargin);
-    }
+//    private void createTimeLabel() {
+//        this.time = new TextObject(this.timer.getFormatedTime(), 24);
+//        this.addGameObject(time, (int) (this.width / 2), yMargin);
+//    }
 
     @Override
     public void update() {
-
+        while(timer.isActive()) {
+            System.out.println(timer.getFormatedTime2());
+        }
     }
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {

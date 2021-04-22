@@ -61,7 +61,7 @@ public class Game {
     }
 
     private void createDashboard() {
-        this.app.addDashboard(new GameDashboard(0, 0, this.app.getWidth(), this.app.getHeight(), this.playerName));
+        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), this.playerName));
     }
 
     private TileMap initMap() {
