@@ -10,13 +10,13 @@ import processing.core.PImage;
 public final class StartMenu {
 
     private final MainApp app;
-    private final StateManager manager;
+    //private final StateManager manager;
     private TextField textField;
 
-    public StartMenu(MainApp app, StateManager manager) {
+    public StartMenu(MainApp app) { //}, StateManager manager) {
 
         this.app = app;
-        this.manager = manager;
+        //this.manager = manager;
         this.createView();
         this.addLogo();
         this.addLabel();

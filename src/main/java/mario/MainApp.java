@@ -21,7 +21,8 @@ public class MainApp extends GameEngine {
 
         size(screenWidth, screenHeight);
 
-        new StateManager(this);
+        //new StateManager(this);
+        new StartMenu(this);
     }
 
     @Override

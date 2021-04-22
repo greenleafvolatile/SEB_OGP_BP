@@ -26,9 +26,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
     private final GameDashboard gameDashboard;
+    private final float jumpingSpeed = 8;
 
-    private final int walkingSpeed = 5;
-    private final int jumpingSpeed = 8;
+    private float groundSpeed = 5;
+    private float airspeed = 4;
+
     private int keysCollected = 0;
 
     private boolean jump;
@@ -45,8 +47,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void initPlayer() {
-        this.setSpeed(this.walkingSpeed);
-        this.setGravity(0.2f);
+        this.setSpeed(this.groundSpeed);
+        this.setGravity(0.3f);
     }
 
 
@@ -58,17 +60,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         switch (intValue) {
 
             case LEFT:
-                setDirectionSpeed(270, this.walkingSpeed);
-                nextFrame();
+
+                setDirectionSpeed(270, jump ? this.airspeed : this.groundSpeed);
                 break;
 
             case RIGHT:
-                setDirectionSpeed(90, this.walkingSpeed);
-                nextFrame();
+
+                setDirectionSpeed(90, jump ? this.airspeed : this.groundSpeed);
                 break;
 
             case SPACE_BAR:
                 if (onFloorTile) {
+                    this.jump = true;
                     jump();
                 }
                 break;
@@ -85,7 +88,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
     }
 
-    private boolean pressedDoubleKey() {
+    private boolean isKeyPressed() {
 
         for (Key key : keys) {
             if (key.isPressed()) {
@@ -97,9 +100,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void jump() {
 
-        this.jump = true;
-
-        if (this.pressedDoubleKey()) {
+        if (this.isKeyPressed()) {
             doDirectionalJump();
         } else {
             doVerticalJump();
@@ -117,9 +118,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
     private void doDirectionalJump() {
+
         for (Key key : keys) {
             if (key.getKeyValue() == RIGHT && key.isPressed()) {
                 setDirectionSpeed(30, jumpingSpeed);
+
             } else if (key.getKeyValue() == LEFT && key.isPressed()) {
                 setDirectionSpeed(320, jumpingSpeed);
             }
@@ -131,7 +134,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         this.setKeyPressed(intValue, false);
 
-        if (intValue != Player.SPACE_BAR) {
+
+        if (intValue != Player.SPACE_BAR) { // If you set speed to 0 when jumping (pressing space bar) you need to keep space bar pressed down to gain height.
             this.setSpeed(0);
         }
 
@@ -178,11 +182,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
-                this.onFloorTile = true;
 
                 if (jump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
+                    this.airspeed = 4; // Magic value. Variable voor aanmaken?
+
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
@@ -193,20 +198,23 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 switch (tile.getCollisionSide()) {
 
                     case LEFT:
-                        setX(tilePixelLocation.x - width);
+
+                        this.setX(tilePixelLocation.x - this.app.getTileMap().getTileSize());
                         break;
 
                     case RIGHT:
-                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
+                        this.setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
                         break;
 
                     case TOP:
-                        setY(tilePixelLocation.y - height);
+                        this.onFloorTile = true;
+                        this.setY(tilePixelLocation.y - this.height); // Top and bottom case very much the same. Move to method.
                         this.setySpeed(0);
                         break;
 
                     case BOTTOM:
-                        this.setY(tilePixelLocation.y + getHeight());
+                        this.setY(tilePixelLocation.y + this.height);
+                        this.setSpeed(0);
                         break;
 
                 }
@@ -214,23 +222,32 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             } else if (tile.getTile() instanceof KeyTile) {
 
                 try {
+
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
                     gameDashboard.addkey();
+                    this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
 
             } else if (tile.getTile() instanceof DoorTile) {
+
                 if (this.keysCollected == 5)  {
-                    System.out.println("Mario wins!");
                     // show end game menu.
                 }
             }
         }
     }
 
-
     public void update() {
-        // Empty method.
+        final double airSpeedReduction = 0.05f;
+
+        if (jump) {
+            this.airspeed -= this.airspeed >= 0 + airSpeedReduction ? airSpeedReduction : 0;
+        }
+
+        if (isKeyPressed() && onFloorTile && this.app.frameCount % 4 == 0) {
+           this.nextFrame();
+        }
     }
 }
