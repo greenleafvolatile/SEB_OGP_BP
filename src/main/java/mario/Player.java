@@ -140,7 +140,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         this.setKeyPressed(intValue, false);
 
-        if (intValue != Player.SPACE_BAR) {
+
+        if (intValue != Player.SPACE_BAR) { // If you set speed to 0 when jumping (pressing space bar) you need to keep space bar pressed down to gain height.
             this.setSpeed(0);
         }
 
