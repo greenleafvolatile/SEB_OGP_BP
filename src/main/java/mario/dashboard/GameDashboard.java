@@ -38,6 +38,8 @@ public class GameDashboard extends Dashboard {
         super(x, y, width, height);
         this.playerName = playerName;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
+        this.timer = new Timer();
+        timer.start();
         this.init();
     }
 
@@ -58,7 +60,7 @@ public class GameDashboard extends Dashboard {
 
     @Override
     public void update() {
-
+        System.out.println(timer.getFormatedTime());
     }
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
