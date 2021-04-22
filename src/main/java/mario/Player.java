@@ -186,7 +186,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (jump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
-                    this.airspeed = 4;
+                    this.airspeed = 4; // Magic value. Variable voor aanmaken?
 
                 }
 
