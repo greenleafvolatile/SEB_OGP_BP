@@ -209,9 +209,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                         break;
 
                     case TOP:
-
                         this.onFloorTile = true;
-                        this.setY(tilePixelLocation.y - this.height);
+                        this.setY(tilePixelLocation.y - this.height); // Top and bottom case very much the same. Move to method.
                         this.setySpeed(0);
                         break;
 
