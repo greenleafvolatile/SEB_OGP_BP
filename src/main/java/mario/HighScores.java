@@ -11,6 +11,8 @@ public class HighScores {
 
     private static final FilePersistence fileHandler = new FilePersistence("/main/java/mario/media/highscores/highscores.txt");
 
+    private HighScores(){}
+
     public static List<Highscore> getHighscores() {
 
         List<Highscore> highscores = new ArrayList<>();
