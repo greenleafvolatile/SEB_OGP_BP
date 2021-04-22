@@ -1,6 +1,7 @@
 package mario;
 
 import mario.dashboard.GameDashboard;
+import mario.enemies.PiranhasPlant;
 import mario.tiles.MarioTile;
 import mario.enemies.Enemy;
 import mario.enemies.FlyingTurtle;
@@ -57,6 +58,9 @@ public class Game {
 
         Enemy flyingTurtle2 = new FlyingTurtle(this.app);
         this.app.addGameObject(flyingTurtle2, 10, 300);
+
+        Enemy piranhasPlant = new PiranhasPlant(this.app);
+        this.app.addGameObject(piranhasPlant, 730, 835);
 
     }
 
