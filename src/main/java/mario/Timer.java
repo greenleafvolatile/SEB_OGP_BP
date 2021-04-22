@@ -32,7 +32,11 @@ public class Timer {
         return String.format("%02d:%02d:%02d", secs / 3600, (secs % 3600) / 60, secs % 60);
     }
 
-//    public static void main(String[] args) {
+    public boolean isActive() {
+        return active;
+    }
+
+    //    public static void main(String[] args) {
 //        Timer time = new Timer();
 //        time.start();
 //
