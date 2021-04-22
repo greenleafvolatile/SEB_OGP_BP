@@ -55,16 +55,24 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         this.setKeyPressed(intValue, true);
 
+
         switch (intValue) {
 
             case LEFT:
                 setDirectionSpeed(270, this.walkingSpeed);
-                nextFrame();
+
+                if (onFloorTile) {
+                    nextFrame();
+                }
+
                 break;
 
             case RIGHT:
                 setDirectionSpeed(90, this.walkingSpeed);
-                nextFrame();
+
+                if (onFloorTile) {
+                    nextFrame();
+                }
                 break;
 
             case SPACE_BAR:
@@ -214,15 +222,17 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             } else if (tile.getTile() instanceof KeyTile) {
 
                 try {
+
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
                     gameDashboard.addkey();
+                    this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
 
             } else if (tile.getTile() instanceof DoorTile) {
+
                 if (this.keysCollected == 5)  {
-                    System.out.println("Mario wins!");
                     // show end game menu.
                 }
             }
