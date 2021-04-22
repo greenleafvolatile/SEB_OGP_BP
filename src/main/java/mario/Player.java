@@ -186,7 +186,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
-                this.onFloorTile = true;
 
                 if (jump) {
                     this.setCurrentFrameIndex(0);
@@ -201,7 +200,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 switch (tile.getCollisionSide()) {
 
                     case LEFT:
-                        this.setX(tilePixelLocation.x - this.width);
+
+                        this.setX(tilePixelLocation.x - this.app.getTileMap().getTileSize());
                         break;
 
                     case RIGHT:
@@ -209,12 +209,15 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                         break;
 
                     case TOP:
+
+                        this.onFloorTile = true;
                         this.setY(tilePixelLocation.y - this.height);
                         this.setySpeed(0);
                         break;
 
                     case BOTTOM:
                         this.setY(tilePixelLocation.y + this.height);
+                        this.setSpeed(0);
                         break;
 
                 }
