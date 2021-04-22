@@ -27,13 +27,16 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final List<Key> keys = new ArrayList<>();
     private final GameDashboard gameDashboard;
 
-    private final int walkingSpeed = 5;
-    private final int jumpingSpeed = 8;
+    private float horizontalSpeed = 5;
+    private float jumpingSpeed = 8;
+    private float test = 4;
+
+
     private int keysCollected = 0;
 
     private boolean jump;
-    private boolean directionalJump;
     private boolean onFloorTile;
+    private boolean directionalJump;
 
     public Player(MainApp app) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
@@ -46,8 +49,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void initPlayer() {
-        this.setSpeed(this.walkingSpeed);
-        this.setGravity(0.2f);
+        this.setSpeed(this.horizontalSpeed);
+        this.setGravity(0.3f);
     }
 
 
@@ -56,24 +59,21 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         this.setKeyPressed(intValue, true);
 
-
         switch (intValue) {
 
             case LEFT:
-                if (this.directionalJump == false) { // Double code in LEFT and RIGHt. move to method.
 
-                    setDirectionSpeed(270, this.walkingSpeed);
-                }
+                setDirectionSpeed(270, jump ? test : this.horizontalSpeed);
                 break;
 
             case RIGHT:
-                if (directionalJump == false) {
-                    setDirectionSpeed(90, this.walkingSpeed);
-                }
+
+                setDirectionSpeed(90, jump ? test : this.horizontalSpeed);
                 break;
 
             case SPACE_BAR:
                 if (onFloorTile) {
+                    this.jump = true;
                     jump();
                 }
                 break;
@@ -102,8 +102,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void jump() {
 
-        this.jump = true;
-
         if (this.isKeyPressed()) {
             doDirectionalJump();
         } else {
@@ -122,10 +120,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
     private void doDirectionalJump() {
-        this.directionalJump = true;
+        directionalJump =  true;
+        System.out.println("DIRECTIONAL!!!!");
         for (Key key : keys) {
             if (key.getKeyValue() == RIGHT && key.isPressed()) {
-                System.out.println("Jump: " + this.jump);
                 setDirectionSpeed(30, jumpingSpeed);
 
             } else if (key.getKeyValue() == LEFT && key.isPressed()) {
@@ -189,10 +187,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
 
-                if (jump || directionalJump) {
+                if (jump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
-                    directionalJump = false;
+                    this.test = 4;
+
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
@@ -244,8 +243,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
     }
 
-
     public void update() {
+        if (jump) {
+            if (this.test > 0) {
+                this.test -= 0.05;
+            }
+        }
         if (isKeyPressed() && onFloorTile && this.app.frameCount % 4 == 0) {
            this.nextFrame();
         }
