@@ -51,16 +51,25 @@ public class Game {
         this.app.addGameObject(player, 580, 802);
 
         Enemy goomba = new Goomba(this.app);
-        this.app.addGameObject(goomba, 1100, 834);
+        this.app.addGameObject(goomba, 1856, 834);
+
+        Enemy goomba2 = new Goomba(this.app);
+        this.app.addGameObject(goomba2, 3733, 834);
 
         Enemy flyingTurtle = new FlyingTurtle(this.app);
-        this.app.addGameObject(flyingTurtle, 1100, 300);
+        this.app.addGameObject(flyingTurtle, 1200, 545);
 
         Enemy flyingTurtle2 = new FlyingTurtle(this.app);
         this.app.addGameObject(flyingTurtle2, 10, 300);
 
+        Enemy flyingTurtle3 = new FlyingTurtle(this.app);
+        this.app.addGameObject(flyingTurtle3, 4669, 609);
+
         Enemy piranhasPlant = new PiranhasPlant(this.app);
-        this.app.addGameObject(piranhasPlant, 730, 835);
+        this.app.addGameObject(piranhasPlant, 2410, 835);
+
+        Enemy piranhasPlant2 = new PiranhasPlant(this.app);
+        this.app.addGameObject(piranhasPlant2, 6066, 835);
 
     }
 
