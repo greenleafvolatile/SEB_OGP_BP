@@ -205,7 +205,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                         break;
 
                     case RIGHT:
-                        this.setX(tilePixelLocation.x + this.width);
+                        this.setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
                         break;
 
                     case TOP:
