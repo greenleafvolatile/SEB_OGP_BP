@@ -32,6 +32,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private int keysCollected = 0;
 
     private boolean jump;
+    private boolean directionalJump;
     private boolean onFloorTile;
 
     public Player(MainApp app) {
@@ -59,20 +60,16 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         switch (intValue) {
 
             case LEFT:
-                setDirectionSpeed(270, this.walkingSpeed);
+                if (this.directionalJump == false) { // Double code in LEFT and RIGHt. move to method.
 
-                /*if (onFloorTile) {
-                    nextFrame();
-                }*/
-
+                    setDirectionSpeed(270, this.walkingSpeed);
+                }
                 break;
 
             case RIGHT:
-                setDirectionSpeed(90, this.walkingSpeed);
-
-                /*if (onFloorTile) {
-                    nextFrame();
-                }*/
+                if (directionalJump == false) {
+                    setDirectionSpeed(90, this.walkingSpeed);
+                }
                 break;
 
             case SPACE_BAR:
@@ -125,12 +122,16 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
     private void doDirectionalJump() {
+        this.directionalJump = true;
         for (Key key : keys) {
             if (key.getKeyValue() == RIGHT && key.isPressed()) {
+                System.out.println("Jump: " + this.jump);
                 setDirectionSpeed(30, jumpingSpeed);
+
             } else if (key.getKeyValue() == LEFT && key.isPressed()) {
                 setDirectionSpeed(320, jumpingSpeed);
             }
+
         }
     }
 
@@ -187,9 +188,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
 
 
-                if (jump) {
+                if (jump || directionalJump) {
                     this.setCurrentFrameIndex(0);
                     jump = false;
+                    directionalJump = false;
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
