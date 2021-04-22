@@ -1,5 +1,6 @@
 package mario.dashboard;
 
+import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;
@@ -20,6 +21,8 @@ public class GameDashboard extends Dashboard {
 
     private int fontSize;
     private int numberOfKeysShown = 0;
+
+    private Timer timer;
 
     private PGraphics graphics;
 
@@ -53,6 +56,10 @@ public class GameDashboard extends Dashboard {
         this.addHearts();
     }
 
+    @Override
+    public void update() {
+
+    }
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
 
