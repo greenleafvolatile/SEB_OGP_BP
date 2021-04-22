@@ -60,7 +60,7 @@ public class Game {
         this.app.addGameObject(flyingTurtle2, 10, 300);
 
         Enemy piranhasPlant = new PiranhasPlant(this.app);
-        this.app.addGameObject(piranhasPlant, 700, 810);
+        this.app.addGameObject(piranhasPlant, 730, 835);
 
     }
 
