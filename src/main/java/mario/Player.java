@@ -61,18 +61,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             case LEFT:
                 setDirectionSpeed(270, this.walkingSpeed);
 
-                if (onFloorTile) {
+                /*if (onFloorTile) {
                     nextFrame();
-                }
+                }*/
 
                 break;
 
             case RIGHT:
                 setDirectionSpeed(90, this.walkingSpeed);
 
-                if (onFloorTile) {
+                /*if (onFloorTile) {
                     nextFrame();
-                }
+                }*/
                 break;
 
             case SPACE_BAR:
@@ -93,7 +93,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
     }
 
-    private boolean pressedDoubleKey() {
+    private boolean isKeyPressed() {
 
         for (Key key : keys) {
             if (key.isPressed()) {
@@ -107,7 +107,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
         this.jump = true;
 
-        if (this.pressedDoubleKey()) {
+        if (this.isKeyPressed()) {
             doDirectionalJump();
         } else {
             doVerticalJump();
@@ -201,20 +201,20 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 switch (tile.getCollisionSide()) {
 
                     case LEFT:
-                        setX(tilePixelLocation.x - width);
+                        this.setX(tilePixelLocation.x - this.width);
                         break;
 
                     case RIGHT:
-                        setX(tilePixelLocation.x + this.app.getTileMap().getTileSize());
+                        this.setX(tilePixelLocation.x + this.width);
                         break;
 
                     case TOP:
-                        setY(tilePixelLocation.y - height);
+                        this.setY(tilePixelLocation.y - this.height);
                         this.setySpeed(0);
                         break;
 
                     case BOTTOM:
-                        this.setY(tilePixelLocation.y + getHeight());
+                        this.setY(tilePixelLocation.y + this.height);
                         break;
 
                 }
@@ -241,6 +241,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
     public void update() {
-        // Empty method.
+        if (isKeyPressed() && onFloorTile && this.app.frameCount % 4 == 0) {
+           this.nextFrame();
+        }
     }
 }
