@@ -2,10 +2,7 @@ package mario;
 
 import mario.dashboard.GameDashboard;
 import mario.enemies.Enemy;
-import mario.tiles.DoorTile;
-import mario.tiles.FloorTile;
-import mario.tiles.KeyTile;
-import mario.tiles.LavaTile;
+import mario.tiles.*;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -232,13 +229,14 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof DoorTile) {
+            } else if (tile.getTile() instanceof BackgroundTile) {
 
-                if (this.keysCollected >= 1)  {
+                //if (this.keysCollected >= 1)  {
                     Score score = new Score(this.playerName, this.gameDashboard.getTimer().getFormattedTime());
                     Highscores.addHighscore(score);
                     List<Score> scores = Highscores.loadHighscores();
                     System.out.println(scores);
+                    this.app.deleteAllDashboards();
                     this.app.deleteAllGameOBjects();
                     new EndScreen(this.app);
 
@@ -247,7 +245,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
 
                     // show end game menu.
-                }
+                //}
             }
         }
     }

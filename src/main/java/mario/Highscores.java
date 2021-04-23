@@ -51,17 +51,15 @@ public class Highscores {
 
         if (isHighscore(score) && !highscores.contains(score)) {
 
-            boolean added = false;
 
             for (int i = highscores.size() - 1; i > 0; i--) {
                 if(score.compareTo(highscores.get(i)) < 0) {
                     highscores.add(i, score);
-                    added = true;
                     break;
                 }
             }
 
-            if (added) highscores.remove(highscores.size() - 1);
+            highscores.remove(highscores.size() - 1);
 
         }
 
