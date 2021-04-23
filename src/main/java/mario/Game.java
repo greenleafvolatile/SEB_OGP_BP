@@ -1,6 +1,7 @@
 package mario;
 
 import mario.dashboard.GameDashboard;
+import mario.enemies.PiranhasPlant;
 import mario.tiles.MarioTile;
 import mario.enemies.Enemy;
 import mario.enemies.FlyingTurtle;
@@ -49,19 +50,18 @@ public class Game {
         player = new Player(this.app);
         this.app.addGameObject(player, 580, 802);
 
-        Enemy goomba = new Goomba(this.app);
-        this.app.addGameObject(goomba, 1100, 834);
-
-        Enemy flyingTurtle = new FlyingTurtle(this.app);
-        this.app.addGameObject(flyingTurtle, 1100, 300);
-
-        Enemy flyingTurtle2 = new FlyingTurtle(this.app);
-        this.app.addGameObject(flyingTurtle2, 10, 300);
+        this.app.addGameObject(new Goomba(this.app), 1856, 834);
+        this.app.addGameObject(new Goomba(this.app), 3733, 834);
+        this.app.addGameObject(new FlyingTurtle(this.app), 1200, 545);
+        this.app.addGameObject(new FlyingTurtle(this.app), 10, 300);
+        this.app.addGameObject(new FlyingTurtle(this.app), 4669, 609);
+        this.app.addGameObject(new PiranhasPlant(this.app), 2410, 835);
+        this.app.addGameObject(new PiranhasPlant(this.app), 6066, 835);
 
     }
 
     private void createDashboard() {
-        this.app.addDashboard(new GameDashboard(0, 0, this.app.getWidth(), this.app.getHeight(), this.playerName));
+        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), this.playerName));
     }
 
     private TileMap initMap() {

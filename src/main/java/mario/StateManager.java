@@ -31,7 +31,7 @@ public class StateManager {
         switch (gameState) {
 
             case START:
-                new StartMenu(this.app, this);
+                //new StartMenu(this.app, this);
                 break;
 
 

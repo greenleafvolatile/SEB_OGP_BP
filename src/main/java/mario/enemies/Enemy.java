@@ -10,15 +10,31 @@ import processing.core.PVector;
 
 import java.util.List;
 
+/**
+ * The type Enemy.
+ */
 public abstract class Enemy extends AnimatedSpriteObject implements ICollidableWithTiles {
 
+    /**
+     * The App.
+     */
     protected MainApp app;
 
+    /**
+     * Instantiates a new Enemy.
+     *
+     * @param app         the app
+     * @param sprite      the sprite
+     * @param totalFrames the total frames
+     */
     public Enemy(MainApp app, Sprite sprite, int totalFrames) {
         super(sprite, totalFrames);
         this.app = app;
     }
 
+    /**
+     * Play animation.
+     */
     public void playAnimation() {
         nextFrame();
     }

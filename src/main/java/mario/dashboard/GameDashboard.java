@@ -1,5 +1,7 @@
 package mario.dashboard;
 
+import mario.MainApp;
+import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;
@@ -14,13 +16,15 @@ public class GameDashboard extends Dashboard {
     private final int yMargin = 20;
 
     private final List<HeartSprite> hearts = new ArrayList<>();
-    private final List<KeySprite> keys = new ArrayList<>();
 
     private final String playerName;
 
     private int fontSize;
     private int numberOfKeysShown = 0;
 
+    private MainApp app;
+    private Timer timer;
+    private TextObject time;
     private PGraphics graphics;
 
     {
@@ -30,11 +34,13 @@ public class GameDashboard extends Dashboard {
         }
     }
 
-    public GameDashboard(float x, float y, float width, float height, String playerName) {
+    public GameDashboard(MainApp app, float x, float y, float width, float height, String playerName) {
 
         super(x, y, width, height);
         this.playerName = playerName;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
+        this.app = app;
+        this.timer = new Timer(this.app);
         this.init();
     }
 
@@ -43,16 +49,25 @@ public class GameDashboard extends Dashboard {
         this.fontSize = 32;
         this.graphics.textSize(fontSize);
 
-        String timerLabelText = "00:00:00";
         String keysLabelText = "keys:";
 
         this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
-        this.addLabel(timerLabelText, (int) (this.width / 2 - this.graphics.textWidth(timerLabelText) / 2f), yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
-
         this.addHearts();
+        this.timer.startTimer();
     }
 
+    private void createTimeLabel() {
+        this.time = new TextObject(this.timer.getFormattedTime(), 32);
+        this.time.setForeColor(255, 255, 255, 255);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.getFormattedTime()) / 2), yMargin);
+    }
+
+    @Override
+    public void update() {
+        this.deleteGameObject(time);
+        createTimeLabel();
+    }
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
 
