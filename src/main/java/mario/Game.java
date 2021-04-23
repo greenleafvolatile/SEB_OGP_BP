@@ -66,11 +66,13 @@ public class Game {
 
     private TileMap initMap() {
 
+        final int tileSize = 64;
+
         @SuppressWarnings("unchecked")
         TileType<Tile>[] tileTypes =  loadTileTypes();
 
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
-        return new TileMap(MarioTile.getTileSize(), tileTypes, tilesMap);
+        return new TileMap(tileSize, tileTypes, tilesMap);
     }
 
     private Viewport centerViewport() {
