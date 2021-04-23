@@ -3,8 +3,16 @@ package mario.enemies;
 import mario.MainApp;
 import nl.han.ica.oopg.objects.Sprite;
 
+/**
+ * The type Flying turtle.
+ */
 public class FlyingTurtle extends Enemy {
 
+    /**
+     * Instantiates a new Flying turtle.
+     *
+     * @param app the app
+     */
     public FlyingTurtle(MainApp app) {
         super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/flyingturtle.png")), 6);
         setxSpeed(2);
@@ -16,9 +24,6 @@ public class FlyingTurtle extends Enemy {
         preventFlyingOffScreen();
     }
 
-    /***
-     * Decrease animation speed based on frame count
-     */
     @Override
     public void playAnimation() {
         if (this.app.frameCount % 2 == 0) {
@@ -26,9 +31,6 @@ public class FlyingTurtle extends Enemy {
         }
     }
 
-    /***
-     * Prevents flying offscreen
-     */
     private void preventFlyingOffScreen() {
         if (getX() <= 0) {
             setDirection(90);
