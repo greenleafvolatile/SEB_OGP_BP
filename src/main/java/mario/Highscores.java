@@ -60,10 +60,10 @@ public class Highscores {
             }
 
             highscores.remove(highscores.size() - 1);
+            saveHighscores(highscores);
 
         }
 
-        saveHighscores(highscores);
     }
 
     public static boolean isHighscore(Score score) {
