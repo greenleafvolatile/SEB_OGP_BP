@@ -2,8 +2,6 @@ package mario;
 
 import mario.dashboard.GameDashboard;
 import mario.enemies.PiranhasPlant;
-import mario.tiles.MarioTile;
-import mario.enemies.Enemy;
 import mario.enemies.FlyingTurtle;
 import mario.enemies.Goomba;
 import nl.han.ica.oopg.tile.Tile;
@@ -66,11 +64,13 @@ public class Game {
 
     private TileMap initMap() {
 
+        final int tileSize = 64;
+
         @SuppressWarnings("unchecked")
         TileType<Tile>[] tileTypes =  loadTileTypes();
 
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
-        return new TileMap(MarioTile.getTileSize(), tileTypes, tilesMap);
+        return new TileMap(tileSize, tileTypes, tilesMap);
     }
 
     private Viewport centerViewport() {
