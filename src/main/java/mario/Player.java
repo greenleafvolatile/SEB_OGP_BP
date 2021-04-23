@@ -12,6 +12,8 @@ import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import processing.core.PVector;
+import sun.util.resources.fr.TimeZoneNames_fr;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -232,25 +234,19 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             } else if (tile.getTile() instanceof BackgroundTile) {
 
-                //if (this.keysCollected >= 1)  {
-                    /*Score score = new Score(this.playerName, this.gameDashboard.getTimer().getFormattedTime());
+                if (this.keysCollected >= 0) {
+                    this.gameDashboard.getTimer().stopTimer();
+                    Score score = new Score(this.playerName, TimeFormatter.getFormattedTime(this.gameDashboard.getTimer().getTotalElapsedTime()));
                     Highscores.addHighscore(score);
                     List<Score> scores = Highscores.loadHighscores();
-                    System.out.println(scores);*/
+                    System.out.println(scores);
 
-                this.app.setTileMap(null);
-                this.app.deleteAllGameOBjects();
-                this.app.deleteAllDashboards();
-                    //Vector<GameObject> objects = this.app.getGameObjectItems();
-                    //System.out.println(objects.size());
+                    this.app.deleteAllGameOBjects();
+                    this.app.deleteAllDashboards();
+
+                    this.app.setTileMap(null);
                     new EndScreen(this.app);
-
-
-
-
-
-                    // show end game menu.
-                //}
+                }
             }
         }
     }
