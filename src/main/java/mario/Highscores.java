@@ -14,7 +14,7 @@ public class Highscores {
 
     private Highscores(){}
 
-    public static List<Score> loadHighscores() {
+    private static List<Score> loadHighscores() {
 
         List<Score> highscores = new ArrayList<>();
 
@@ -66,7 +66,7 @@ public class Highscores {
 
     }
 
-    public static boolean isHighscore(Score score) {
+    private static boolean isHighscore(Score score) {
 
         List<Score> highscores = loadHighscores();
         if (score.compareTo(highscores.get(highscores.size() - 1)) < 0) {

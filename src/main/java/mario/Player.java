@@ -11,6 +11,8 @@ import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
+import nl.han.ica.oopg.tile.Tile;
+import nl.han.ica.oopg.tile.TileMap;
 import processing.core.PVector;
 import sun.util.resources.fr.TimeZoneNames_fr;
 
@@ -238,14 +240,14 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     this.gameDashboard.getTimer().stopTimer();
                     Score score = new Score(this.playerName, TimeFormatter.getFormattedTime(this.gameDashboard.getTimer().getTotalElapsedTime()));
                     Highscores.addHighscore(score);
-                    List<Score> scores = Highscores.loadHighscores();
-                    System.out.println(scores);
 
-                    this.app.deleteAllGameOBjects();
-                    this.app.deleteAllDashboards();
 
-                    this.app.setTileMap(null);
-                    new EndScreen(this.app);
+                    //this.app.setTileMap(new TileMap(64));
+                    //this.app.deleteAllGameOBjects();
+                    //this.app.deleteAllDashboards();
+
+                    new EndScreen(this.app, this.playerName);
+                    return;
                 }
             }
         }

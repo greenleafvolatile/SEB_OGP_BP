@@ -1,23 +1,64 @@
 package mario;
 
 import mario.ui.Button;
+import mario.ui.MouseListener;
 import nl.han.ica.oopg.objects.Sprite;
+import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.view.View;
 
 public class EndScreen {
 
     private final MainApp app;
+    private final String playerName;
 
-    public EndScreen(MainApp app) {
+    public EndScreen(MainApp app, String playerName) {
 
         this.app = app;
+        this.playerName = playerName;
+        this.app.deleteAllGameOBjects();
+        this.app.deleteAllDashboards();
+        this.app.setTileMap(null);
         this.init();
 
     }
 
     private void init() {
+
+
         this.createView();
+        final int buttonWidth = 350;
+        final int buttonHeight = 100;
+
+        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
+        playButton.addListener(new MouseListener() {
+
+            @Override
+            public void mousePressed(int x, int y, int button)  {
+
+                EndScreen.this.app.deleteAllGameOBjects();
+                new Game(EndScreen.this.app, EndScreen.this.playerName);
+
+
+            }
+        });
+
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
+        exitButton.addListener(new MouseListener() {
+
+            @Override
+            public void mousePressed(int x, int y, int button) {
+                System.exit(0);
+            }
+
+        });
+
+        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 300);
+        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 430);
     }
+
+
+
+
 
     private void createView() {
         View view = new View(this.app.getWidth() , this.app.getHeight());

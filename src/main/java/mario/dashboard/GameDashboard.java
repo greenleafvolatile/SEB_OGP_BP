@@ -72,6 +72,7 @@ public class GameDashboard extends Dashboard {
     @Override
     public void update() {
         this.time.setText(TimeFormatter.getFormattedTime(this.timer.getElapsedTime()));
+        System.out.println("updating");
     }
 
 
