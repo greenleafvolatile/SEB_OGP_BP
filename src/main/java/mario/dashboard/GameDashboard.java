@@ -60,7 +60,7 @@ public class GameDashboard extends Dashboard {
     private void createTimeLabel() {
         this.time = new TextObject(this.timer.getFormatedTime(), 32);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(time, (int) (this.width / 2), yMargin);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.getFormatedTime()) / 2), yMargin);
     }
 
     @Override
