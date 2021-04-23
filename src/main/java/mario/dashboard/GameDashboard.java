@@ -53,8 +53,13 @@ public class GameDashboard extends Dashboard {
 
         this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
+
+        this.createTimeLabel();
+
         this.addHearts();
+
         this.timer.startTimer();
+
     }
 
     private void createTimeLabel() {
@@ -65,9 +70,9 @@ public class GameDashboard extends Dashboard {
 
     @Override
     public void update() {
-        this.deleteGameObject(time);
-        createTimeLabel();
+        this.time.setText(timer.getFormattedTime());
     }
+
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
 
