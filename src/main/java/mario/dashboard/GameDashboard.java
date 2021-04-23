@@ -41,7 +41,6 @@ public class GameDashboard extends Dashboard {
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
         this.timer = new Timer(this.app);
-        timer.start();
         this.init();
     }
 
@@ -55,6 +54,7 @@ public class GameDashboard extends Dashboard {
         this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
         this.addHearts();
+        this.timer.startTimer();
     }
 
     private void createTimeLabel() {
@@ -65,10 +65,8 @@ public class GameDashboard extends Dashboard {
 
     @Override
     public void update() {
-        if(this.timer.isActive()) {
-            this.deleteGameObject(time);
-            createTimeLabel();
-        }
+        this.deleteGameObject(time);
+        createTimeLabel();
     }
 
     private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
