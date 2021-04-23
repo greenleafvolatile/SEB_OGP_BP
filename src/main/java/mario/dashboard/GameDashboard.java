@@ -16,7 +16,6 @@ public class GameDashboard extends Dashboard {
     private final int yMargin = 20;
 
     private final List<HeartSprite> hearts = new ArrayList<>();
-    private final List<KeySprite> keys = new ArrayList<>();
 
     private final String playerName;
 
@@ -26,7 +25,6 @@ public class GameDashboard extends Dashboard {
     private MainApp app;
     private Timer timer;
     private TextObject time;
-
     private PGraphics graphics;
 
     {

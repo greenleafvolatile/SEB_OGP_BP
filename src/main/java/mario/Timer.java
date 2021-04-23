@@ -12,15 +12,15 @@ public class Timer {
 
     public Timer(MainApp app) {
         this.app = app;
-        this.start = app.millis();
+        this.start = app.millis(); // Hetzelfde doe je hieronder ook.
     }
 
-    public void start() {
-        this.start = this.app.millis();
+    public void start() { //Methode heeft zelfde naam als variable. Confusing.
+        this.start = this.app.millis(); // Hetzelfde doe je hierboven ook.
         this.active = true;
     }
 
-    public void end() {
+    public void end() { // Methode heeft dezelfde naam als variable. Confusing.
         this.end = getSeconds();
         this.active = false;
     }
@@ -40,7 +40,7 @@ public class Timer {
 
     public String getFormatedFinalTime() {
         int secs = (int) getElapsedSeconds();
-        return String.format("%02d:%02d:%02d", secs / 3600, (secs % 3600) / 60, secs % 60);
+        return String.format("%02d:%02d:%02d", secs / 3600, (secs % 3600) / 60, secs % 60); // Ik zou er een 00:00 format van maken. Geen uren doen.
     }
 
     public boolean isActive() {
