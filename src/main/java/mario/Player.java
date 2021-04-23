@@ -14,6 +14,7 @@ import nl.han.ica.oopg.sound.Sound;
 import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
@@ -232,12 +233,16 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             } else if (tile.getTile() instanceof BackgroundTile) {
 
                 //if (this.keysCollected >= 1)  {
-                    Score score = new Score(this.playerName, this.gameDashboard.getTimer().getFormattedTime());
+                    /*Score score = new Score(this.playerName, this.gameDashboard.getTimer().getFormattedTime());
                     Highscores.addHighscore(score);
                     List<Score> scores = Highscores.loadHighscores();
-                    System.out.println(scores);
-                    this.app.deleteAllDashboards();
-                    this.app.deleteAllGameOBjects();
+                    System.out.println(scores);*/
+
+                this.app.setTileMap(null);
+                this.app.deleteAllGameOBjects();
+                this.app.deleteAllDashboards();
+                    //Vector<GameObject> objects = this.app.getGameObjectItems();
+                    //System.out.println(objects.size());
                     new EndScreen(this.app);
 
 
