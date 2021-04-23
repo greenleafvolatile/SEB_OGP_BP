@@ -27,6 +27,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final List<Key> keys = new ArrayList<>();
     private final GameDashboard gameDashboard;
     private final float jumpingSpeed = 8;
+    private final String playerName;
 
     private float groundSpeed = 5;
     private float airspeed = 4;
@@ -36,10 +37,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private boolean jump;
     private boolean onFloorTile;
 
-    public Player(MainApp app) {
+    public Player(MainApp app, String playerName) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
+        this.playerName = playerName;
         this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
         this.keys.add(new Key(LEFT));
         this.keys.add(new Key(RIGHT));
@@ -232,7 +234,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
             } else if (tile.getTile() instanceof DoorTile) {
 
-                if (this.keysCollected == 5)  {
+                if (this.keysCollected >= 1)  {
+                    Score score = new Score(this.playerName, this.gameDashboard.getTimer().getFormattedTime());
+                    Highscores.addHighscore(score);
+                    List<Score> scores = Highscores.loadHighscores();
+                    System.out.println(scores);
+                    this.app.deleteAllGameOBjects();
+                    new EndScreen(this.app);
+
+
+
+
+
                     // show end game menu.
                 }
             }

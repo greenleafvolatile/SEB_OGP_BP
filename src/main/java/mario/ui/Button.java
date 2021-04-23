@@ -13,7 +13,7 @@ import processing.core.PGraphics;
  * @since 04-11-2021
  *
  */
-public final class Button extends SpriteObject {
+public final class Button extends Image {
 
     private MouseListener listener;
 
@@ -22,12 +22,6 @@ public final class Button extends SpriteObject {
         super(sprite);
         this.width = width;
         this.height = height;
-    }
-
-    @Override
-    public void draw(PGraphics graphics) {
-
-        graphics.image(this.getImage(), this.x, this.y, this.width, this.height);
     }
 
     @Override

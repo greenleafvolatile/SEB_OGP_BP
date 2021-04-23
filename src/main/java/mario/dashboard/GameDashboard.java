@@ -117,4 +117,11 @@ public class GameDashboard extends Dashboard {
         KeySprite key = new KeySprite();
         this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeysShown), (int) (yMargin + fontSize + key.getHeight() / 2f));
     }
+
+    public Timer getTimer() {
+        return this.timer;
+    }
+
+
+
 }

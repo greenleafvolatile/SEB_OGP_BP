@@ -8,7 +8,7 @@ public final class TextField extends GameObject {
 
     private final float fontSize;
 
-    private String playerName = "";
+    private String playerName = "Player";
     private KeyListener keyListener;
 
     public TextField(int width, int height) {

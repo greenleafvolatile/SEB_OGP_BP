@@ -6,6 +6,7 @@ package mario;
 public class Timer {
 
     private double start;
+    private double end;
 
     private final MainApp app;
 
@@ -24,6 +25,7 @@ public class Timer {
     public void startTimer() {
         this.start = this.app.millis();
     }
+
 
     /**
      * Gets elapsed time.

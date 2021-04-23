@@ -1,17 +1,17 @@
 package mario;
 
-public class Highscore implements Comparable<Highscore>{
+public class Score implements Comparable<Score>{
 
     private String name;
     private String time;
 
-    public Highscore(String name, String time) {
+    public Score(String name, String time) {
         this.name = name;
         this.time = time;
     }
 
     @Override
-    public int compareTo(Highscore highscore) {
+    public int compareTo(Score highscore) {
         return this.time.compareTo(highscore.time);
     }
 
@@ -35,7 +35,7 @@ public class Highscore implements Comparable<Highscore>{
             return false;
         }
 
-        Highscore score = (Highscore) object;
+        Score score = (Score) object;
 
         return this.name.equals(score.name) && this.time.equals(score.time);
 

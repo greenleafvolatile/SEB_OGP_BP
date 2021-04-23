@@ -20,7 +20,6 @@ import static mario.TileTypeLoader.loadTileTypes;
 public class Game {
 
     private final MainApp app;
-    private final String playerName;
 
     private Player player;
     private int level = 1;
@@ -30,25 +29,25 @@ public class Game {
 
     public Game(MainApp app, String playerName) {
         this.app = app;
-        this.playerName = playerName;
+
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);
-        createDashboard();
-        createObjects();
-        initMap();
-        createView();
+
+        this.addDashboard(playerName);
+
+        this.addPlayer(playerName);
+
+        this.addEnemies();
+
+        this.createView();
     }
 
-    /*public void display() {
-        createDashboard();
-        createObjects();
-        initMap();
-        createView();
-    }*/
-
-    private void createObjects() {
-        player = new Player(this.app);
+    private void addPlayer(String playerName) {
+        player = new Player(this.app, playerName);
         this.app.addGameObject(player, 580, 802);
+    }
+
+    private void addEnemies() {
 
         this.app.addGameObject(new Goomba(this.app), 1856, 834);
         this.app.addGameObject(new Goomba(this.app), 3733, 834);
@@ -60,8 +59,8 @@ public class Game {
 
     }
 
-    private void createDashboard() {
-        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), this.playerName));
+    private void addDashboard(String playerName) {
+        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), playerName));
     }
 
     private TileMap initMap() {
