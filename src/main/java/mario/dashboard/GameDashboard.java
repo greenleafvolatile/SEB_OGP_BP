@@ -7,7 +7,6 @@ import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;
 import processing.core.PGraphics;
 
-import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,25 +52,24 @@ public class GameDashboard extends Dashboard {
         this.fontSize = 32;
         this.graphics.textSize(fontSize);
 
-//        String timerLabelText = "00:00:00";
         String keysLabelText = "keys:";
 
         this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
-//        createTimeLabel();
-//        this.addLabel(this.time, (int) (this.width / 2 - this.graphics.textWidth(this.time) / 2f), yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
         this.addHearts();
     }
 
-//    private void createTimeLabel() {
-//        this.time = new TextObject(this.timer.getFormatedTime(), 24);
-//        this.addGameObject(time, (int) (this.width / 2), yMargin);
-//    }
+    private void createTimeLabel() {
+        this.time = new TextObject(this.timer.getFormatedTime(), 32);
+        this.time.setForeColor(255, 255, 255, 255);
+        this.addGameObject(time, (int) (this.width / 2), yMargin);
+    }
 
     @Override
     public void update() {
-        while(timer.isActive()) {
-            System.out.println(timer.getFormatedTime2());
+        if(this.timer.isActive()) {
+            this.deleteGameObject(time);
+            createTimeLabel();
         }
     }
 
