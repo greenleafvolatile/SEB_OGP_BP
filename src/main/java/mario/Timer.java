@@ -6,15 +6,14 @@ public class Timer {
 
     private double start;
     private double end;
+    private boolean active = false;
 
-    private MainApp app;
+    private final MainApp app;
 
     public Timer(MainApp app) {
         this.app = app;
         this.start = app.millis();
     }
-
-    private boolean active = false;
 
     public void start() {
         this.start = this.app.millis();
