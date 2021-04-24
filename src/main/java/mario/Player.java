@@ -22,13 +22,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private static final int SPACE_BAR = 32;
 
-
-    private String name = "";
-
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
-//    private final GameDashboard gameDashboard;
+
+    private String name = "";
 
     private final float jumpingSpeed = 8;
     private float groundSpeed = 5;
@@ -36,6 +34,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private int keysCollected = 0;
     private int health = 3;
+
 
     private boolean jump;
     private boolean onFloorTile;
@@ -45,7 +44,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
         this.name = name;
-//        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
         this.keys.add(new Key(LEFT));
         this.keys.add(new Key(RIGHT));
         initPlayer();
@@ -65,10 +63,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
     public int getHealth() {
         return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
     }
 
     private void removeOneHealthPoint() {
