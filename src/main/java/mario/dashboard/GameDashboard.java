@@ -64,14 +64,14 @@ public class GameDashboard extends Dashboard {
     }
 
     private void createTimeLabel() {
-        this.time = new TextObject(this.timer.toString(), 32);
+        this.time = new TextObject(this.timer.elapsedTimeToString(), 32);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.toString()) / 2), yMargin);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.elapsedTimeToString()) / 2), yMargin);
     }
 
     @Override
     public void update() {
-        this.time.setText(this.timer.toString());
+        this.time.setText(this.timer.elapsedTimeToString());
     }
 
 
