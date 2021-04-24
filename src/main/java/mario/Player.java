@@ -23,12 +23,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private static final int SPACE_BAR = 32;
 
 
-    private String name;
+    private String name = "";
 
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
-    private final GameDashboard gameDashboard;
+//    private final GameDashboard gameDashboard;
 
     private final float jumpingSpeed = 8;
     private float groundSpeed = 5;
@@ -40,11 +40,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private boolean jump;
     private boolean onFloorTile;
 
-    public Player(MainApp app) {
+    public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
-        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
+        this.name = name;
+//        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
         this.keys.add(new Key(LEFT));
         this.keys.add(new Key(RIGHT));
         initPlayer();
@@ -160,10 +161,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void resetPlayer() {
-
-        if (this.gameDashboard.getNumberOfHearts() == 0) {
-            // Show endgame screen.
-        }
+//
+//        if (this.gameDashboard.getNumberOfHearts() == 0) {
+//            // Show endgame screen.
+//        }
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -180,7 +181,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-                    this.gameDashboard.removeHeart();
+//                    this.gameDashboard.removeHeart();
                     resetPlayer();
                 }
 
@@ -209,7 +210,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
-                    this.gameDashboard.removeHeart();
+//                    this.gameDashboard.removeHeart();
                     resetPlayer();
                 }
 
@@ -242,7 +243,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-                    gameDashboard.addkey();
+//                    gameDashboard.addkey();
                     this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
