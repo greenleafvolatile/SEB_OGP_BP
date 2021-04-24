@@ -48,10 +48,14 @@ public class Timer {
     }
 
 
-    @Override
-    public String toString() {
-        int secs = (int) getElapsedTime();
-        return String.format("%02d:%02d", (secs % 3600) / 60, secs % 60);
+    /**
+     * Gets formatted time in String format MM:SS.
+     *
+     * @param seconds the seconds
+     * @return the formatted time
+     */
+    public String getFormattedTime(int seconds) {
+        return String.format("%02d:%02d", (seconds % 3600) / 60, seconds % 60);
     }
 
 }
