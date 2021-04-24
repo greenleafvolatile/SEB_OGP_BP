@@ -71,6 +71,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.health = health;
     }
 
+    private void removeOneHealthPoint() {
+        this.health--;
+    }
+
     @Override
     public void keyPressed(int intValue, char charValue) {
 
@@ -181,7 +185,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-//                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
@@ -210,7 +214,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
-//                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
