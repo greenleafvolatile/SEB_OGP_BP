@@ -22,7 +22,6 @@ public class GameDashboard extends Dashboard {
     private Player player;
 
     private int fontSize;
-    private int numberOfKeysShown = 0;
 
     private MainApp app;
     private Timer timer;
@@ -73,6 +72,8 @@ public class GameDashboard extends Dashboard {
     @Override
     public void update() {
         this.time.setText(TimeFormatter.format(timer.getElapsedTime()));
+        removeHeart();
+        addkey();
     }
 
 
@@ -100,9 +101,7 @@ public class GameDashboard extends Dashboard {
     }
 
     public void removeHeart() {
-
-        if (this.hearts.size() > 0) {
-
+        if (this.player.getHealth() != this.hearts.size()) {
             this.deleteGameObject(hearts.get(hearts.size() - 1));
             this.hearts.remove(this.hearts.size() - 1);
         }
@@ -114,9 +113,9 @@ public class GameDashboard extends Dashboard {
 
 
     public void addkey() {
-
-        this.numberOfKeysShown++;
-        KeySprite key = new KeySprite();
-        this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeysShown), (int) (yMargin + fontSize + key.getHeight() / 2f));
+        if (this.player.getKeysCollected() > 0) {
+            KeySprite key = new KeySprite();
+            this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * this.player.getKeysCollected()), (int) (yMargin + fontSize + key.getHeight() / 2f));
+        }
     }
 }

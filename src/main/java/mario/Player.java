@@ -32,6 +32,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private float groundSpeed = 5;
     private float airspeed = 4;
 
+
     private int keysCollected = 0;
     private int health = 3;
 
@@ -67,6 +68,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void removeOneHealthPoint() {
         this.health--;
+    }
+
+    public int getKeysCollected() {
+        return keysCollected;
     }
 
     @Override
@@ -241,7 +246,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-//                    gameDashboard.addkey();
                     this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
