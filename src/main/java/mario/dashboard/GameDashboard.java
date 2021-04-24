@@ -18,11 +18,11 @@ public class GameDashboard extends Dashboard {
     private final int yMargin = 20;
 
     private final List<HeartSprite> hearts = new ArrayList<>();
+    private KeySprite key;
 
     private Player player;
 
     private int fontSize;
-    private int numberOfKeysShown = 0;
 
     private MainApp app;
     private Timer timer;
@@ -36,6 +36,7 @@ public class GameDashboard extends Dashboard {
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
         this.timer = new Timer(this.app);
+        this.key = new KeySprite();
         initHearts();
         this.init();
     }
@@ -73,10 +74,8 @@ public class GameDashboard extends Dashboard {
     @Override
     public void update() {
         this.time.setText(TimeFormatter.format(timer.getElapsedTime()));
-        if (this.player.getHealth() != this.hearts.size()) {
-            this.deleteGameObject(hearts.get(hearts.size() - 1));
-            this.hearts.remove(this.hearts.size() - 1);
-        }
+        removeHeart();
+        addkey();
     }
 
 
@@ -104,9 +103,7 @@ public class GameDashboard extends Dashboard {
     }
 
     public void removeHeart() {
-
-        if (this.hearts.size() > 0) {
-
+        if (this.player.getHealth() != this.hearts.size()) {
             this.deleteGameObject(hearts.get(hearts.size() - 1));
             this.hearts.remove(this.hearts.size() - 1);
         }
@@ -118,9 +115,8 @@ public class GameDashboard extends Dashboard {
 
 
     public void addkey() {
-
-        this.numberOfKeysShown++;
-        KeySprite key = new KeySprite();
-        this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeysShown), (int) (yMargin + fontSize + key.getHeight() / 2f));
+        if (this.player.getKeysCollected() > 0) {
+            this.addGameObject(this.key, (int) (this.width - xMargin - key.getWidth() * this.player.getKeysCollected()), (int) (yMargin + fontSize + key.getHeight() / 2f));
+        }
     }
 }
