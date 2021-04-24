@@ -18,7 +18,6 @@ public class GameDashboard extends Dashboard {
     private final int yMargin = 20;
 
     private final List<HeartSprite> hearts = new ArrayList<>();
-    private KeySprite key;
 
     private Player player;
 
@@ -36,7 +35,6 @@ public class GameDashboard extends Dashboard {
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
         this.timer = new Timer(this.app);
-        this.key = new KeySprite();
         initHearts();
         this.init();
     }
@@ -116,7 +114,8 @@ public class GameDashboard extends Dashboard {
 
     public void addkey() {
         if (this.player.getKeysCollected() > 0) {
-            this.addGameObject(this.key, (int) (this.width - xMargin - key.getWidth() * this.player.getKeysCollected()), (int) (yMargin + fontSize + key.getHeight() / 2f));
+            KeySprite key = new KeySprite();
+            this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * this.player.getKeysCollected()), (int) (yMargin + fontSize + key.getHeight() / 2f));
         }
     }
 }
