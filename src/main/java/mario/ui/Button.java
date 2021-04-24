@@ -13,7 +13,7 @@ import processing.core.PGraphics;
  * @since 04-11-2021
  *
  */
-public final class Button extends SpriteObject {
+public final class Button extends Image {
 
     private MouseListener listener;
 
@@ -25,15 +25,9 @@ public final class Button extends SpriteObject {
     }
 
     @Override
-    public void draw(PGraphics graphics) {
-
-        graphics.image(this.getImage(), this.x, this.y, this.width, this.height);
-    }
-
-    @Override
     public void mousePressed(int x, int y, int button) {
 
-        if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + height) {
+        if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height) {
             this.listener.mousePressed(x, y, button);
         }
     }

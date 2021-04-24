@@ -2,6 +2,8 @@ package mario;
 
 import nl.han.ica.oopg.engine.GameEngine;
 
+import java.util.List;
+
 public class MainApp extends GameEngine {
 
     public static String MEDIA_URL = "src/main/java/mario/media/";
@@ -22,7 +24,11 @@ public class MainApp extends GameEngine {
         size(screenWidth, screenHeight);
 
         //new StateManager(this);
+
         new StartMenu(this);
+
+
+
     }
 
     @Override

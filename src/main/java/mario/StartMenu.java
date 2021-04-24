@@ -50,7 +50,6 @@ public final class StartMenu {
             @Override
             public void mousePressed(int x, int y, int button)  {
 
-                //StartMenu.this.manager.setGameState(GameState.GAME);
                 StartMenu.this.app.deleteAllGameOBjects();
                 new Game(StartMenu.this.app, StartMenu.this.textField.getInputValue());
 
@@ -63,12 +62,13 @@ public final class StartMenu {
 
             @Override
             public void mousePressed(int x, int y, int button) {
+                System.out.println("Pressed exit button.");
                 System.exit(0);
             }
-
         });
 
         this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 300);
+
         this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 430);
 
     }
