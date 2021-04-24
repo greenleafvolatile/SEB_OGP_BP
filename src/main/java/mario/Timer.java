@@ -33,6 +33,11 @@ public class Timer {
         this.end = this.app.millis();
     }
 
+    /**
+     * Gets total elapsed time.
+     *
+     * @return the total elapsed time
+     */
     public double getTotalElapsedTime() {
         return (this.end - this.start) / 1000f;
     }
@@ -54,18 +59,8 @@ public class Timer {
      * @param seconds the seconds
      * @return the formatted time
      */
-    public String formatToString(int seconds) {
-        return String.format("%02d:%02d", (seconds % 3600) / 60, seconds % 60);
-    }
-
-    /**
-     * Elapsed time to string string format MM:SS.
-     *
-     * @return the string
-     */
-    public String elapsedTimeToString() {
-        int secs = (int) getElapsedTime();
-        return String.format("%02d:%02d", (secs % 3600) / 60, secs % 60);
+    public String formatToString(double seconds) {
+        return String.format("%02d:%02d", ((int) seconds % 3600) / 60, (int) seconds % 60);
     }
 
 }
