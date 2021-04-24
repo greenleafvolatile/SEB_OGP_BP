@@ -6,6 +6,7 @@ import mario.model.enemy.Goomba;
 import mario.model.enemy.PiranhasPlant;
 import mario.model.map.MapLoader;
 import mario.model.Player;
+import mario.view.Screen;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
@@ -17,49 +18,39 @@ import java.io.File;
 
 import static mario.model.map.TileTypeLoader.loadTileTypes;
 
-public class GameView {
+/**
+ * The type Game view.
+ */
+public class GameView extends Screen {
 
-    private final MainApp app;
-
-    private Player player;
-    private int level = 1;
-    private TileMap tileMap;
+    private final Player player;
+    private final TileMap tileMap;
 
     private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/level1.csv"))};
 
+    /**
+     * Instantiates a new Game view.
+     *
+     * @param app        the app
+     * @param playerName the player name
+     */
     public GameView(MainApp app, String playerName) {
-        this.app = app;
+        super(app);
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);
         this.player = new Player(app, playerName);
-        createObjects();
-        createDashboard();
-        initMap();
-        createView();
-    }
-
-    /*public void display() {
-        createDashboard();
-        createObjects();
-        initMap();
-        createView();
-    }*/
-
-    private void createObjects() {
-        this.app.addGameObject(this.player, 580, 802);
-
-        this.app.addGameObject(new Goomba(this.app), 1856, 834);
-        this.app.addGameObject(new Goomba(this.app), 3733, 834);
-        this.app.addGameObject(new FlyingTurtle(this.app), 1200, 545);
-        this.app.addGameObject(new FlyingTurtle(this.app), 10, 300);
-        this.app.addGameObject(new FlyingTurtle(this.app), 4669, 609);
-        this.app.addGameObject(new PiranhasPlant(this.app), 2410, 835);
-        this.app.addGameObject(new PiranhasPlant(this.app), 6066, 835);
-
+        this.createDashboard();
     }
 
     private void createDashboard() {
-        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), this.player));
+        this.app.addDashboard(
+                new GameDashboard(
+                        this.app,
+                        0, 0,
+                        this.app.getWidth(),
+                        this.app.getHeight(),
+                        this.player
+                ));
     }
 
     private TileMap initMap() {
@@ -69,8 +60,22 @@ public class GameView {
         @SuppressWarnings("unchecked")
         TileType<Tile>[] tileTypes =  loadTileTypes();
 
+        int level = 1;
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
         return new TileMap(tileSize, tileTypes, tilesMap);
+    }
+
+    @Override
+    public void addObjects() {
+        this.app.addGameObject(this.player, 580, 802);
+
+        this.app.addGameObject(new Goomba(this.app), 1856, 834);
+        this.app.addGameObject(new Goomba(this.app), 3733, 834);
+        this.app.addGameObject(new FlyingTurtle(this.app), 1200, 545);
+        this.app.addGameObject(new FlyingTurtle(this.app), 10, 300);
+        this.app.addGameObject(new FlyingTurtle(this.app), 4669, 609);
+        this.app.addGameObject(new PiranhasPlant(this.app), 2410, 835);
+        this.app.addGameObject(new PiranhasPlant(this.app), 6066, 835);
     }
 
     private Viewport centerViewport() {
@@ -82,12 +87,13 @@ public class GameView {
         return viewPort;
     }
 
-    private void createView() {
+    @Override
+    public View createView() {
         int worldWidth = this.tileMap.getMapWidth();
         int worldHeight = this.tileMap.getMapHeight();
 
         View view = new View(centerViewport(), worldWidth, worldHeight);
         view.setBackground(153, 217, 234);
-        this.app.setView(view);
+        return view;
     }
 }
