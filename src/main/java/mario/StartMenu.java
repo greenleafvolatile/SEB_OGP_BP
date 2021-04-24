@@ -52,7 +52,7 @@ public final class StartMenu {
 
                 //StartMenu.this.manager.setGameState(GameState.GAME);
                 StartMenu.this.app.deleteAllGameOBjects();
-                new Game(StartMenu.this.app, StartMenu.this.textField.getPlayerName());
+                new Game(StartMenu.this.app, StartMenu.this.textField.getInputValue());
 
 
             }

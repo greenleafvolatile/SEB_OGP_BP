@@ -8,7 +8,7 @@ public final class TextField extends GameObject {
 
     private final float fontSize;
 
-    private String playerName = "";
+    private String inputValue = "";
     private KeyListener keyListener;
 
     public TextField(int width, int height) {
@@ -26,13 +26,13 @@ public final class TextField extends GameObject {
         graphics.rect(this.x, this.y, this.width, this.height);
         graphics.fill(0, 0, 0);
 
-        if (graphics.textWidth(this.playerName) < this.width) { // Dit zou in een ternary statement kunnen.
+        if (graphics.textWidth(this.inputValue) < this.width) { // Dit zou in een ternary statement kunnen.
 
-            graphics.text(this.playerName, x, this.y + this.height - this.fontSize);
+            graphics.text(this.inputValue, x, this.y + this.height - this.fontSize);
 
         } else {
 
-            playerName = playerName.substring(0, playerName.length() - 1);
+            inputValue = inputValue.substring(0, inputValue.length() - 1);
         }
     }
 
@@ -54,17 +54,17 @@ public final class TextField extends GameObject {
 
     public void addChar(char ch) {
 
-        this.playerName += ch;
+        this.inputValue += ch;
     }
 
     public void removeChar() {
 
-        if (this.playerName.length() > 0) {
-            playerName = playerName.substring(0, playerName.length() - 1);
+        if (this.inputValue.length() > 0) {
+            inputValue = inputValue.substring(0, inputValue.length() - 1);
         }
     }
 
-    public String getPlayerName() {
-        return this.playerName;
+    public String getInputValue() {
+        return inputValue;
     }
 }

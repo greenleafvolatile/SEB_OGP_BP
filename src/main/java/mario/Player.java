@@ -25,22 +25,25 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
-    private final GameDashboard gameDashboard;
-    private final float jumpingSpeed = 8;
 
+    private String name = "";
+
+    private final float jumpingSpeed = 8;
     private float groundSpeed = 5;
     private float airspeed = 4;
 
     private int keysCollected = 0;
+    private int health = 3;
+
 
     private boolean jump;
     private boolean onFloorTile;
 
-    public Player(MainApp app) {
+    public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
-        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
+        this.name = name;
         this.keys.add(new Key(LEFT));
         this.keys.add(new Key(RIGHT));
         initPlayer();
@@ -51,6 +54,20 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.setGravity(0.3f);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getHealth() {
+        return health;
+    }
+
+    private void removeOneHealthPoint() {
+        this.health--;
+    }
 
     @Override
     public void keyPressed(int intValue, char charValue) {
@@ -142,10 +159,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void resetPlayer() {
-
-        if (this.gameDashboard.getNumberOfHearts() == 0) {
-            // Show endgame screen.
-        }
+//
+//        if (this.gameDashboard.getNumberOfHearts() == 0) {
+//            // Show endgame screen.
+//        }
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -162,7 +179,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
@@ -191,7 +208,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
-                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
@@ -224,7 +241,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-                    gameDashboard.addkey();
+//                    gameDashboard.addkey();
                     this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
