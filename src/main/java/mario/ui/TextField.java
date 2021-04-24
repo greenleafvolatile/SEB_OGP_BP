@@ -56,4 +56,8 @@ public final class TextField extends GameObject {
 
         this.inputValue += ch;
     }
+
+    public String getInputValue() {
+        return inputValue;
+    }
 }
