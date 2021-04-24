@@ -3,6 +3,7 @@ package mario.view.menu;
 import mario.MainApp;
 import mario.ui.*;
 import mario.view.Screen;
+import mario.view.game.GameView;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
@@ -17,6 +18,8 @@ public class MenuView extends Screen {
     private final int buttonWidth = 350;
     private final int buttonHeight = 100;
 
+    private TextField textField;
+
     /**
      * Instantiates a new Menu view.
      *
@@ -24,6 +27,7 @@ public class MenuView extends Screen {
      */
     public MenuView(MainApp app) {
         super(app);
+        super.render();
     }
 
     @Override
@@ -49,8 +53,10 @@ public class MenuView extends Screen {
                 430
         );
 
+        this.createTextField();
+
         this.app.addGameObject(
-                textField(),
+                this.textField,
                 this.app.getWidth() / 2f,
                 210
         );
@@ -75,11 +81,9 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-
-//                StartMenu.this.app.deleteAllGameOBjects();
-//                new GameView(StartMenu.this.app, StartMenu.this.textField.getInputValue());
-
-
+                dispose();
+                GameView gameView = new GameView(app, MenuView.this.textField.getInputValue());
+                gameView.render();
             }
         });
         return playButton;
@@ -99,9 +103,9 @@ public class MenuView extends Screen {
         return exitButton;
     }
 
-    private TextField textField() {
+    private void createTextField() {
 
-        TextField textField = new TextField( 200, 50);
+        this.textField = new TextField( 200, 50);
         textField.addKeyListener(new KeyListener() {
 
             @Override
@@ -115,7 +119,6 @@ public class MenuView extends Screen {
                 }
             }
         });
-        return textField;
     }
 
     @Override
@@ -127,4 +130,5 @@ public class MenuView extends Screen {
 
         return view;
     }
+
 }
