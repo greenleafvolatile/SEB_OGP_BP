@@ -11,18 +11,19 @@ import processing.core.PGraphics;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A dashboard.
+ *
+ */
 public class GameDashboard extends Dashboard {
 
     private final int xMargin = 40;
     private final int yMargin = 20;
-
     private final List<HeartSprite> hearts = new ArrayList<>();
-
     private final String playerName;
 
     private int fontSize;
     private int numberOfKeysShown = 0;
-
     private MainApp app;
     private Timer timer;
     private TextObject time;
@@ -35,6 +36,16 @@ public class GameDashboard extends Dashboard {
         }
     }
 
+    /**
+     * Instantiates a new Game dashboard.
+     *
+     * @param app        the app
+     * @param x          the x
+     * @param y          the y
+     * @param width      the width
+     * @param height     the height
+     * @param playerName the player name
+     */
     public GameDashboard(MainApp app, float x, float y, float width, float height, String playerName) {
 
         super(x, y, width, height);
@@ -64,15 +75,14 @@ public class GameDashboard extends Dashboard {
     }
 
     private void createTimeLabel() {
-        this.time = new TextObject(TimeFormatter.getFormattedTime(this.timer.getElapsedTime()), 32);
+        this.time = new TextObject(TimeFormatter.format(this.timer.getElapsedTime()), 32);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(TimeFormatter.getFormattedTime(this.timer.getElapsedTime())) / 2), yMargin);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(TimeFormatter.format(this.timer.getElapsedTime())) / 2), yMargin);
     }
 
     @Override
     public void update() {
-        this.time.setText(TimeFormatter.getFormattedTime(this.timer.getElapsedTime()));
-        System.out.println("updating");
+        this.time.setText(TimeFormatter.format(this.timer.getElapsedTime()));
     }
 
 
@@ -99,6 +109,9 @@ public class GameDashboard extends Dashboard {
         }
     }
 
+    /**
+     * Remove heart.
+     */
     public void removeHeart() {
 
         if (this.hearts.size() > 0) {
@@ -108,11 +121,19 @@ public class GameDashboard extends Dashboard {
         }
     }
 
+    /**
+     * Gets number of hearts.
+     *
+     * @return the number of hearts
+     */
     public int getNumberOfHearts() {
         return this.hearts.size();
     }
 
 
+    /**
+     * Addkey.
+     */
     public void addkey() {
 
         this.numberOfKeysShown++;
@@ -120,6 +141,11 @@ public class GameDashboard extends Dashboard {
         this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeysShown), (int) (yMargin + fontSize + key.getHeight() / 2f));
     }
 
+    /**
+     * Gets timer.
+     *
+     * @return the timer
+     */
     public Timer getTimer() {
         return this.timer;
     }

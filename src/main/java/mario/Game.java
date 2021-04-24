@@ -66,7 +66,7 @@ public class Game {
         final int tileSize = 64;
 
         @SuppressWarnings("unchecked")
-        TileType<Tile>[] tileTypes =  loadTileTypes();
+        TileType<Tile>[] tileTypes =  TileTypeLoader.loadTileTypes();
 
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
         return new TileMap(tileSize, tileTypes, tilesMap);
