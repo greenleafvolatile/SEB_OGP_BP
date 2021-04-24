@@ -73,6 +73,10 @@ public class GameDashboard extends Dashboard {
     @Override
     public void update() {
         this.time.setText(TimeFormatter.format(timer.getElapsedTime()));
+        if (this.player.getHealth() != this.hearts.size()) {
+            this.deleteGameObject(hearts.get(hearts.size() - 1));
+            this.hearts.remove(this.hearts.size() - 1);
+        }
     }
 
 
