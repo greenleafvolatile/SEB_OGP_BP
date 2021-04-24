@@ -250,6 +250,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             } else if (tile.getTile() instanceof DoorTile) {
 
                 if (this.keysCollected == 5)  {
+
                     // show end game menu.
                 }
             }
