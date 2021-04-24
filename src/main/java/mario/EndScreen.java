@@ -36,8 +36,8 @@ public class EndScreen {
             public void mousePressed(int x, int y, int button)  {
 
                 EndScreen.this.app.deleteAllGameOBjects();
-
                 new Game(EndScreen.this.app, EndScreen.this.playerName);
+
 
 
             }
@@ -52,13 +52,31 @@ public class EndScreen {
 
                 EndScreen.this.app.deleteAllGameOBjects();
 
+                System.out.println("Startmenu");
                 new StartMenu(EndScreen.this.app);
             }
 
         });
 
-        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 300);
-        this.app.addGameObject(startMenuButton, this.app.getWidth() / 2f - startMenuButton.getWidth() / 2f, 430);
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
+
+        exitButton.addListener(new MouseListener() {
+
+            @Override
+            public void mousePressed(int x, int y, int button) {
+
+                EndScreen.this.app.deleteAllGameOBjects();
+                System.out.println("Exit");
+                System.exit(0);
+
+            }
+
+        });
+
+        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 100);
+        this.app.addGameObject(startMenuButton, this.app.getWidth() / 2f - startMenuButton.getWidth() / 2f, 250);
+
+        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - startMenuButton.getWidth() / 2f, 350);
     }
 
 
