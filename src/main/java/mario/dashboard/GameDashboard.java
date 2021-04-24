@@ -1,7 +1,7 @@
 package mario.dashboard;
 
 import mario.MainApp;
-import mario.TimeFormatter;
+import mario.Player;
 import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
@@ -11,48 +11,31 @@ import processing.core.PGraphics;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A dashboard.
- *
- */
 public class GameDashboard extends Dashboard {
 
     private final int xMargin = 40;
     private final int yMargin = 20;
+
     private final List<HeartSprite> hearts = new ArrayList<>();
-    private final String playerName;
+
+    private Player player;
 
     private int fontSize;
     private int numberOfKeysShown = 0;
+
     private MainApp app;
     private Timer timer;
     private TextObject time;
     private PGraphics graphics;
 
-    {
-        final int numberOfHearts = 3;
-        for (int i = 0; i < numberOfHearts; i++) {
-            hearts.add(new HeartSprite());
-        }
-    }
-
-    /**
-     * Instantiates a new Game dashboard.
-     *
-     * @param app        the app
-     * @param x          the x
-     * @param y          the y
-     * @param width      the width
-     * @param height     the height
-     * @param playerName the player name
-     */
-    public GameDashboard(MainApp app, float x, float y, float width, float height, String playerName) {
+    public GameDashboard(MainApp app, float x, float y, float width, float height, Player player) {
 
         super(x, y, width, height);
-        this.playerName = playerName;
+        this.player = player;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
         this.timer = new Timer(this.app);
+        initHearts();
         this.init();
     }
 
@@ -63,7 +46,7 @@ public class GameDashboard extends Dashboard {
 
         String keysLabelText = "keys:";
 
-        this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
+        this.addLabel("Player:" + this.player.getName(), xMargin, yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
 
         this.createTimeLabel();
@@ -74,15 +57,21 @@ public class GameDashboard extends Dashboard {
 
     }
 
+    private void initHearts() {
+        for (int i = 0; i < this.player.getHealth(); i++) {
+            hearts.add(new HeartSprite());
+        }
+    }
+
     private void createTimeLabel() {
-        this.time = new TextObject(TimeFormatter.format(this.timer.getElapsedTime()), 32);
+        this.time = new TextObject(this.timer.getFormattedTime(), 32);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(TimeFormatter.format(this.timer.getElapsedTime())) / 2), yMargin);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.getFormattedTime()) / 2), yMargin);
     }
 
     @Override
     public void update() {
-        this.time.setText(TimeFormatter.format(this.timer.getElapsedTime()));
+        this.time.setText(timer.getFormattedTime());
     }
 
 
@@ -109,9 +98,6 @@ public class GameDashboard extends Dashboard {
         }
     }
 
-    /**
-     * Remove heart.
-     */
     public void removeHeart() {
 
         if (this.hearts.size() > 0) {
@@ -121,35 +107,15 @@ public class GameDashboard extends Dashboard {
         }
     }
 
-    /**
-     * Gets number of hearts.
-     *
-     * @return the number of hearts
-     */
     public int getNumberOfHearts() {
         return this.hearts.size();
     }
 
 
-    /**
-     * Addkey.
-     */
     public void addkey() {
 
         this.numberOfKeysShown++;
         KeySprite key = new KeySprite();
         this.addGameObject(key, (int) (this.width - xMargin - key.getWidth() * numberOfKeysShown), (int) (yMargin + fontSize + key.getHeight() / 2f));
     }
-
-    /**
-     * Gets timer.
-     *
-     * @return the timer
-     */
-    public Timer getTimer() {
-        return this.timer;
-    }
-
-
-
 }

@@ -2,7 +2,10 @@ package mario;
 
 import mario.dashboard.GameDashboard;
 import mario.enemies.Enemy;
-import mario.tiles.*;
+import mario.tiles.DoorTile;
+import mario.tiles.FloorTile;
+import mario.tiles.KeyTile;
+import mario.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -11,16 +14,9 @@ import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
-import nl.han.ica.oopg.tile.EmptyTile;
-import nl.han.ica.oopg.tile.Tile;
-import nl.han.ica.oopg.tile.TileMap;
-import nl.han.ica.oopg.tile.TileType;
 import processing.core.PVector;
-import sun.util.resources.fr.TimeZoneNames_fr;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
@@ -29,24 +25,25 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
-    private final GameDashboard gameDashboard;
-    private final float jumpingSpeed = 8;
-    private final String playerName;
 
+    private String name = "";
+
+    private final float jumpingSpeed = 8;
     private float groundSpeed = 5;
     private float airspeed = 4;
 
     private int keysCollected = 0;
+    private int health = 3;
+
 
     private boolean jump;
     private boolean onFloorTile;
 
-    public Player(MainApp app, String playerName) {
+    public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
         this.app = app;
-        this.playerName = playerName;
-        this.gameDashboard = (GameDashboard) app.getDashboards().get(0);
+        this.name = name;
         this.keys.add(new Key(LEFT));
         this.keys.add(new Key(RIGHT));
         initPlayer();
@@ -57,6 +54,20 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.setGravity(0.3f);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getHealth() {
+        return health;
+    }
+
+    private void removeOneHealthPoint() {
+        this.health--;
+    }
 
     @Override
     public void keyPressed(int intValue, char charValue) {
@@ -148,10 +159,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void resetPlayer() {
-
-        if (this.gameDashboard.getNumberOfHearts() == 0) {
-            // Show endgame screen.
-        }
+//
+//        if (this.gameDashboard.getNumberOfHearts() == 0) {
+//            // Show endgame screen.
+//        }
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -168,7 +179,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
@@ -197,7 +208,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 }
 
                 if (tile.getTile() instanceof LavaTile) {
-                    this.gameDashboard.removeHeart();
+                    removeOneHealthPoint();
                     resetPlayer();
                 }
 
@@ -230,22 +241,16 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 try {
 
                     this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-                    gameDashboard.addkey();
+//                    gameDashboard.addkey();
                     this.keysCollected++;
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof BackgroundTile) {
+            } else if (tile.getTile() instanceof DoorTile) {
 
-                if (this.keysCollected >= 0) {
-                    this.gameDashboard.getTimer().stopTimer();
-                    Score score = new Score(this.playerName, TimeFormatter.format(this.gameDashboard.getTimer().getTotalElapsedTime()));
-                    Highscores.addHighscore(score);
-
-                    this.app.deleteAllGameOBjects();
-                    this.app.deleteAllDashboards();
-                    new StartMenu(this.app);
+                if (this.keysCollected == 5)  {
+                    // show end game menu.
                 }
             }
         }

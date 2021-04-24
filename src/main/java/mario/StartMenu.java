@@ -51,7 +51,7 @@ public final class StartMenu {
             public void mousePressed(int x, int y, int button)  {
 
                 StartMenu.this.app.deleteAllGameOBjects();
-                new Game(StartMenu.this.app, StartMenu.this.textField.getPlayerName());
+                new Game(StartMenu.this.app, StartMenu.this.textField.getInputValue());
 
 
             }

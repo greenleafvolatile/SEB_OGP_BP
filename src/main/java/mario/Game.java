@@ -4,7 +4,6 @@ import mario.dashboard.GameDashboard;
 import mario.enemies.PiranhasPlant;
 import mario.enemies.FlyingTurtle;
 import mario.enemies.Goomba;
-import nl.han.ica.oopg.tile.EmptyTile;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
@@ -28,25 +27,24 @@ public class Game {
 
     public Game(MainApp app, String playerName) {
         this.app = app;
-
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);
-
-        this.addDashboard(playerName);
-
-        this.addPlayer(playerName);
-
-        this.addEnemies();
-
-        this.createView();
+        this.player = new Player(app, playerName);
+        createObjects();
+        createDashboard();
+        initMap();
+        createView();
     }
 
-    private void addPlayer(String playerName) {
-        player = new Player(this.app, playerName);
-        this.app.addGameObject(player, 580, 802);
-    }
+    /*public void display() {
+        createDashboard();
+        createObjects();
+        initMap();
+        createView();
+    }*/
 
-    private void addEnemies() {
+    private void createObjects() {
+        this.app.addGameObject(this.player, 580, 802);
 
         this.app.addGameObject(new Goomba(this.app), 1856, 834);
         this.app.addGameObject(new Goomba(this.app), 3733, 834);
@@ -58,8 +56,8 @@ public class Game {
 
     }
 
-    private void addDashboard(String playerName) {
-        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), playerName));
+    private void createDashboard() {
+        this.app.addDashboard(new GameDashboard(this.app,0, 0, this.app.getWidth(), this.app.getHeight(), this.player));
     }
 
     private TileMap initMap() {
@@ -67,7 +65,7 @@ public class Game {
         final int tileSize = 64;
 
         @SuppressWarnings("unchecked")
-        TileType<Tile>[] tileTypes =  TileTypeLoader.loadTileTypes();
+        TileType<Tile>[] tileTypes =  loadTileTypes();
 
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
         return new TileMap(tileSize, tileTypes, tilesMap);
