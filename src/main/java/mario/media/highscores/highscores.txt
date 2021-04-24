@@ -1,5 +1,5 @@
 Player 00:00
 Player 00:01
-Mark 00:20
-Mies 00:25
 Player 00:07
+Player 00:11
+Player 00:02

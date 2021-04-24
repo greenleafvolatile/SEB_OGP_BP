@@ -69,6 +69,8 @@ public final class StartMenu {
 
         this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 300);
 
+        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 430);
+
     }
 
     private void addTextField() {

@@ -2,9 +2,12 @@ package mario;
 
 import mario.ui.Button;
 import mario.ui.MouseListener;
+import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.view.View;
+
+import java.util.Vector;
 
 public class EndScreen {
 
@@ -33,6 +36,7 @@ public class EndScreen {
             public void mousePressed(int x, int y, int button)  {
 
                 EndScreen.this.app.deleteAllGameOBjects();
+
                 new Game(EndScreen.this.app, EndScreen.this.playerName);
 
 
@@ -40,12 +44,14 @@ public class EndScreen {
         });
 
         Button startMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
+
         startMenuButton.addListener(new MouseListener() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
 
                 EndScreen.this.app.deleteAllGameOBjects();
+
                 new StartMenu(EndScreen.this.app);
             }
 
