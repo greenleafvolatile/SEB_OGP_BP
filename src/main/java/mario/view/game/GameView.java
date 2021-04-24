@@ -1,9 +1,11 @@
-package mario;
+package mario.view.game;
 
-import mario.dashboard.GameDashboard;
-import mario.enemies.PiranhasPlant;
-import mario.enemies.FlyingTurtle;
-import mario.enemies.Goomba;
+import mario.MainApp;
+import mario.model.enemy.FlyingTurtle;
+import mario.model.enemy.Goomba;
+import mario.model.enemy.PiranhasPlant;
+import mario.model.map.MapLoader;
+import mario.model.Player;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
@@ -13,9 +15,9 @@ import nl.han.ica.oopg.view.Viewport;
 
 import java.io.File;
 
-import static mario.TileTypeLoader.loadTileTypes;
+import static mario.model.map.TileTypeLoader.loadTileTypes;
 
-public class Game {
+public class GameView {
 
     private final MainApp app;
 
@@ -25,7 +27,7 @@ public class Game {
 
     private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/level1.csv"))};
 
-    public Game(MainApp app, String playerName) {
+    public GameView(MainApp app, String playerName) {
         this.app = app;
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);

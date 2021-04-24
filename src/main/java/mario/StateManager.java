@@ -1,10 +1,11 @@
 package mario;
 
+import mario.view.menu.StartMenu;
+
 public class StateManager {
 
     private MainApp app;
     private StartMenu menu;
-    private Game game;
     private GameState gameState = GameState.START;
 
 

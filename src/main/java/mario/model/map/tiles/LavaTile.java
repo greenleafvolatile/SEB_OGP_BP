@@ -1,11 +1,11 @@
-package mario.tiles;
+package mario.model.map.tiles;
 
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 
-public class KeyTile extends Tile {
+public class LavaTile extends Tile {
 
-    public KeyTile(Sprite sprite) {
+    public LavaTile(Sprite sprite) {
         super(sprite);
     }
 

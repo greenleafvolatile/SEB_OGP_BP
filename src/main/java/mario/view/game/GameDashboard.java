@@ -1,8 +1,10 @@
-package mario.dashboard;
+package mario.view.game;
 
 import mario.MainApp;
-import mario.Player;
-import mario.Timer;
+import mario.model.Player;
+import mario.model.Timer;
+import mario.view.game.sprites.HeartSprite;
+import mario.view.game.sprites.KeySprite;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;

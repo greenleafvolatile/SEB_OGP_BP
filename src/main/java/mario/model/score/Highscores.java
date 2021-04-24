@@ -1,12 +1,12 @@
-package mario;
+package mario.model.score;
 
 
+import mario.model.score.Score;
 import nl.han.ica.oopg.persistence.FilePersistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Highscores {
 

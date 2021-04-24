@@ -1,11 +1,11 @@
-package mario;
+package mario.model;
 
-import mario.dashboard.GameDashboard;
-import mario.enemies.Enemy;
-import mario.tiles.DoorTile;
-import mario.tiles.FloorTile;
-import mario.tiles.KeyTile;
-import mario.tiles.LavaTile;
+import mario.MainApp;
+import mario.model.enemy.Enemy;
+import mario.model.map.tiles.DoorTile;
+import mario.model.map.tiles.FloorTile;
+import mario.model.map.tiles.KeyTile;
+import mario.model.map.tiles.LavaTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;

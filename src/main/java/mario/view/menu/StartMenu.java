@@ -1,6 +1,8 @@
-package mario;
+package mario.view.menu;
 
+import mario.MainApp;
 import mario.ui.*;
+import mario.view.game.GameView;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
@@ -51,7 +53,7 @@ public final class StartMenu {
             public void mousePressed(int x, int y, int button)  {
 
                 StartMenu.this.app.deleteAllGameOBjects();
-                new Game(StartMenu.this.app, StartMenu.this.textField.getInputValue());
+                new GameView(StartMenu.this.app, StartMenu.this.textField.getInputValue());
 
 
             }

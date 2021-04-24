@@ -1,7 +1,7 @@
-package mario.enemies;
+package mario.model.enemy;
 
 import mario.MainApp;
-import mario.tiles.FloorTile;
+import mario.model.map.tiles.FloorTile;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;

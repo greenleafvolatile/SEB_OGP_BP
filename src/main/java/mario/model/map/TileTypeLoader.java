@@ -1,6 +1,7 @@
-package mario;
+package mario.model.map;
 
-import mario.tiles.*;
+import mario.MainApp;
+import mario.model.map.tiles.*;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;

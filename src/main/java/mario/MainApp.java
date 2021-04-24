@@ -1,8 +1,7 @@
 package mario;
 
+import mario.view.menu.StartMenu;
 import nl.han.ica.oopg.engine.GameEngine;
-
-import java.util.List;
 
 public class MainApp extends GameEngine {
 
