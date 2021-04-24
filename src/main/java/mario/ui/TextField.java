@@ -57,6 +57,13 @@ public final class TextField extends GameObject {
         this.inputValue += ch;
     }
 
+    public void removeChar() {
+
+        if (this.inputValue.length() > 0) {
+            inputValue = inputValue.substring(0, inputValue.length() - 1);
+        }
+    }
+
     public String getInputValue() {
         return inputValue;
     }
