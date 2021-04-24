@@ -40,6 +40,7 @@ public class GameView extends Screen {
         this.app.setTileMap(this.tileMap);
         this.player = new Player(app, playerName);
         this.createDashboard();
+        this.render();
     }
 
     private void createDashboard() {
