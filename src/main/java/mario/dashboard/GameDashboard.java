@@ -1,6 +1,7 @@
 package mario.dashboard;
 
 import mario.MainApp;
+import mario.Player;
 import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
@@ -17,7 +18,7 @@ public class GameDashboard extends Dashboard {
 
     private final List<HeartSprite> hearts = new ArrayList<>();
 
-    private final String playerName;
+    private Player player;
 
     private int fontSize;
     private int numberOfKeysShown = 0;
@@ -27,20 +28,14 @@ public class GameDashboard extends Dashboard {
     private TextObject time;
     private PGraphics graphics;
 
-    {
-        final int numberOfHearts = 3;
-        for (int i = 0; i < numberOfHearts; i++) {
-            hearts.add(new HeartSprite());
-        }
-    }
-
-    public GameDashboard(MainApp app, float x, float y, float width, float height, String playerName) {
+    public GameDashboard(MainApp app, float x, float y, float width, float height, Player player) {
 
         super(x, y, width, height);
-        this.playerName = playerName;
+        this.player = player;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
         this.timer = new Timer(this.app);
+        initHearts();
         this.init();
     }
 
@@ -51,7 +46,7 @@ public class GameDashboard extends Dashboard {
 
         String keysLabelText = "keys:";
 
-        this.addLabel("Player:" + this.playerName, xMargin, yMargin, fontSize, 255, 255, 255);
+        this.addLabel("Player:" + this.player.getName(), xMargin, yMargin, fontSize, 255, 255, 255);
         this.addLabel(keysLabelText, (int) (this.width - xMargin - this.graphics.textWidth(keysLabelText)), yMargin, fontSize, 255, 255, 255);
 
         this.createTimeLabel();
@@ -60,6 +55,12 @@ public class GameDashboard extends Dashboard {
 
         this.timer.startTimer();
 
+    }
+
+    private void initHearts() {
+        for (int i = 0; i < this.player.getHealth(); i++) {
+            hearts.add(new HeartSprite());
+        }
     }
 
     private void createTimeLabel() {
