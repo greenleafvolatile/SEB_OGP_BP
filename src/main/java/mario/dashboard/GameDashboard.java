@@ -2,7 +2,6 @@ package mario.dashboard;
 
 import mario.MainApp;
 import mario.Player;
-import mario.TimeFormatter;
 import mario.Timer;
 import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
@@ -35,7 +34,7 @@ public class GameDashboard extends Dashboard {
         this.player = player;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
-        this.timer = new Timer(this.app);
+        this.timer = new Timer(app);
         initHearts();
         this.init();
     }
@@ -65,14 +64,14 @@ public class GameDashboard extends Dashboard {
     }
 
     private void createTimeLabel() {
-        this.time = new TextObject(TimeFormatter.format(this.timer.getElapsedTime()), 32);
+        this.time = new TextObject(this.timer.toString(), 32);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(TimeFormatter.format(this.timer.getElapsedTime())) / 2), yMargin);
+        this.addGameObject(time, (int) (this.width / 2 - graphics.textWidth(this.timer.toString()) / 2), yMargin);
     }
 
     @Override
     public void update() {
-        this.time.setText(TimeFormatter.format(timer.getElapsedTime()));
+        this.time.setText(this.timer.toString());
     }
 
 
