@@ -245,7 +245,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                     this.app.deleteAllGameOBjects();
                     this.app.deleteAllDashboards();
-                    new EndScreen(this.app, this.playerName);
+                    new StartMenu(this.app);
                 }
             }
         }

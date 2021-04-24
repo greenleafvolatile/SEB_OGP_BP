@@ -27,7 +27,7 @@ public final class Button extends Image {
     @Override
     public void mousePressed(int x, int y, int button) {
 
-        if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + height) {
+        if (x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height) {
             this.listener.mousePressed(x, y, button);
         }
     }

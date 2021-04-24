@@ -4,6 +4,7 @@ import mario.dashboard.GameDashboard;
 import mario.enemies.PiranhasPlant;
 import mario.enemies.FlyingTurtle;
 import mario.enemies.Goomba;
+import nl.han.ica.oopg.tile.EmptyTile;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
