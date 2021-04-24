@@ -26,12 +26,13 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
     private final GameDashboard gameDashboard;
-    private final float jumpingSpeed = 8;
 
+    private final float jumpingSpeed = 8;
     private float groundSpeed = 5;
     private float airspeed = 4;
 
     private int keysCollected = 0;
+    private int health = 3;
 
     private boolean jump;
     private boolean onFloorTile;
@@ -51,6 +52,13 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.setGravity(0.3f);
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 
     @Override
     public void keyPressed(int intValue, char charValue) {
