@@ -22,6 +22,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private static final int SPACE_BAR = 32;
 
+
+    private String name;
+
     private final Sound jumpSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
@@ -52,6 +55,13 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.setGravity(0.3f);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public int getHealth() {
         return health;
     }
