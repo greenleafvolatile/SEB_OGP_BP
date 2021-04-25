@@ -261,8 +261,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
                     this.succesFull = true;
                     this.app.updateGame();
-                    new EndView(this.app, this.name);
-
+                    new EndView(this.app, this.name, succesFull);
                     break;
                 }
             }
