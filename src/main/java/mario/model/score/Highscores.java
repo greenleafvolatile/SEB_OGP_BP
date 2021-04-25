@@ -14,7 +14,7 @@ public class Highscores {
 
     private Highscores(){}
 
-    private static List<Score> loadHighscores() {
+    public static List<Score> loadHighscores() {
 
         List<Score> highscores = new ArrayList<>();
 

@@ -3,6 +3,8 @@ package mario.view.game;
 import mario.MainApp;
 import mario.model.Player;
 import mario.model.Timer;
+import mario.model.score.Highscores;
+import mario.model.score.Score;
 import mario.view.game.sprites.HeartSprite;
 import mario.view.game.sprites.KeySprite;
 import nl.han.ica.oopg.dashboard.Dashboard;
@@ -24,7 +26,6 @@ public class GameDashboard extends Dashboard {
 
     private int fontSize;
 
-    private MainApp app;
     private Timer timer;
     private TextObject time;
     private PGraphics graphics;
@@ -34,7 +35,6 @@ public class GameDashboard extends Dashboard {
         super(x, y, width, height);
         this.player = player;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
-        this.app = app;
         this.timer = new Timer();
         initHearts();
         this.init();
@@ -72,9 +72,14 @@ public class GameDashboard extends Dashboard {
 
     @Override
     public void update() {
+
         removeHeart();
         addkey();
         this.time.setText(this.timer.formatToString(timer.getElapsedTime()));
+        if (this.player.isSucessfull()) {
+            Highscores.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
+        }
+
     }
 
 

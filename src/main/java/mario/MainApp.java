@@ -1,7 +1,11 @@
 package mario;
 
+import mario.model.score.Highscores;
+import mario.model.score.Score;
 import mario.view.menu.MenuView;
 import nl.han.ica.oopg.engine.GameEngine;
+
+import java.util.List;
 
 public class MainApp extends GameEngine {
 
@@ -23,6 +27,7 @@ public class MainApp extends GameEngine {
         size(screenWidth, screenHeight);
 
         new MenuView(this);
+
     }
 
     @Override

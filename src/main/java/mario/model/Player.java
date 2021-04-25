@@ -4,6 +4,8 @@ import mario.MainApp;
 import mario.model.enemy.Enemy;
 import mario.model.map.MapLoader;
 import mario.model.map.tiles.*;
+import mario.model.score.Highscores;
+import mario.model.score.Score;
 import mario.view.end.EndView;
 import mario.view.menu.MenuView;
 import nl.han.ica.oopg.collision.CollidedTile;
@@ -34,13 +36,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private float groundSpeed = 5;
     private float airspeed = 4;
 
-
     private int keysCollected = 0;
     private int health = 3;
 
-
     private boolean jump;
     private boolean onFloorTile;
+    private boolean succesFull;
 
     public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
@@ -258,11 +259,18 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.keysCollected >= 0)  {
 
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+                    this.succesFull = true;
+                    this.app.updateGame();
                     new EndView(this.app, this.name);
+
                     break;
                 }
             }
         }
+    }
+
+    public boolean isSucessfull() {
+        return this.succesFull;
     }
 
     public void update() {

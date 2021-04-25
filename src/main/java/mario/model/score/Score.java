@@ -40,4 +40,12 @@ public class Score implements Comparable<Score>{
         return this.name.equals(score.name) && this.time.equals(score.time);
 
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getTime() {
+        return this.time;
+    }
 }
