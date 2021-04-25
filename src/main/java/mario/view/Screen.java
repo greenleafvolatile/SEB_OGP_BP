@@ -21,7 +21,9 @@ public abstract class Screen {
      */
     public Screen(MainApp app) {
         this.app = app;
+        dispose();
     }
+
 
     /**
      * Add objects.

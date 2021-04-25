@@ -81,7 +81,7 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                dispose();
+                System.out.println("Pressed play button");
                 new GameView(app, MenuView.this.textField.getInputValue());
             }
         });
