@@ -225,6 +225,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (tile.getTile() instanceof LavaTile) {
                     removeOneHealthPoint();
                     resetPlayer();
+                    break;
                 }
 
                 switch (tile.getCollisionSide()) {
