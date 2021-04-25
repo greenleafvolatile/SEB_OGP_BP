@@ -23,11 +23,11 @@ public class EndView extends Screen {
     private final String name;
     private float highscoresWidth;
 
-    private final boolean successFull;
+    private final boolean gameOver;
 
-    public EndView(MainApp app, String name, boolean successFull) {
+    public EndView(MainApp app, String name, boolean gameOver) {
         super(app);
-        this.successFull = successFull;
+        this.gameOver = gameOver;
         this.name = name;
         super.render();
     }
@@ -58,7 +58,7 @@ public class EndView extends Screen {
 
         this.app.textSize(fontSize);
 
-        String text = this.successFull ? "You win!" : "You lose!";
+        String text = this.gameOver ? "You win!" : "You lose!";
 
         TextObject label = new TextObject(text, fontSize);
         label.setForeColor(0, 0, 0, 255);
