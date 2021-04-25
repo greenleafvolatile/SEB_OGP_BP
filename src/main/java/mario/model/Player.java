@@ -4,6 +4,7 @@ import mario.MainApp;
 import mario.model.enemy.Enemy;
 import mario.model.map.MapLoader;
 import mario.model.map.tiles.*;
+import mario.view.end.EndView;
 import mario.view.menu.MenuView;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
@@ -16,8 +17,6 @@ import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import nl.han.ica.oopg.tile.TileType;
 import processing.core.PVector;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +34,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private float groundSpeed = 5;
     private float airspeed = 4;
 
+
     private int keysCollected = 0;
     private int health = 3;
+
 
     private boolean jump;
     private boolean onFloorTile;
@@ -63,7 +64,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     public void setName(String name) {
         this.name = name;
     }
-
     public int getHealth() {
         return health;
     }
@@ -166,7 +166,10 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void resetPlayer() {
-
+//
+//        if (this.gameDashboard.getNumberOfHearts() == 0) {
+//            // Show endgame screen.
+//        }
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -255,9 +258,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.keysCollected >= 0)  {
 
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-                    //this.app.deleteAllDashboards();
-                    //this.app.deleteAllGameOBjects();
-                    new MenuView(this.app);
+                    new EndView(this.app, this.name);
                     break;
                 }
             }

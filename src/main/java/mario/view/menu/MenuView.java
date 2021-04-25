@@ -81,7 +81,6 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                //dispose();
                 new GameView(app, MenuView.this.textField.getInputValue());
             }
         });
@@ -95,7 +94,6 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                System.out.println("Pressed exit button.");
                 System.exit(0);
             }
         });

@@ -24,6 +24,7 @@ public abstract class Screen {
         dispose();
     }
 
+
     /**
      * Add objects.
      */
