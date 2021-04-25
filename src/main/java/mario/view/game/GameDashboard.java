@@ -35,7 +35,7 @@ public class GameDashboard extends Dashboard {
         this.player = player;
         this.graphics = new PGraphicsCreator().createPGraphics((int) width, (int) height);
         this.app = app;
-        this.timer = new Timer(app);
+        this.timer = new Timer();
         initHearts();
         this.init();
     }

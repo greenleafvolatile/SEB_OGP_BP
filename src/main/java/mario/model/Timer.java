@@ -7,32 +7,21 @@ import mario.MainApp;
  */
 public class Timer {
 
-    private int start;
-    private int end;
-
-    private final MainApp app;
-
-    /**
-     * Instantiates a new Timer.
-     *
-     * @param app the app
-     */
-    public Timer(MainApp app) {
-        this.app = app;
-    }
+    private long start;
+    private long end;
 
     /**
      * Start timer.
      */
     public void startTimer() {
-        this.start = this.app.millis();
+        this.start = System.nanoTime();
     }
 
     /**
      * Stop timer.
      */
     public void stopTimer() {
-        this.end = this.app.millis();
+        this.end = System.nanoTime();
     }
 
     /**
@@ -41,7 +30,7 @@ public class Timer {
      * @return the total elapsed time
      */
     public double getTotalElapsedTime() {
-        return (this.end - this.start) / 1000f;
+        return (this.end - this.start) / 1_000_000_000.0;
     }
 
 
@@ -51,7 +40,7 @@ public class Timer {
      * @return the elapsed time
      */
     public double getElapsedTime() {
-        return (this.app.millis() - this.start) / 1000f;
+        return (System.nanoTime() - this.start) / 1_000_000_000.0;
     }
 
 
