@@ -25,14 +25,14 @@ public class EndView extends Screen {
     public void addObjects() {
 
         this.app.addGameObject(
-                playAgainButton(),
-                this.app.getWidth() / 2f - playAgainButton().getWidth() * 1.25f,
-                this.app.getHeight() - playAgainButton().getHeight() * 1.25f);
+                menuButton(),
+                this.app.getWidth() / 2f - playAgainButton().getWidth() * 1.05f,
+                this.app.getHeight() - playAgainButton().getHeight() * 2.25f);
 
         this.app.addGameObject(
-                menuButton(),
-                this.app.getWidth() / 2f + menuButton().getWidth() * .25f,
-                this.app.getHeight() - menuButton().getHeight() * 1.25f);
+                playAgainButton(),
+                this.app.getWidth() / 2f + menuButton().getWidth() * .05f,
+                this.app.getHeight() - menuButton().getHeight() * 2.25f);
 
     }
 
