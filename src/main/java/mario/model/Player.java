@@ -75,6 +75,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void removeOneHealthPoint() {
         this.health--;
+        if (this.health == 0) {
+            this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+            new EndView(this.app, this.name, successFull);
+
+        }
+
     }
 
     public int getKeysCollected() {
@@ -172,9 +178,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private void resetPlayer() {
 //
-//        if (this.gameDashboard.getNumberOfHearts() == 0) {
-//            // Show endgame screen.
-//        }
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -260,20 +263,20 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof BackgroundTile) {
+            } else if (tile.getTile() instanceof DoorTile) {
 
                 if (this.keysCollected >= 0)  {
 
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
                     this.successFull = true;
                     this.app.updateGame();
-                    System.out.println("Player: " + this.successFull);
                     new EndView(this.app, this.name, successFull);
                     break;
                 }
             }
         }
     }
+
 
 
     public boolean isSucessfull() {
