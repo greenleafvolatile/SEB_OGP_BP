@@ -8,7 +8,6 @@ import mario.view.game.GameView;
 import mario.view.menu.MenuView;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.view.View;
-import processing.core.PImage;
 
 public class EndView extends Screen {
 
@@ -44,7 +43,6 @@ public class EndView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                System.out.println("Pressed play again button");
                 new GameView(EndView.this.app, EndView.this.name);
             }
         });
@@ -58,7 +56,6 @@ public class EndView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                System.out.println("Pressed menu button.");
                 new MenuView(EndView.this.app);
             }
         });
