@@ -258,9 +258,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 if (this.keysCollected >= 0)  {
 
-                    //Highscores.addHighscore(new Score(this.name, "00:01"));
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+                    this.succesFull = true;
+                    this.app.updateGame();
                     new EndView(this.app, this.name);
+
                     break;
                 }
             }

@@ -28,12 +28,6 @@ public class MainApp extends GameEngine {
 
         new MenuView(this);
 
-        List<Score> highScores = Highscores.loadHighscores();
-        System.out.println(highScores);
-        Score one = new Score("Test", "00:01");
-        Highscores.addHighscore(one);
-        List<Score> updated = Highscores.loadHighscores();
-        System.out.println(updated);
     }
 
     @Override

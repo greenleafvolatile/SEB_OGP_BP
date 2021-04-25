@@ -76,6 +76,9 @@ public class GameDashboard extends Dashboard {
         removeHeart();
         addkey();
         this.time.setText(this.timer.formatToString(timer.getElapsedTime()));
+        if (this.player.isSucessfull()) {
+            Highscores.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
+        }
 
     }
 
