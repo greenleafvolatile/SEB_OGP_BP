@@ -22,14 +22,21 @@ public class EndView extends Screen {
     private final String name;
     private float highscoresWidth;
 
-    public EndView(MainApp app, String name) {
+    private boolean successFull;
+
+    public EndView(MainApp app, String name, boolean successFull) {
         super(app);
         super.render();
         this.name = name;
+        this.successFull = successFull;
     }
 
     @Override
     public void addObjects() {
+
+        addTitle();
+        addHighscoresLabel();
+        addHighScores();
 
         this.app.addGameObject(
                 menuButton(),
@@ -42,8 +49,20 @@ public class EndView extends Screen {
                 this.app.getHeight() - menuButton().getHeight() * 2.25f);
 
 
-        addHighscoresLabel();
-        addHighScores();
+    }
+
+    private void addTitle() {
+
+        final int fontSize = 100;
+
+        this.app.textSize(fontSize);
+
+        String text = this.successFull ? "You win!" : "You lose!";
+
+        TextObject label = new TextObject(text, fontSize);
+        label.setForeColor(0, 255, 0, 255);
+
+        this.app.addGameObject(label, this.app.getWidth() / 2f - this.app.textWidth(text) / 2, fontSize * .5f);
 
     }
 
