@@ -1,8 +1,7 @@
 package mario;
 
+import mario.view.menu.MenuView;
 import nl.han.ica.oopg.engine.GameEngine;
-
-import java.util.List;
 
 public class MainApp extends GameEngine {
 
@@ -23,12 +22,7 @@ public class MainApp extends GameEngine {
 
         size(screenWidth, screenHeight);
 
-        //new StateManager(this);
-
-        new StartMenu(this);
-
-
-
+        new MenuView(this);
     }
 
     @Override

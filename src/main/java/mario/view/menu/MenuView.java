@@ -1,34 +1,69 @@
-package mario;
+package mario.view.menu;
 
+import mario.MainApp;
 import mario.ui.*;
+import mario.view.Screen;
+import mario.view.game.GameView;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public final class StartMenu {
+/**
+ * The type Menu view.
+ */
+public class MenuView extends Screen {
 
-    private final MainApp app;
-    //private final StateManager manager;
+    private final int buttonWidth = 350;
+    private final int buttonHeight = 100;
+
     private TextField textField;
 
-    public StartMenu(MainApp app) { //}, StateManager manager) {
+    /**
+     * Instantiates a new Menu view.
+     *
+     * @param app the app
+     */
+    public MenuView(MainApp app) {
+        super(app);
+        super.render();
+    }
 
-        this.app = app;
-        //this.manager = manager;
-        this.createView();
-        this.addLogo();
+    @Override
+    public void addObjects() {
+
         this.addLabel();
-        this.addTextField();
-        this.addButtons();
+
+        this.app.addGameObject(
+                new Image(new Sprite(MainApp.MEDIA_URL.concat("logo.png"))),
+                app.getWidth() / 2f - 225,
+                50
+        );
+
+        this.app.addGameObject(
+                playButton(),
+                this.app.getWidth() / 2f - playButton().getWidth() / 2f,
+                300
+        );
+
+        this.app.addGameObject(
+                exitButton(),
+                this.app.getWidth() / 2f - exitButton().getWidth() / 2f,
+                430
+        );
+
+        this.createTextField();
+
+        this.app.addGameObject(
+                this.textField,
+                this.app.getWidth() / 2f,
+                210
+        );
+
     }
 
-    private void addLogo() {
-        Image logo = new Image(new Sprite(MainApp.MEDIA_URL.concat("logo.png")));
-        this.app.addGameObject(logo, app.getWidth() / 2f - 225, 50);
-    }
-
+    // TODO Maybe create a class for text labels...?
     private void addLabel() {
         final int fontSize = 40;
         String labelText = "Enter name:";
@@ -39,23 +74,21 @@ public final class StartMenu {
         this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 200 + fontSize / 4f);
     }
 
-    private void addButtons() {
-
-        final int buttonWidth = 350;
-        final int buttonHeight = 100;
+    private Button playButton() {
 
         Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
         playButton.addListener(new MouseListener() {
 
             @Override
-            public void mousePressed(int x, int y, int button)  {
-
-                StartMenu.this.app.deleteAllGameOBjects();
-                new Game(StartMenu.this.app, StartMenu.this.textField.getInputValue());
-
-
+            public void mousePressed(int x, int y, int button) {
+                dispose();
+                new GameView(app, MenuView.this.textField.getInputValue());
             }
         });
+        return playButton;
+    }
+
+    private Button exitButton() {
 
         Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
         exitButton.addListener(new MouseListener() {
@@ -66,14 +99,10 @@ public final class StartMenu {
                 System.exit(0);
             }
         });
-
-        this.app.addGameObject(playButton, this.app.getWidth() / 2f - playButton.getWidth() / 2f, 300);
-
-        this.app.addGameObject(exitButton, this.app.getWidth() / 2f - exitButton.getWidth() / 2f, 430);
-
+        return exitButton;
     }
 
-    private void addTextField() {
+    private void createTextField() {
 
         this.textField = new TextField( 200, 50);
         textField.addKeyListener(new KeyListener() {
@@ -89,21 +118,16 @@ public final class StartMenu {
                 }
             }
         });
-
-        this.app.addGameObject(textField, this.app.getWidth() / 2f, 210);
-
     }
 
-    private void createView() {
-
+    @Override
+    public View createView() {
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
         PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/menu_background.jpg"));
         view.setBackground(image);
 
-        this.app.setView(view);
+        return view;
     }
-
-
 
 }

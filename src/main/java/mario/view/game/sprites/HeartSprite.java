@@ -1,4 +1,4 @@
-package mario.dashboard;
+package mario.view.game.sprites;
 
 import mario.MainApp;
 import nl.han.ica.oopg.objects.Sprite;

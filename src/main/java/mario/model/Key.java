@@ -1,4 +1,4 @@
-package mario;
+package mario.model;
 
 public class Key {
 

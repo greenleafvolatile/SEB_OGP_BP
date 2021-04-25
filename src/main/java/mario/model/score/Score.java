@@ -1,4 +1,4 @@
-package mario;
+package mario.model.score;
 
 public class Score implements Comparable<Score>{
 

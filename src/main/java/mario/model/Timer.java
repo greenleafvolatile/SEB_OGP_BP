@@ -1,4 +1,6 @@
-package mario;
+package mario.model;
+
+import mario.MainApp;
 
 /**
  * The type Timer.

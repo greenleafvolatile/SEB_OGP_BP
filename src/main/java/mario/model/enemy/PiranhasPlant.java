@@ -1,4 +1,4 @@
-package mario.enemies;
+package mario.model.enemy;
 
 import mario.MainApp;
 import nl.han.ica.oopg.objects.Sprite;
