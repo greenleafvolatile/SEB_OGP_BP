@@ -78,7 +78,7 @@ public class EndView extends Screen {
 
             TextObject timeObject = new TextObject(score.getTime(), fontSize);
             timeObject.setForeColor(0, 0, 255, 255);
-            this.app.addGameObject(timeObject, this.app.getWidth() / 2f - highscoresWidth / 2f + 200, yPos);
+            this.app.addGameObject(timeObject, this.app.getWidth() / 2f - highscoresWidth / 2f + 200, yPos); // 200 is the widh of the textField in MenuView en dus ook de maximale width of playerName.
 
             yPos += fontSize * 1.5f;
 
