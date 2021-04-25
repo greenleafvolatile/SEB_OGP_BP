@@ -1,5 +1,7 @@
 package mario.model.map;
 
+import mario.MainApp;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -31,6 +33,11 @@ public final class MapLoader {
 
         return map;
 
+    }
+
+    public static int[][] loadEmptyMap() {
+
+        return loadMap(new File(MainApp.MEDIA_URL.concat("/maps/empty.csv")));
     }
 
     private static int[] toIntArray(String[] array) {
