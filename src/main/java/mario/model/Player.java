@@ -2,10 +2,7 @@ package mario.model;
 
 import mario.MainApp;
 import mario.model.enemy.Enemy;
-import mario.model.map.tiles.DoorTile;
-import mario.model.map.tiles.FloorTile;
-import mario.model.map.tiles.KeyTile;
-import mario.model.map.tiles.LavaTile;
+import mario.model.map.tiles.*;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -251,11 +248,11 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof DoorTile) {
+            } else if (tile.getTile() instanceof BackgroundTile) {
 
-                if (this.keysCollected == 5)  {
+                if (this.keysCollected >= 0)  {
 
-                    // show end game menu.
+
                 }
             }
         }
