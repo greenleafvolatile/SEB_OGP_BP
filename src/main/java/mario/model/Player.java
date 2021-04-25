@@ -43,7 +43,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     private boolean jump;
     private boolean onFloorTile;
-    private boolean succesFull;
+    private boolean successFull;
 
     public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
@@ -68,6 +68,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     public void setName(String name) {
         this.name = name;
     }
+
     public int getHealth() {
         return health;
     }
@@ -264,17 +265,19 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 if (this.keysCollected >= 0)  {
 
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-                    this.succesFull = true;
+                    this.successFull = true;
                     this.app.updateGame();
-                    new EndView(this.app, this.name, succesFull);
+                    System.out.println("Player: " + this.successFull);
+                    new EndView(this.app, this.name, successFull);
                     break;
                 }
             }
         }
     }
 
+
     public boolean isSucessfull() {
-        return this.succesFull;
+        return this.successFull;
     }
 
     public void update() {

@@ -22,13 +22,14 @@ public class EndView extends Screen {
     private final String name;
     private float highscoresWidth;
 
-    private boolean successFull;
+    private final boolean successFull;
 
     public EndView(MainApp app, String name, boolean successFull) {
         super(app);
         super.render();
         this.name = name;
         this.successFull = successFull;
+        System.out.println("Constructor: " + this.successFull);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class EndView extends Screen {
 
         this.app.textSize(fontSize);
 
+        System.out.println("Add title: " + this.successFull);
         String text = this.successFull ? "You win!" : "You lose!";
 
         TextObject label = new TextObject(text, fontSize);
