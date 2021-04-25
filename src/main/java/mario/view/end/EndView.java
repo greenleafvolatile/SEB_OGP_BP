@@ -74,13 +74,11 @@ public class EndView extends Screen {
 
             TextObject nameObject = new TextObject(score.getName(), fontSize);
             nameObject.setForeColor(255, 0, 0, 255);
-
             this.app.addGameObject(nameObject, this.app.getWidth() / 2f - highscoresWidth / 2f, yPos);
 
             TextObject timeObject = new TextObject(score.getTime(), fontSize);
             timeObject.setForeColor(0, 0, 255, 255);
-
-            this.app.addGameObject(timeObject, this.app.getWidth() / 2f + 50, yPos);
+            this.app.addGameObject(timeObject, this.app.getWidth() / 2f - highscoresWidth / 2f + 200, yPos);
 
             yPos += fontSize * 1.5f;
 
