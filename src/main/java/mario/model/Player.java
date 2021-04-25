@@ -265,14 +265,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
     }
 
-    private void resetXPosition() {
-
-    }
-
-    private void resetYPosition() {
-
-    }
-
     public void update() {
         final double airSpeedReduction = 0.05f;
 
