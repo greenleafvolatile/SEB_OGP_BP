@@ -2,10 +2,12 @@ package mario;
 
 import mario.view.menu.MenuView;
 import nl.han.ica.oopg.engine.GameEngine;
+import nl.han.ica.oopg.sound.Sound;
 
 public class MainApp extends GameEngine {
 
     public static String MEDIA_URL = "src/main/java/mario/media/";
+    private Sound backgroundMusic;
 
 
     public static void main(String[] args) {
@@ -21,7 +23,8 @@ public class MainApp extends GameEngine {
         int screenHeight = 768;
 
         size(screenWidth, screenHeight);
-
+        backgroundMusic = new Sound(this, MEDIA_URL.concat("sounds/background_loop.WAV"));
+        backgroundMusic.loop(-1);
         new MenuView(this);
     }
 
