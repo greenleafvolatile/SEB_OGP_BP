@@ -32,7 +32,6 @@ public class GameView extends Screen {
      * Instantiates a new Game view.
      *
      * @param app        the app
-     * @param playerName the player name
      */
     public GameView(MainApp app, Player player) {
         super(app);
@@ -46,7 +45,6 @@ public class GameView extends Screen {
     private void createDashboard() {
         this.app.addDashboard(
                 new GameDashboard(
-                        this.app,
                         0, 0,
                         this.app.getWidth(),
                         this.app.getHeight(),
