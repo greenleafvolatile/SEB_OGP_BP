@@ -34,11 +34,11 @@ public class GameView extends Screen {
      * @param app        the app
      * @param playerName the player name
      */
-    public GameView(MainApp app, String playerName) {
+    public GameView(MainApp app, Player player) {
         super(app);
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);
-        this.player = new Player(app, playerName);
+        this.player = player;
         this.createDashboard();
         this.render();
     }
