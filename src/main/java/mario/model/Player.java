@@ -2,6 +2,7 @@ package mario.model;
 
 import mario.MainApp;
 import mario.model.enemy.Enemy;
+import mario.model.enemy.IMakeSound;
 import mario.model.map.MapLoader;
 import mario.model.map.tiles.*;
 import mario.model.score.Highscores;
@@ -198,6 +199,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             if (object instanceof Enemy) {
 
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
+                    if (object instanceof IMakeSound) {
+                        ((IMakeSound) object).playSound();
+                    }
                     this.app.deleteGameObject(object);
                 } else {
                     removeOneHealthPoint();
