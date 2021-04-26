@@ -1,10 +1,24 @@
 package mario.model.score;
 
+/**
+ * This class represents a score in the game consisting
+ * of a name and a time.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.0
+ * @since 20-04-2021
+ *
+ */
 public class Score implements Comparable<Score>{
 
-    private String name;
-    private String time;
+    final private String name;
+    final private String time;
 
+    /**
+     * The constructor
+     * @param name the player's name
+     * @param time the time it took the player to finish the game.
+     */
     public Score(String name, String time) {
         this.name = name;
         this.time = time;
