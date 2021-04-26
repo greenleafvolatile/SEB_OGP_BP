@@ -78,7 +78,7 @@ public class MenuView extends Screen {
     private Button playButton() {
 
         Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
-        playButton.addListener(new MouseListener() {
+        playButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -91,7 +91,7 @@ public class MenuView extends Screen {
     private Button exitButton() {
 
         Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
-        exitButton.addListener(new MouseListener() {
+        exitButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -104,16 +104,17 @@ public class MenuView extends Screen {
     private void createTextField() {
 
         this.textField = new TextField( 200, 50);
-        textField.addKeyListener(new KeyListener() {
+        textField.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(int intValue, char charValue) {
 
                 if (intValue == PConstants.BACKSPACE) {
                     textField.removeChar();
-                }
-                else if (Character.isLetterOrDigit(charValue)) {
+                } else if (Character.isLetterOrDigit(charValue)) {
                     textField.addChar(charValue);
+                } else if (intValue == PConstants.ENTER) {
+                    new GameView(MenuView.this.app, new Player(MenuView.this.app, MenuView.this.textField.getInputValue()));
                 }
             }
         });

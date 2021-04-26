@@ -1,10 +1,11 @@
 package mario.view.game.sprites;
 
 import mario.MainApp;
+import mario.ui.Image;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.SpriteObject;
 
-public class KeySprite extends SpriteObject {
+public class KeySprite extends Image {
 
     public KeySprite() {
 

@@ -5,7 +5,7 @@ import mario.model.Player;
 import mario.model.score.Highscores;
 import mario.model.score.Score;
 import mario.ui.Button;
-import mario.ui.MouseListener;
+import mario.ui.MouseAdapter;
 import mario.view.Screen;
 import mario.view.game.GameView;
 import mario.view.menu.MenuView;
@@ -117,7 +117,7 @@ public class EndView extends Screen {
     private Button createPlayAgainButton() {
 
         Button play_again_button = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_again_button.png")), buttonWidth, buttonHeight);
-        play_again_button.addListener(new MouseListener() {
+        play_again_button.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -130,7 +130,7 @@ public class EndView extends Screen {
     private Button createMenuButton() {
 
         Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/back_to_menu_button.png")), buttonWidth, buttonHeight);
-        createMenuButton.addListener(new MouseListener() {
+        createMenuButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
