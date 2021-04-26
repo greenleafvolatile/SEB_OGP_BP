@@ -1,6 +1,5 @@
 package mario.view.game;
 
-import mario.MainApp;
 import mario.model.Player;
 import mario.model.Timer;
 import mario.model.score.Highscores;
@@ -11,7 +10,6 @@ import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.PGraphicsCreator;
 import processing.core.PGraphics;
-
 import java.util.ArrayList;
 import java.util.List;
 
