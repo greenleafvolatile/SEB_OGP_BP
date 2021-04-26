@@ -77,7 +77,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.health--;
         if (this.health == 0) {
             this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-            new EndView(this.app, this.name, successFull);
+            new EndView(this.app, this);
+            resetPlayer();
 
         }
 
@@ -177,7 +178,12 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     }
 
     private void resetPlayer() {
-//
+        this.health = 3;
+        this.keysCollected = 0;
+    }
+
+    private void moveToStart() {
+
         this.setSpeed(0);
         this.setX(508);
         this.setY(802);
@@ -195,7 +201,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     this.app.deleteGameObject(object);
                 } else {
                     removeOneHealthPoint();
-                    resetPlayer();
+                    moveToStart();
                 }
 
             }
@@ -224,7 +230,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
                 if (tile.getTile() instanceof LavaTile) {
                     removeOneHealthPoint();
-                    resetPlayer();
+                    moveToStart();
                     break;
                 }
 
@@ -264,14 +270,15 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof BackgroundTile) {
+            } else if (tile.getTile() instanceof DoorTile) {
 
                 if (this.keysCollected >= 0)  {
 
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
                     this.successFull = true;
                     this.app.updateGame();
-                    new EndView(this.app, this.name, successFull);
+                    new EndView(this.app, this);
+                    resetPlayer();
                     break;
                 }
             }

@@ -1,6 +1,7 @@
 package mario.view.end;
 
 import mario.MainApp;
+import mario.model.Player;
 import mario.model.score.Highscores;
 import mario.model.score.Score;
 import mario.ui.Button;
@@ -19,22 +20,22 @@ public class EndView extends Screen {
 
     private final int buttonWidth = 350;
     private final int buttonHeight = 100;
+    private final Player player;
 
-    private final String name;
 
-    private final boolean successFull;
 
-    public EndView(MainApp app, String name, boolean successFull) {
+
+
+    public EndView(MainApp app, Player player) {
         super(app);
-        this.successFull = successFull;
-        this.name = name;
+        this.player = player;
         super.render();
     }
 
     @Override
     public void addObjects() {
 
-        final String endText = successFull ? "You win!" : "You lose!";
+        final String endText = this.player.isSucessfull() ? "You win!" : "You lose!";
         final int endTextFontSize = 100;
         addText(endText, endTextFontSize, this.app.getWidth() / 2f - getTextWidth(endText, endTextFontSize) / 2f, endTextFontSize * .5f);
 
@@ -120,7 +121,7 @@ public class EndView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(EndView.this.app, EndView.this.name);
+                new GameView(EndView.this.app, EndView.this.player);
             }
         });
         return play_again_button;
