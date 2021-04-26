@@ -1,6 +1,7 @@
 package mario.view.menu;
 
 import mario.MainApp;
+import mario.model.Player;
 import mario.ui.*;
 import mario.view.Screen;
 import mario.view.game.GameView;
@@ -81,7 +82,7 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(app, MenuView.this.textField.getInputValue());
+                new GameView(app, new Player(app, MenuView.this.textField.getInputValue()));
             }
         });
         return playButton;
