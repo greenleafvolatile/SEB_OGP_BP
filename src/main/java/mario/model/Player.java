@@ -264,7 +264,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     e.printStackTrace();
                 }
 
-            } else if (tile.getTile() instanceof DoorTile) {
+            } else if (tile.getTile() instanceof BackgroundTile) {
 
                 if (this.keysCollected >= 0)  {
 
