@@ -37,7 +37,7 @@ public class MenuView extends Screen {
         this.addLabel();
 
         this.app.addGameObject(
-                new Image(new Sprite(MainApp.MEDIA_URL.concat("logo.png"))),
+                new Image(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/logo.png"))),
                 app.getWidth() / 2f - 225,
                 50
         );
@@ -77,7 +77,7 @@ public class MenuView extends Screen {
 
     private Button playButton() {
 
-        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
+        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
         playButton.addListener(new MouseAdapter() {
 
             @Override
@@ -90,7 +90,7 @@ public class MenuView extends Screen {
 
     private Button exitButton() {
 
-        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
+        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
         exitButton.addListener(new MouseAdapter() {
 
             @Override
@@ -124,7 +124,7 @@ public class MenuView extends Screen {
     public View createView() {
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
-        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/menu_background.jpg"));
+        PImage image = this.app.loadImage(MainApp.MEDIA_URL.concat("media/background/menu_background.jpg"));
         view.setBackground(image);
 
         return view;

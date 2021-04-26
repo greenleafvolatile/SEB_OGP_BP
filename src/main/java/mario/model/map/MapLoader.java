@@ -37,7 +37,7 @@ public final class MapLoader {
 
     public static int[][] loadEmptyMap() {
 
-        return loadMap(new File(MainApp.MEDIA_URL.concat("/maps/empty.csv")));
+        return loadMap(new File(MainApp.MEDIA_URL.concat("data/maps/empty.csv")));
     }
 
     private static int[] toIntArray(String[] array) {

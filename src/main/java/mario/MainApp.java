@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MainApp extends GameEngine {
 
-    public static String MEDIA_URL = "src/main/java/mario/media/";
+    public static String MEDIA_URL = "src/main/java/mario/resources/";
 
 
     public static void main(String[] args) {
@@ -27,7 +27,7 @@ public class MainApp extends GameEngine {
 
         size(screenWidth, screenHeight);
 
-        Sound backgroundMusic = new Sound(this, MEDIA_URL.concat("sounds/background_loop.WAV"));
+        Sound backgroundMusic = new Sound(this, MEDIA_URL.concat("media/sounds/background_loop.wav"));
         backgroundMusic.loop(-1);
 
         new MenuView(this);

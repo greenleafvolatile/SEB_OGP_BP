@@ -14,7 +14,7 @@ public class PiranhasPlant extends Enemy {
      * @param app the app
      */
     public PiranhasPlant(MainApp app) {
-        super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/plant.png")), 176);
+        super(app, new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/plant.png")), 176);
     }
 
     @Override
