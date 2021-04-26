@@ -72,7 +72,7 @@ public class MenuView extends Screen {
 
         TextObject textFieldLabel = new TextObject(labelText, 40);
         textFieldLabel.setForeColor(0, 0, 255, 255);
-        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 200 + fontSize / 4f);
+        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 200 + fontSize / 2f);
     }
 
     private Button playButton() {
