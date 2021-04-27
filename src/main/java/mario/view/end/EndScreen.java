@@ -13,20 +13,16 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PImage;
-
 import java.util.List;
 
-public class EndView extends Screen {
+public class EndScreen extends Screen {
 
-    private final int buttonWidth = 350;
-    private final int buttonHeight = 100;
+    private static final int BUTTON_WIDTH = 350;
+    private static final int BUTTON_HEIGHT = 100;
+
     private final Player player;
 
-
-
-
-
-    public EndView(MainApp app, Player player) {
+    public EndScreen(MainApp app, Player player) {
         super(app);
         this.player = player;
         super.render();
@@ -34,14 +30,14 @@ public class EndView extends Screen {
 
     @Override
     public void addObjects() {
-
-        final String endText = this.player.isSucessfull() ? "You win!" : "You lose!";
+        final String endText = this.player.isSucessfull() ? "You won!" : "You lost!";
         final int endTextFontSize = 100;
+
         addText(endText, endTextFontSize, this.app.getWidth() / 2f - getTextWidth(endText, endTextFontSize) / 2f, endTextFontSize * .5f);
 
         final String highscores = "Highscores:";
-        final int highscoresFontFize = 50;
-        addText(highscores, highscoresFontFize, this.app.getWidth() / 2f - getTextWidth(highscores, highscoresFontFize) / 2f, 200);
+        final int highscoresFontSize = 50;
+        addText(highscores, highscoresFontSize, this.app.getWidth() / 2f - getTextWidth(highscores, highscoresFontSize) / 2f, 200);
 
         addHighScores();
 
@@ -57,46 +53,59 @@ public class EndView extends Screen {
 
     }
 
-
+    /**
+     * This method adds text for the end screen.
+     * @param text the text to show.
+     * @param fontSize the font size of the text.
+     * @param xPos the x-position of the text.
+     * @param yPos the y-position of the text.
+     */
     private void addText(String text, int fontSize, float xPos, float yPos) {
-
         TextObject label = new TextObject(text, fontSize);
         label.setForeColor(0, 0, 0, 255);
 
         this.app.addGameObject(label, xPos, yPos);
     }
 
-
-
+    /**
+     * This helper method returns the width of a string.
+     * @param string a string.
+     * @param fontSize a font size.
+     * @return float the width of the string.
+     */
     private float getTextWidth(String string, int fontSize) {
         this.app.textSize(fontSize);
         return this.app.textWidth(string);
     }
 
+    /**
+     * This method adds the highscores to the end screen.
+     */
     private void addHighScores() {
-
         final List<Score> highscores = Highscores.loadHighscores();
         final int fontSize = 32;
-        final float padding = getMaxNameWidth(highscores, fontSize) / 10f;
+        final float maxNameWidth = getMaxNameWidth(highscores, fontSize) / 10f; // To align the names you need to know the length of the longest name.
 
         int yPos = 275;
 
         for (Score score : highscores) {
 
-            TextObject nameObject = new TextObject(score.getName(), fontSize);
-            nameObject.setForeColor(0, 0, 0, 255);
-            this.app.addGameObject(nameObject, this.app.getWidth() / 2f - getMaxNameWidth(highscores, fontSize), yPos);
-
-            TextObject timeObject = new TextObject(score.getTime(), fontSize);
-            timeObject.setForeColor(0, 0, 0, 255);
-            this.app.addGameObject(timeObject, this.app.getWidth() / 2f + padding, yPos);
+            this.addText(score.getName(), fontSize, this.app.getWidth() / 2f - getMaxNameWidth(highscores, fontSize), yPos);
+            this.addText(score.getTime(), fontSize,  this.app.getWidth() / 2f + maxNameWidth, yPos);
 
             yPos += fontSize * 1.5f;
         }
     }
 
+    /**
+     * This method returns the length of the longest name
+     * in the highscores list.
+     * @param highscores a list of highscores.
+     * @param fontSize a font size.
+     * @return float the length of the name.
+     */
+    @SuppressWarnings("SameParameterValue")
     private float getMaxNameWidth(List<Score> highscores, int fontSize) {
-
         float maxWidth = 0;
 
         this.app.textSize(fontSize);
@@ -109,32 +118,38 @@ public class EndView extends Screen {
 
         }
         return maxWidth;
-
-
     }
 
 
+    /**
+     * This methods creates a button that starts
+     * a new game for the same player.
+     * @return Button a button.
+     */
     private Button createPlayAgainButton() {
-
-        Button play_again_button = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_again_button.png")), buttonWidth, buttonHeight);
-        play_again_button.addListener(new MouseAdapter() {
+        final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/playAgainButton.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        playAgainButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(EndView.this.app, EndView.this.player);
+                new GameView(EndScreen.this.app, EndScreen.this.player);
             }
         });
-        return play_again_button;
+        return playAgainButton;
     }
 
+    /**
+     * This method creates a button that takes the
+     * player back to the menu screen.
+     * @return Button a button.
+     */
     private Button createMenuButton() {
-
-        Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/back_to_menu_button.png")), buttonWidth, buttonHeight);
+        final Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/back_to_menu_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createMenuButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new MenuView(EndView.this.app);
+                new MenuView(EndScreen.this.app);
             }
         });
 
@@ -143,7 +158,6 @@ public class EndView extends Screen {
 
     @Override
     public View createView() {
-
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
         PImage backgroundImage = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/end_screen.jpg"));
