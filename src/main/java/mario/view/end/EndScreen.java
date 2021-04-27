@@ -8,13 +8,18 @@ import mario.ui.Button;
 import mario.ui.MouseAdapter;
 import mario.view.Screen;
 import mario.view.game.GameView;
-import mario.view.menu.MenuView;
+import mario.view.menu.MenuScreen;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
 import processing.core.PImage;
 import java.util.List;
 
+/**
+ * This class represents an end screen where
+ * the player can see the high scores, go back
+ * to the menu screen or choose to play again.
+ */
 public class EndScreen extends Screen {
 
     private static final int BUTTON_WIDTH = 350;
@@ -79,7 +84,7 @@ public class EndScreen extends Screen {
     }
 
     /**
-     * This method adds the highscores to the end screen.
+     * This method adds the high scores to the end screen.
      */
     private void addHighScores() {
         final List<Score> highscores = Highscores.loadHighscores();
@@ -99,8 +104,8 @@ public class EndScreen extends Screen {
 
     /**
      * This method returns the length of the longest name
-     * in the highscores list.
-     * @param highscores a list of highscores.
+     * in the high scores list.
+     * @param highscores a list of high scores.
      * @param fontSize a font size.
      * @return float the length of the name.
      */
@@ -149,10 +154,9 @@ public class EndScreen extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new MenuView(EndScreen.this.app);
+                new MenuScreen(EndScreen.this.app);
             }
         });
-
         return createMenuButton;
     }
 
