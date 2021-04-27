@@ -88,7 +88,7 @@ public class GameDashboard extends Dashboard {
     @Override
     public void update() {
         removeHeart();
-        addkey();
+        addKey();
         this.time.setText(this.timer.formatToString(this.timer.getElapsedTime()));
         if (this.player.isSucessfull()) {
             Highscores.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
@@ -140,7 +140,7 @@ public class GameDashboard extends Dashboard {
     /**
      * This method adds a key to the dashboard.
      */
-    public void addkey() {
+    public void addKey() {
         if (this.player.getKeysCollected() > 0) {
             KeySprite key = new KeySprite();
             this.addGameObject(key, (int) (this.width - X_MARGIN - key.getWidth() * this.player.getKeysCollected()), (int) (Y_MARGIN + FONT_SIZE + key.getHeight() / 2f));
