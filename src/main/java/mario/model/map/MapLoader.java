@@ -27,7 +27,7 @@ public final class MapLoader {
             map = new int[getNumberOfLines(file)][];
 
             for (int i = 0; i < map.length; i++) {
-                map[i] = toIntArray(reader.readLine().split(","));
+                map[i] = convertStringToIntArray(reader.readLine().split(","));
             }
 
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public final class MapLoader {
      * @param array an array of numerical strings.
      * @return int[]
      */
-    private static int[] toIntArray(String[] array) {
+    private static int[] convertStringToIntArray(String[] array) {
         final int[] result = new int[array.length];
 
             for (int i = 0; i < array.length; i++) {
