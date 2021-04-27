@@ -4,9 +4,14 @@ import nl.han.ica.oopg.userinput.IMouseInput;
 
 /**
  * An abstract class for receiving mouseEvents.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.0
+ * @since 24-04-2021
  */
 public abstract class MouseAdapter implements IMouseInput {
 
+    protected MouseAdapter() {}
 
     @Override
     public void mousePressed(int i, int i1, int i2) {}
