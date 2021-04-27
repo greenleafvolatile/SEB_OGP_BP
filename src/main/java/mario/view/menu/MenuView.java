@@ -16,8 +16,8 @@ import processing.core.PImage;
  */
 public class MenuView extends Screen {
 
-    private final int buttonWidth = 350;
-    private final int buttonHeight = 100;
+    private static final int BUTTON_WIDTH = 350;
+    private static final int BUTTON_HEIGHT= 100;
 
     private TextField textField;
 
@@ -85,7 +85,7 @@ public class MenuView extends Screen {
      * @return Button a button.
      */
     private Button createPlayButton() {
-        final Button createPlayButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), this.buttonWidth, this.buttonHeight);
+        final Button createPlayButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createPlayButton.addListener(new MouseAdapter() {
 
             @Override
@@ -102,7 +102,7 @@ public class MenuView extends Screen {
      * @return Button a button.
      */
     private Button createExitButton() {
-        final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), this.buttonWidth, this.buttonHeight);
+        final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createExitButton.addListener(new MouseAdapter() {
 
             @Override
