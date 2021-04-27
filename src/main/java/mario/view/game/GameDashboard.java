@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class GameDashboard extends Dashboard {
 
-    private final int xMargin = 40;
-    private final int yMargin = 20;
-    private final int fontSize = 32;
+    private static final int X_MARGIN = 40;
+    private static final int Y_MARGIN = 20;
+    private static final int FONT_SIZE = 32;
 
     private final Timer timer;
     private final List<HeartSprite> hearts = new ArrayList<>();
@@ -51,12 +51,12 @@ public class GameDashboard extends Dashboard {
      * This method initializes the dashboard to its starting state.
      */
     private void init() {
-        this.graphics.textSize(fontSize);
+        this.graphics.textSize(FONT_SIZE);
 
         String keysLabelText = "keys:";
-        this.addLabel(keysLabelText, (int) (this.width - this.xMargin - this.graphics.textWidth(keysLabelText)), this.yMargin, this.fontSize, 255, 255, 255);
+        this.addLabel(keysLabelText, (int) (this.width - X_MARGIN - this.graphics.textWidth(keysLabelText)), Y_MARGIN, 255, 255, 255);
 
-        this.addLabel("Player:" + this.player.getName(), this.xMargin, this.yMargin, this.fontSize, 255, 255, 255);
+        this.addLabel("Player:" + this.player.getName(), X_MARGIN, Y_MARGIN, 255, 255, 255);
 
         this.createTimeLabel();
 
@@ -80,9 +80,9 @@ public class GameDashboard extends Dashboard {
      * the time on the dashboard.
      */
     private void createTimeLabel() {
-        this.time = new TextObject(this.timer.formatToString(this.timer.getElapsedTime()), this.fontSize);
+        this.time = new TextObject(this.timer.formatToString(this.timer.getElapsedTime()), FONT_SIZE);
         this.time.setForeColor(255, 255, 255, 255);
-        this.addGameObject(this.time, (int) (this.width / 2 - this.graphics.textWidth(this.timer.formatToString(this.timer.getElapsedTime())) / 2), this.yMargin);
+        this.addGameObject(this.time, (int) (this.width / 2 - this.graphics.textWidth(this.timer.formatToString(this.timer.getElapsedTime())) / 2), Y_MARGIN);
     }
 
     @Override
@@ -100,16 +100,15 @@ public class GameDashboard extends Dashboard {
      * @param text the text to show.
      * @param xPos the x-position of the text.
      * @param yPos the y-position of the text.
-     * @param fontSize the fontsize.
      * @param red a red value for the color of the text.
      * @param green a green value for the color of the text.
      * @param blue a blue value for the color of the text.
      */
     @SuppressWarnings("SameParameterValue")
-    private void addLabel(String text, int xPos, int yPos, int fontSize, int red, int green, int blue) {
+    private void addLabel(String text, int xPos, int yPos, int red, int green, int blue) {
         final int alpha = 255;
 
-        TextObject textObject = new TextObject(text, fontSize);
+        TextObject textObject = new TextObject(text, FONT_SIZE);
         textObject.setForeColor(red, green, blue, alpha);
 
         this.addGameObject(textObject, xPos, yPos);
@@ -119,8 +118,8 @@ public class GameDashboard extends Dashboard {
      * This methods adds heart sprites to the dashboard.
      */
     private void addHearts() {
-        final int y = this.yMargin + this.fontSize;
-        int x = xMargin;
+        final int y = Y_MARGIN + FONT_SIZE;
+        int x = X_MARGIN;
 
         for (HeartSprite heartSprite : this.hearts) {
             this.addGameObject(heartSprite, x, y + (int) (heartSprite.getHeight() / 2f));
@@ -144,7 +143,7 @@ public class GameDashboard extends Dashboard {
     public void addkey() {
         if (this.player.getKeysCollected() > 0) {
             KeySprite key = new KeySprite();
-            this.addGameObject(key, (int) (this.width - this.xMargin - key.getWidth() * this.player.getKeysCollected()), (int) (this.yMargin + this.fontSize + key.getHeight() / 2f));
+            this.addGameObject(key, (int) (this.width - X_MARGIN - key.getWidth() * this.player.getKeysCollected()), (int) (Y_MARGIN + FONT_SIZE + key.getHeight() / 2f));
         }
     }
 }
