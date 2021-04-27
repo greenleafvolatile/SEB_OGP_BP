@@ -9,7 +9,7 @@ public class KeySprite extends Image {
 
     public KeySprite() {
 
-        super(new Sprite(MainApp.MEDIA_URL.concat("/sprites/items/hud_keyYellow.png")));
+        super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/items/hud_keyYellow.png")));
     }
 
     public void update() {

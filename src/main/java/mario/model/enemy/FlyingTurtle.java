@@ -14,7 +14,7 @@ public class FlyingTurtle extends Enemy {
      * @param app the app
      */
     public FlyingTurtle(MainApp app) {
-        super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/flyingturtle.png")), 6);
+        super(app, new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/flyingturtle.png")), 6);
         setxSpeed(2);
     }
 
