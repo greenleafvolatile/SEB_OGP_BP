@@ -85,7 +85,7 @@ public class MenuScreen extends Screen {
      * @return Button a button.
      */
     private Button createPlayButton() {
-        final Button createPlayButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        final Button createPlayButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/play_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createPlayButton.addListener(new MouseAdapter() {
 
             @Override
@@ -102,7 +102,7 @@ public class MenuScreen extends Screen {
      * @return Button a button.
      */
     private Button createExitButton() {
-        final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/exit_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createExitButton.addListener(new MouseAdapter() {
 
             @Override
