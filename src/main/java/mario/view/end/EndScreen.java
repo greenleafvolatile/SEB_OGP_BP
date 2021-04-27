@@ -7,7 +7,7 @@ import mario.model.score.Score;
 import mario.ui.Button;
 import mario.ui.MouseAdapter;
 import mario.view.Screen;
-import mario.view.game.GameView;
+import mario.view.game.GameScreen;
 import mario.view.menu.MenuScreen;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
@@ -19,6 +19,10 @@ import java.util.List;
  * This class represents an end screen where
  * the player can see the high scores, go back
  * to the menu screen or choose to play again.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.1
+ * @since 27-04-2021
  */
 public class EndScreen extends Screen {
 
@@ -137,7 +141,7 @@ public class EndScreen extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(EndScreen.this.app, EndScreen.this.player);
+                new GameScreen(EndScreen.this.app, EndScreen.this.player);
             }
         });
         return playAgainButton;
