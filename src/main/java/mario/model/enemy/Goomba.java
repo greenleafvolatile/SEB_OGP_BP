@@ -14,7 +14,7 @@ public class Goomba extends Enemy {
      * @param app the app
      */
     public Goomba(MainApp app) {
-        super(app, new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/goomba.png")), 8);
+        super(app, new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/goomba.png")), 8);
         setxSpeed(5);
     }
 

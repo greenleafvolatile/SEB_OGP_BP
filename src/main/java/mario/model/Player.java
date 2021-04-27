@@ -46,9 +46,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private boolean successFull;
 
     public Player(MainApp app, String name) {
-        super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
-        this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
-        this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("sounds/key_pickup.wav"));
+        super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/mario.png")), 7);
+        this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("media/sounds/jump_11.wav")));
+        this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("media/sounds/key_pickup.wav"));
         this.app = app;
         this.name = name;
         this.keys.add(new Key(LEFT));

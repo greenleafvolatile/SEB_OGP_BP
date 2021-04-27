@@ -26,13 +26,12 @@ public class GameView extends Screen {
     private final Player player;
     private final TileMap tileMap;
 
-    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("maps/level1.csv"))};
+    private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("data/maps/level1.csv"))};
 
     /**
      * Instantiates a new Game view.
      *
      * @param app        the app
-     * @param playerName the player name
      */
     public GameView(MainApp app, Player player) {
         super(app);
