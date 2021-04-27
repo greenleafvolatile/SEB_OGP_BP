@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * This class represents the player.
  */
-public final class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
+public class Player extends AnimatedSpriteObject implements ICollidableWithTiles, ICollidableWithGameObjects {
 
     private static final int SPACE_BAR = 32;
     private static final float JUMPING_SPEED = 8;
@@ -72,7 +72,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         }
     }
 
-
     @Override
     public void keyPressed(int intValue, char charValue) {
         this.setKeyPressed(intValue, true);
@@ -114,7 +113,6 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             }
         }
     }
-
 
     /**
      * The method allows the player to jump.
