@@ -11,6 +11,8 @@ import nl.han.ica.oopg.userinput.IKeyInput;
  */
 public abstract class KeyAdapter implements IKeyInput {
 
+    protected KeyAdapter() {}
+
     @Override
     public void keyPressed(int i, char c) {}
 

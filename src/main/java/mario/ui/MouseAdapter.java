@@ -7,6 +7,7 @@ import nl.han.ica.oopg.userinput.IMouseInput;
  */
 public abstract class MouseAdapter implements IMouseInput {
 
+    protected MouseAdapter() {}
 
     @Override
     public void mousePressed(int i, int i1, int i2) {}
