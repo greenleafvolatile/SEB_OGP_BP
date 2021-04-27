@@ -18,7 +18,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
     /**
      * The App.
      */
-    protected MainApp app;
+    protected final MainApp app;
 
     /**
      * Instantiates a new Enemy.
@@ -27,7 +27,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
      * @param sprite      the sprite
      * @param totalFrames the total frames
      */
-    public Enemy(MainApp app, Sprite sprite, int totalFrames) {
+    protected Enemy(MainApp app, Sprite sprite, int totalFrames) {
         super(sprite, totalFrames);
         this.app = app;
     }
@@ -46,15 +46,12 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
 
     @Override
     public final void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
-
         for (CollidedTile tile : collidedTiles) {
 
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile) {
-
                 switch (tile.getCollisionSide()) {
-
                     case LEFT:
                         setX(tilePixelLocation.x - width);
                         setDirection(270);
