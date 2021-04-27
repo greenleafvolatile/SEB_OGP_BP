@@ -4,7 +4,7 @@ import mario.MainApp;
 import mario.model.Player;
 import mario.ui.*;
 import mario.view.Screen;
-import mario.view.game.GameView;
+import mario.view.game.GameScreen;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
@@ -13,6 +13,10 @@ import processing.core.PImage;
 
 /**
  * This class represents a start menu.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.1.
+ * @since 27-04-2021
  */
 public class MenuScreen extends Screen {
 
@@ -90,7 +94,7 @@ public class MenuScreen extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
+                new GameScreen(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
             }
         });
         return createPlayButton;
@@ -132,7 +136,7 @@ public class MenuScreen extends Screen {
                 } else if (Character.isLetterOrDigit(charValue)) {
                     MenuScreen.this.textField.addChar(charValue);
                 } else if (intValue == PConstants.ENTER) {
-                    new GameView(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
+                    new GameScreen(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
                 }
             }
         });

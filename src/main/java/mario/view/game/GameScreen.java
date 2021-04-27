@@ -19,30 +19,35 @@ import java.io.File;
 import static mario.model.map.TileTypeLoader.loadTileTypes;
 
 /**
- * The type Game view.
+ * This class represents the game screen.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.1
+ * @since 27-04-2021
  */
-public class GameView extends Screen {
+public class GameScreen extends Screen {
 
     private final Player player;
     private final TileMap tileMap;
-
     private final File[] mapFiles = { new File(MainApp.MEDIA_URL.concat("data/maps/level1.csv"))};
 
+    private int level = 1; // Future iterations of the game could have different levels. To reflect this, the field is currently not final.
+
     /**
-     * Instantiates a new Game view.
-     *
-     * @param app        the app
+     * The constructor
+     * @param app an instance of the game engine.
+     * @param player a player object.
      */
-    public GameView(MainApp app, Player player) {
+    public GameScreen(MainApp app, Player player) {
         super(app);
         this.tileMap = this.initMap();
         this.app.setTileMap(this.tileMap);
         this.player = player;
-        this.createDashboard();
+        this.addDashboard();
         this.render();
     }
 
-    private void createDashboard() {
+    private void addDashboard() {
         this.app.addDashboard(
                 new GameDashboard(
                         0, 0,
@@ -52,14 +57,14 @@ public class GameView extends Screen {
                 ));
     }
 
+    /**
+     * This method initiates the tile map that underlies the game world.
+     * @return TileMap a tile map.
+     */
     private TileMap initMap() {
-
         final int tileSize = 64;
 
-        @SuppressWarnings("unchecked")
         TileType<Tile>[] tileTypes =  loadTileTypes();
-
-        int level = 1;
         int[][] tilesMap = MapLoader.loadMap(mapFiles[level - 1]);
         return new TileMap(tileSize, tileTypes, tilesMap);
     }
@@ -77,11 +82,15 @@ public class GameView extends Screen {
         this.app.addGameObject(new PiranhasPlant(this.app), 6066, 835);
     }
 
+    /**
+     * This method creates a viewport on the game world.
+     * @return Viewport a view port.
+     */
     private Viewport centerViewport() {
         int screenWidth = this.app.getWidth();
         int screenHeight = this.app.getHeight();
 
-        CenterFollowingViewport viewPort = new CenterFollowingViewport(player, screenWidth, screenHeight, 0, 100);
+        CenterFollowingViewport viewPort = new CenterFollowingViewport(this.player, screenWidth, screenHeight, 0, 100);
         viewPort.setTolerance(50, 280, 50, 50);
         return viewPort;
     }
