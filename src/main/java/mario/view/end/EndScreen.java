@@ -35,7 +35,7 @@ public class EndScreen extends Screen {
 
     @Override
     public void addObjects() {
-        final String endText = this.player.isSucessfull() ? "You won!" : "You lost!";
+        final String endText = this.player.isSuccessful() ? "You won!" : "You lost!";
         final int endTextFontSize = 100;
 
         addText(endText, endTextFontSize, this.app.getWidth() / 2f - getTextWidth(endText, endTextFontSize) / 2f, endTextFontSize * .5f);
