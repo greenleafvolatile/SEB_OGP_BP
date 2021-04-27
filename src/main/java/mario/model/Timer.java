@@ -23,7 +23,7 @@ public class Timer {
     }
 
     /**
-     * Gets total elapsed time.
+     * Gets total elapsed time when stopTimer is used.
      *
      * @return the total elapsed time
      */
@@ -33,7 +33,7 @@ public class Timer {
 
 
     /**
-     * Gets elapsed time.
+     * Gets elapsed time in seconds.
      *
      * @return the elapsed time
      */
