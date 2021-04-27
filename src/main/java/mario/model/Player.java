@@ -15,7 +15,7 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
 import nl.han.ica.oopg.tile.TileMap;
 import processing.core.PVector;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private final Sound jumpSound;
     private final Sound keyPickup;
     private final MainApp app;
-    private final List<Key> keys = new ArrayList<>();
+    private final List<Key> keys = Arrays.asList(new Key(LEFT), new Key(RIGHT));
     private final String name;
 
     private float airspeed = 4;
@@ -46,8 +46,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("media/sounds/key_pickup.wav"));
         this.app = app;
         this.name = name;
-        this.keys.add(new Key(LEFT));
-        this.keys.add(new Key(RIGHT));
         this.initPlayer();
     }
 
@@ -106,7 +104,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * @param pressed a boolean.
      */
     private void setKeyPressed(int intValue, boolean pressed) {
-
         for (Key key : keys) {
             if (key.getKeyValue() == intValue) {
                 key.setPressed(pressed);
@@ -137,7 +134,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         this.setDirectionSpeed(360, JUMPING_SPEED);
     }
 
-
     /**
      * This method performs a directional jump.
      */
@@ -154,7 +150,6 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
     @Override
     public void keyReleased(int intValue, char charValue) {
-
         this.setKeyPressed(intValue, false);
 
 
