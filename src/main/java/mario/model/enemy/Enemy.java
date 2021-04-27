@@ -33,7 +33,7 @@ public abstract class Enemy extends AnimatedSpriteObject implements ICollidableW
     }
 
     /**
-     * Play animation.
+     * Play animation by calling next sprite frame.
      */
     public void playAnimation() {
         nextFrame();
