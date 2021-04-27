@@ -1,5 +1,6 @@
 package mario.model.score;
 
+import mario.MainApp;
 import nl.han.ica.oopg.persistence.FilePersistence;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class Highscores {
 
-    private static final FilePersistence fileHandler = new FilePersistence("/main/java/mario/media/highscores/highscores.txt");
+    private static final FilePersistence fileHandler = new FilePersistence("main/java/mario/resources/data/highscores/highscores.txt");
 
     /**
      * A private constructor. This class is a utility class that should not be instantiated.

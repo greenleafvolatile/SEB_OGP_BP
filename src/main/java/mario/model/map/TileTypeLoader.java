@@ -12,17 +12,17 @@ public final class TileTypeLoader {
 
     public static TileType<Tile>[] loadTileTypes() {
 
-        Sprite boxSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/box.png"); // 0
-        Sprite groundSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/ground.png"); // 1
-        Sprite lavaSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/lava.png"); // 2
-        Sprite doorYellowTopSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/locked_door_yellow_top.png"); // 3
-        Sprite doorYellowBottomSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/locked_door_yellow_bottom.png"); // 4
-        Sprite noLockDoorBottomSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/no_lock_door_bottom.png"); // 5
-        Sprite noLockDoorTopSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/no_lock_door_top.png"); // 6
-        Sprite platformBlueSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/platform_blue.png"); // 7
-        Sprite keySprite = new Sprite(MainApp.MEDIA_URL + "sprites/items/keyYellow.png"); // 8
-        Sprite groundLayerSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/ground_layer.png"); // 9
-        Sprite lavaLayerSprite = new Sprite(MainApp.MEDIA_URL + "sprites/ground/lava_layer.png"); // 10
+        Sprite boxSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/box.png"); // 0
+        Sprite groundSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/ground.png"); // 1
+        Sprite lavaSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/lava.png"); // 2
+        Sprite doorYellowTopSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/locked_door_yellow_top.png"); // 3
+        Sprite doorYellowBottomSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/locked_door_yellow_bottom.png"); // 4
+        Sprite noLockDoorBottomSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/no_lock_door_bottom.png"); // 5
+        Sprite noLockDoorTopSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/no_lock_door_top.png"); // 6
+        Sprite platformBlueSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/platform_blue.png"); // 7
+        Sprite keySprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/items/keyYellow.png"); // 8
+        Sprite groundLayerSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/ground_layer.png"); // 9
+        Sprite lavaLayerSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/lava_layer.png"); // 10
 
         TileType<FloorTile> boxTileType = new TileType<>(FloorTile.class, boxSprite); // 0
         TileType<FloorTile> groundTileType = new TileType<>(FloorTile.class, groundSprite); // 1
