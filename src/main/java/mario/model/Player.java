@@ -211,7 +211,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
-            if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
+            //if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
+
+            if (tile.getTile() instanceof FloorTile) { //|| tile.getTile() instanceof LavaTile) {
 
                 if (this.jump) {
                     this.setCurrentFrameIndex(0);
@@ -219,14 +221,19 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     this.airspeed = 4; // Reset airspeed to default value.
                 }
 
-                if (tile.getTile() instanceof LavaTile) {
+                /*if (tile.getTile() instanceof LavaTile) {
                     this.removeOneHealthPoint();
                     this.moveToStart();
                     break;
-                }
+                }*/
 
                 parseCollisionSide(tile, tilePixelLocation);
 
+            } else if (tile.getTile() instanceof LavaTile) {
+
+                this.removeOneHealthPoint();
+                this.moveToStart();
+                break;
 
             } else if (tile.getTile() instanceof KeyTile) {
 
