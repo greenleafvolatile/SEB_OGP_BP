@@ -13,7 +13,6 @@ import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.sound.Sound;
-import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileMap;
 import processing.core.PVector;
 import java.util.ArrayList;
@@ -211,56 +210,52 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
-            //if (tile.getTile() instanceof FloorTile || tile.getTile() instanceof LavaTile) {
-
-            if (tile.getTile() instanceof FloorTile) { //|| tile.getTile() instanceof LavaTile) {
-
+            if (tile.getTile() instanceof FloorTile) {
                 if (this.jump) {
                     this.setCurrentFrameIndex(0);
                     this.jump = false;
                     this.airspeed = 4; // Reset airspeed to default value.
                 }
 
-                /*if (tile.getTile() instanceof LavaTile) {
-                    this.removeOneHealthPoint();
-                    this.moveToStart();
-                    break;
-                }*/
-
                 parseCollisionSide(tile, tilePixelLocation);
-
             } else if (tile.getTile() instanceof LavaTile) {
-
                 this.removeOneHealthPoint();
                 this.moveToStart();
                 break;
-
             } else if (tile.getTile() instanceof KeyTile) {
-
                 try {
-                    this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1);
-                    this.keysCollected++;
-                    this.keyPickup.cue(0);
-                    this.keyPickup.play();
+                    pickupKey(tileIndexLocation);
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
-
-            } else if (tile.getTile() instanceof DoorTile) {
-
-                if (this.keysCollected >= 0)  {
-
-                    this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-                    this.successFull = true;
-                    this.app.updateGame();
-                    new EndScreen(this.app, this);
-                    resetPlayer();
-                    break;
-                }
+            } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
+                this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+                this.successFull = true;
+                this.app.updateGame();
+                new EndScreen(this.app, this);
+                this.resetPlayer();
+                break;
             }
         }
     }
 
+    /**
+     * This method performs key pickup actions.
+     * @param tileIndexLocation the location of the key tile in the list.
+     */
+    private void pickupKey(PVector tileIndexLocation) {
+        this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1); // Set the location of the key tile in the map to -1 indicating that is now empty.
+        this.keysCollected++;
+        this.keyPickup.cue(0);
+        this.keyPickup.play();
+    }
+
+    /**
+     * This method checks which side of a tile the player
+     * collided with.
+     * @param tile a tile
+     * @param tilePixelLocation the location of a pixel in the tile.
+     */
     private void parseCollisionSide(CollidedTile tile, PVector tilePixelLocation) {
 
         switch (tile.getCollisionSide()) {
@@ -284,6 +279,8 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                 this.setY(tilePixelLocation.y + this.height);
                 this.setSpeed(0);
                 break;
+            default:
+                // Log error to file.
 
         }
     }
