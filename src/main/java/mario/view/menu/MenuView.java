@@ -99,7 +99,7 @@ public class MenuView extends Screen {
     /**
      * This method creates a button for
      * exiting the game.
-     * @return
+     * @return Button a button.
      */
     private Button createExitButton() {
         final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), this.buttonWidth, this.buttonHeight);
