@@ -35,7 +35,7 @@ public class EndScreen extends Screen {
 
     @Override
     public void addObjects() {
-        final String endText = this.player.isSuccessful() ? "You won!" : "You lost!";
+        final String endText = this.player.isSuccessFull() ? "You won!" : "You lost!";
         final int endTextFontSize = 100;
 
         addText(endText, endTextFontSize, this.app.getWidth() / 2f - getTextWidth(endText, endTextFontSize) / 2f, endTextFontSize * .5f);
@@ -132,7 +132,7 @@ public class EndScreen extends Screen {
      * @return Button a button.
      */
     private Button createPlayAgainButton() {
-        final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/playAgainButton.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/play_again_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         playAgainButton.addListener(new MouseAdapter() {
 
             @Override

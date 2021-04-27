@@ -309,7 +309,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         return healthPoints;
     }
 
-    public boolean isSuccessful() {
+    public boolean isSuccessFull() {
         return this.successFull;
     }
 
