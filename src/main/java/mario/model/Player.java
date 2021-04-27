@@ -40,6 +40,12 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private boolean onFloorTile;
     private boolean successFull;
 
+    /**
+     * Instantiates a new Player.
+     *
+     * @param app  the app
+     * @param name the name
+     */
     public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("media/sounds/jump_11.wav")));
@@ -208,38 +214,47 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile) {
-
-                if (this.jump) {
-                    this.setCurrentFrameIndex(0);
-                    this.jump = false;
-                    this.airspeed = 4; // Reset airspeed to default value.
-                }
+                collisionFloorTile();
                 parseCollisionSide(tile, tilePixelLocation);
-
             } else if (tile.getTile() instanceof LavaTile) {
-
-                this.removeOneHealthPoint();
-                this.moveToStart();
+                collisionLavaTile();
                 break;
-
             } else if (tile.getTile() instanceof KeyTile) {
-
-                try {
-                    pickupKey(tileIndexLocation);
-                } catch (TileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
+                collisionKeyTile(tileIndexLocation);
             } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
-
-                this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-                this.successFull = true;
-                this.app.updateGame();
-                new EndScreen(this.app, this);
-                this.resetPlayer();
+                collisionDoorTile();
                 break;
             }
         }
+    }
+
+    private void collisionFloorTile() {
+        if (this.jump) {
+            this.setCurrentFrameIndex(0);
+            this.jump = false;
+            this.airspeed = 4; // Reset airspeed to default value.
+        }
+    }
+
+    private void collisionLavaTile() {
+        this.removeOneHealthPoint();
+        this.moveToStart();
+    }
+
+    private void collisionKeyTile(PVector tileIndexLocation) {
+        try {
+            pickupKey(tileIndexLocation);
+        } catch (TileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void collisionDoorTile() {
+        this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+        this.successFull = true;
+        this.app.updateGame();
+        new EndScreen(this.app, this);
+        this.resetPlayer();
     }
 
     /**
@@ -301,18 +316,38 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         }
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets health.
+     *
+     * @return the health
+     */
     public int getHealth() {
         return healthPoints;
     }
 
+    /**
+     * Is success full boolean.
+     *
+     * @return the boolean
+     */
     public boolean isSuccessFull() {
         return this.successFull;
     }
 
+    /**
+     * Gets keys collected.
+     *
+     * @return the keys collected
+     */
     public int getKeysCollected() {
         return keysCollected;
     }
