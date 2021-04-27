@@ -13,6 +13,10 @@ import java.io.IOException;
  */
 public final class MapLoader {
 
+    /**
+     * A private constructor. This class is a utility class
+     * that should not be instantiated.
+     */
     private MapLoader(){}
 
     /**
