@@ -12,7 +12,7 @@ import processing.core.PConstants;
 import processing.core.PImage;
 
 /**
- * The type Menu view.
+ * This class represents a start menu.
  */
 public class MenuView extends Screen {
 
@@ -22,9 +22,9 @@ public class MenuView extends Screen {
     private TextField textField;
 
     /**
-     * Instantiates a new Menu view.
+     * The constructor
      *
-     * @param app the app
+     * @param app an instance of the game engine.
      */
     public MenuView(MainApp app) {
         super(app);
@@ -34,7 +34,7 @@ public class MenuView extends Screen {
     @Override
     public void addObjects() {
 
-        this.addLabel();
+        this.addTextFieldLabel();
 
         this.app.addGameObject(
                 new Image(new Sprite(MainApp.MEDIA_URL.concat("logo.png"))),
@@ -43,14 +43,14 @@ public class MenuView extends Screen {
         );
 
         this.app.addGameObject(
-                playButton(),
-                this.app.getWidth() / 2f - playButton().getWidth() / 2f,
+                createPlayButton(),
+                this.app.getWidth() / 2f - createPlayButton().getWidth() / 2f,
                 300
         );
 
         this.app.addGameObject(
-                exitButton(),
-                this.app.getWidth() / 2f - exitButton().getWidth() / 2f,
+                createExitButton(),
+                this.app.getWidth() / 2f - createExitButton().getWidth() / 2f,
                 430
         );
 
@@ -61,58 +61,76 @@ public class MenuView extends Screen {
                 this.app.getWidth() / 2f,
                 210
         );
-
     }
 
+    /**
+     * This method adds a label to the text field.
+     */
     // TODO Maybe create a class for text labels...?
-    private void addLabel() {
+    private void addTextFieldLabel() {
         final int fontSize = 40;
-        String labelText = "Enter name:";
-        this.app.textSize(40);
+        final int yPos = 200;
+        final String labelText = "Enter name:";
 
-        TextObject textFieldLabel = new TextObject(labelText, 40);
+        this.app.textSize(fontSize);
+
+        TextObject textFieldLabel = new TextObject(labelText, fontSize);
         textFieldLabel.setForeColor(0, 0, 255, 255);
-        this.app.addGameObject(textFieldLabel, app.getWidth() / 2f - app.textWidth(labelText), 200 + fontSize / 4f);
+        this.app.addGameObject(textFieldLabel, this.app.getWidth() / 2f - this.app.textWidth(labelText), yPos + fontSize / 4f);
     }
 
-    private Button playButton() {
-
-        Button playButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), buttonWidth, buttonHeight);
-        playButton.addListener(new MouseAdapter() {
+    /**
+     * This method creates a button that
+     * starts the game.
+     * @return Button a button.
+     */
+    private Button createPlayButton() {
+        final Button createPlayButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/play_button.png")), this.buttonWidth, this.buttonHeight);
+        createPlayButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
                 new GameView(MenuView.this.app, new Player(MenuView.this.app, MenuView.this.textField.getInputValue()));
             }
         });
-        return playButton;
+        return createPlayButton;
     }
 
-    private Button exitButton() {
-
-        Button exitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), buttonWidth, buttonHeight);
-        exitButton.addListener(new MouseAdapter() {
+    /**
+     * This method creates a button for
+     * exiting the game.
+     * @return
+     */
+    private Button createExitButton() {
+        final Button createExitButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/exit_button.png")), this.buttonWidth, this.buttonHeight);
+        createExitButton.addListener(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
                 System.exit(0);
             }
         });
-        return exitButton;
+        return createExitButton;
     }
 
+    /**
+     * This methods creates a text field for entering
+     * the user's name.
+     */
     private void createTextField() {
+        final int textFieldWidth = 200;
+        final int textFieldHeight = 50;
 
-        this.textField = new TextField( 200, 50);
-        textField.addKeyListener(new KeyAdapter() {
+        this.textField = new TextField( textFieldWidth, textFieldHeight);
+        this.textField.addKeyListener(new KeyAdapter() {
 
             @Override
             public void keyPressed(int intValue, char charValue) {
 
                 if (intValue == PConstants.BACKSPACE) {
-                    textField.removeChar();
+                    MenuView.this.textField.removeChar();
                 } else if (Character.isLetterOrDigit(charValue)) {
-                    textField.addChar(charValue);
+                    MenuView.this.textField.addChar(charValue);
                 } else if (intValue == PConstants.ENTER) {
                     new GameView(MenuView.this.app, new Player(MenuView.this.app, MenuView.this.textField.getInputValue()));
                 }
@@ -129,5 +147,4 @@ public class MenuView extends Screen {
 
         return view;
     }
-
 }
