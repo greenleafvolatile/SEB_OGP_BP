@@ -204,31 +204,36 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
 
     @Override
     public void tileCollisionOccurred(List<CollidedTile> collidedTiles) {
-
         for (CollidedTile tile : collidedTiles) {
 
             PVector tilePixelLocation = this.app.getTileMap().getTilePixelLocation(tile.getTile());
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile) {
+
                 if (this.jump) {
                     this.setCurrentFrameIndex(0);
                     this.jump = false;
                     this.airspeed = 4; // Reset airspeed to default value.
                 }
-
                 parseCollisionSide(tile, tilePixelLocation);
+
             } else if (tile.getTile() instanceof LavaTile) {
+
                 this.removeOneHealthPoint();
                 this.moveToStart();
                 break;
+
             } else if (tile.getTile() instanceof KeyTile) {
+
                 try {
                     pickupKey(tileIndexLocation);
                 } catch (TileNotFoundException e) {
                     e.printStackTrace();
                 }
+
             } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
+
                 this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
                 this.successFull = true;
                 this.app.updateGame();
