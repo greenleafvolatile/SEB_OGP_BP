@@ -11,8 +11,8 @@ package mario.model.score;
  */
 public class Score implements Comparable<Score>{
 
-    final private String name;
-    final private String time;
+    private final String name;
+    private final String time;
 
     /**
      * The constructor

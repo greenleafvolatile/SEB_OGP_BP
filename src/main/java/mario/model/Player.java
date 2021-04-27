@@ -61,7 +61,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
 
 
     /**
-     * This method removes one healthPoints point.
+     * This method removes one health point.
      */
     private void removeOneHealthPoint() {
         this.healthPoints--;
@@ -115,7 +115,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     }
 
     /**
-     * The method allows the player to jump.
+     * This method allows the player to jump.
      */
     private void jump() {
         if (this.isKeyPressed()) {
@@ -193,8 +193,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-                    removeOneHealthPoint();
-                    moveToStart();
+                    playerDies();
                 }
             }
         }
@@ -217,9 +216,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 parseCollisionSide(tile, tilePixelLocation);
 
             } else if (tile.getTile() instanceof LavaTile) {
-
-                this.removeOneHealthPoint();
-                this.moveToStart();
+                this.playerDies();
                 break;
 
             } else if (tile.getTile() instanceof KeyTile) {
@@ -240,6 +237,15 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 break;
             }
         }
+    }
+
+    /**
+     * This method performs actions that occur
+     * on player death.
+     */
+    private void playerDies() {
+        this.removeOneHealthPoint();
+        this.moveToStart();
     }
 
     /**
