@@ -14,7 +14,7 @@ import processing.core.PImage;
 /**
  * This class represents a start menu.
  */
-public class MenuView extends Screen {
+public class MenuScreen extends Screen {
 
     private static final int BUTTON_WIDTH = 350;
     private static final int BUTTON_HEIGHT= 100;
@@ -26,7 +26,7 @@ public class MenuView extends Screen {
      *
      * @param app an instance of the game engine.
      */
-    public MenuView(MainApp app) {
+    public MenuScreen(MainApp app) {
         super(app);
         super.render();
     }
@@ -90,7 +90,7 @@ public class MenuView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new GameView(MenuView.this.app, new Player(MenuView.this.app, MenuView.this.textField.getInputValue()));
+                new GameView(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
             }
         });
         return createPlayButton;
@@ -128,11 +128,11 @@ public class MenuView extends Screen {
             public void keyPressed(int intValue, char charValue) {
 
                 if (intValue == PConstants.BACKSPACE) {
-                    MenuView.this.textField.removeChar();
+                    MenuScreen.this.textField.removeChar();
                 } else if (Character.isLetterOrDigit(charValue)) {
-                    MenuView.this.textField.addChar(charValue);
+                    MenuScreen.this.textField.addChar(charValue);
                 } else if (intValue == PConstants.ENTER) {
-                    new GameView(MenuView.this.app, new Player(MenuView.this.app, MenuView.this.textField.getInputValue()));
+                    new GameView(MenuScreen.this.app, new Player(MenuScreen.this.app, MenuScreen.this.textField.getInputValue()));
                 }
             }
         });

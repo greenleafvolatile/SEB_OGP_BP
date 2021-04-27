@@ -8,7 +8,7 @@ import mario.ui.Button;
 import mario.ui.MouseAdapter;
 import mario.view.Screen;
 import mario.view.game.GameView;
-import mario.view.menu.MenuView;
+import mario.view.menu.MenuScreen;
 import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.objects.TextObject;
 import nl.han.ica.oopg.view.View;
@@ -130,7 +130,7 @@ public class EndView extends Screen {
 
             @Override
             public void mousePressed(int x, int y, int button) {
-                new MenuView(EndView.this.app);
+                new MenuScreen(EndView.this.app);
             }
         });
 
