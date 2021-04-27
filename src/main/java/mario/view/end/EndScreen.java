@@ -132,7 +132,7 @@ public class EndScreen extends Screen {
      * @return Button a button.
      */
     private Button createPlayAgainButton() {
-        final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/playAgainButton.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/playAgainButton.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         playAgainButton.addListener(new MouseAdapter() {
 
             @Override
@@ -149,7 +149,7 @@ public class EndScreen extends Screen {
      * @return Button a button.
      */
     private Button createMenuButton() {
-        final Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("/sprites/buttons/back_to_menu_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
+        final Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/back_to_menu_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
         createMenuButton.addListener(new MouseAdapter() {
 
             @Override
@@ -164,7 +164,7 @@ public class EndScreen extends Screen {
     public View createView() {
         View view = new View(this.app.getWidth(), this.app.getHeight());
 
-        PImage backgroundImage = this.app.loadImage(MainApp.MEDIA_URL.concat("/background/end_screen.jpg"));
+        PImage backgroundImage = this.app.loadImage(MainApp.MEDIA_URL.concat("media/background/end_screen.jpg"));
 
         view.setBackground(backgroundImage);
 
