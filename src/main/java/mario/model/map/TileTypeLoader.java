@@ -6,10 +6,27 @@ import nl.han.ica.oopg.objects.Sprite;
 import nl.han.ica.oopg.tile.Tile;
 import nl.han.ica.oopg.tile.TileType;
 
+/**
+ * This class is a utility class. Its one and only function is return an
+ * array of TileTypes necessary for the instantiation of a TileMap object.
+ *
+ * @author Christiaan Wiggers en Daan Pol
+ * @version 1.0.
+ * @since 20-04-2021
+ */
 public final class TileTypeLoader {
 
+    /**
+     * A private constructor. This class is a utility class that
+     * shoudl not be instantiated.
+     */
     private TileTypeLoader(){}
 
+    /**
+     * This method creates an array with the TileTypes
+     * that the game world is made out of.
+     * @return TileType<Tile>[] an array of TileTypes.
+     */
     public static TileType<Tile>[] loadTileTypes() {
 
         Sprite boxSprite = new Sprite(MainApp.MEDIA_URL + "media/sprites/ground/box.png"); // 0
@@ -36,8 +53,6 @@ public final class TileTypeLoader {
         TileType<FloorTile> groundLayerType = new TileType<>(FloorTile.class, groundLayerSprite); // 9
         TileType<LavaTile> lavaLayerType = new TileType<>(LavaTile.class, lavaLayerSprite); // 9
 
-
-
         @SuppressWarnings("rawtypes")
         TileType[] tileTypes = new TileType[]{
                 boxTileType,
@@ -52,7 +67,6 @@ public final class TileTypeLoader {
                 groundLayerType,
                 lavaLayerType
         };
-
         return tileTypes;
     }
 }
