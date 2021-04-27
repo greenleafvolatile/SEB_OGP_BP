@@ -1,16 +1,12 @@
 package mario;
 
-import mario.model.score.Highscores;
-import mario.model.score.Score;
-import mario.view.menu.MenuView;
+import mario.view.menu.MenuScreen;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.sound.Sound;
 
-import java.util.List;
-
 public class MainApp extends GameEngine {
 
-    public static String MEDIA_URL = "src/main/java/mario/media/";
+    public static String MEDIA_URL = "src/main/java/mario/resources/";
 
 
     public static void main(String[] args) {
@@ -27,10 +23,10 @@ public class MainApp extends GameEngine {
 
         size(screenWidth, screenHeight);
 
-        Sound backgroundMusic = new Sound(this, MEDIA_URL.concat("sounds/background_loop.WAV"));
+        Sound backgroundMusic = new Sound(this, MEDIA_URL.concat("media/sounds/background_loop.wav"));
         backgroundMusic.loop(-1);
 
-        new MenuView(this);
+        new MenuScreen(this);
 
     }
 
