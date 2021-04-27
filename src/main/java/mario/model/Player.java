@@ -4,7 +4,7 @@ import mario.MainApp;
 import mario.model.enemy.Enemy;
 import mario.model.map.MapLoader;
 import mario.model.map.tiles.*;
-import mario.view.end.EndView;
+import mario.view.end.EndScreen;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
@@ -42,9 +42,9 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
     private boolean successFull;
 
     public Player(MainApp app, String name) {
-        super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/mario.png")), 7);
-        this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("media/sounds/jump_11.wav")));
-        this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("media/sounds/key_pickup.wav"));
+        super(new Sprite(MainApp.MEDIA_URL.concat("sprites/characters/mario.png")), 7);
+        this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("sounds/jump_11.wav")));
+        this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("sounds/key_pickup.wav"));
         this.app = app;
         this.name = name;
         this.keys.add(new Key(LEFT));
@@ -73,7 +73,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
         this.health--;
         if (this.health == 0) {
             this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-            new EndView(this.app, this);
+            new EndScreen(this.app, this);
             resetPlayer();
 
         }
@@ -273,7 +273,7 @@ public final class Player extends AnimatedSpriteObject implements ICollidableWit
                     this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
                     this.successFull = true;
                     this.app.updateGame();
-                    new EndView(this.app, this);
+                    new EndScreen(this.app, this);
                     resetPlayer();
                     break;
                 }
