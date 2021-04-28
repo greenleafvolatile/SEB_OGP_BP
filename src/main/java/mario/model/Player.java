@@ -8,7 +8,6 @@ import mario.view.end.EndScreen;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
-import nl.han.ica.oopg.exceptions.TileNotFoundException;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
@@ -217,11 +216,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 break;
 
             } else if (tile.getTile() instanceof KeyTile) {
-                try {
-                    pickupKey(tileIndexLocation);
-                } catch (TileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                pickupKey(tileIndexLocation);
+                playKeyPickupSound();
 
             } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
                 this.showEndScreen();
@@ -245,9 +241,9 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * This method resets animation frame and airspeed after jump.
      */
     private void resetFromJump() {
-            this.setCurrentFrameIndex(0);
-            this.jump = false;
-            this.airspeed = 4; // Reset airspeed to default value.
+        this.setCurrentFrameIndex(0);
+        this.jump = false;
+        this.airspeed = 4; // Reset airspeed to default value.
     }
 
     /**
@@ -265,6 +261,12 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private void pickupKey(PVector tileIndexLocation) {
         this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1); // Set the location of the key tile in the map to -1 indicating that is now empty.
         this.keysCollected++;
+    }
+
+    /**
+     * This method plays a sound when a key is picked up.
+     */
+    private void playKeyPickupSound() {
         this.keyPickup.cue(0);
         this.keyPickup.play();
     }
