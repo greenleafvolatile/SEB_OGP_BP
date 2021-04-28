@@ -209,15 +209,15 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 if (this.jump) {
                     resetFromJump();
                 }
-                parseCollisionSide(tile, tilePixelLocation);
+                this.parseCollisionSide(tile, tilePixelLocation);
 
             } else if (tile.getTile() instanceof LavaTile) {
                 this.playerDies();
                 break;
 
             } else if (tile.getTile() instanceof KeyTile) {
-                pickupKey(tileIndexLocation);
-                playKeyPickupSound();
+                this.pickupKey(tileIndexLocation);
+                this.playKeyPickupSound();
 
             } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
                 this.showEndScreen();
