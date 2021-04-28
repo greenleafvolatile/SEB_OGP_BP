@@ -207,7 +207,9 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile) {
-                resetFromJump();
+                if (this.jump) {
+                    resetFromJump();
+                }
                 parseCollisionSide(tile, tilePixelLocation);
 
             } else if (tile.getTile() instanceof LavaTile) {
@@ -243,11 +245,9 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * This method resets animation frame and airspeed after jump.
      */
     private void resetFromJump() {
-        if (this.jump) {
             this.setCurrentFrameIndex(0);
             this.jump = false;
             this.airspeed = 4; // Reset airspeed to default value.
-        }
     }
 
     /**
