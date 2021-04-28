@@ -2,7 +2,7 @@ package mario.view.game;
 
 import mario.model.Player;
 import mario.model.Timer;
-import mario.model.score.Highscores;
+import mario.model.score.HighscoresHandler;
 import mario.model.score.Score;
 import mario.view.game.sprites.HeartSprite;
 import mario.view.game.sprites.KeySprite;
@@ -91,7 +91,7 @@ public class GameDashboard extends Dashboard {
         addKey();
         this.time.setText(this.timer.formatToString(this.timer.getElapsedTime()));
         if (this.player.isSuccessFull()) {
-            Highscores.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
+            HighscoresHandler.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
         }
     }
 

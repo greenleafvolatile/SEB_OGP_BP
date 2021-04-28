@@ -59,7 +59,7 @@ public class TextField extends GameObject {
      * Adds a keyAdapter object to the text field.
      * @param keyAdapter a keyAdapter object.
      */
-    public void addKeyListener(KeyAdapter keyAdapter) {
+    public void addKeyAdapter(KeyAdapter keyAdapter) {
         this.keyAdapter = keyAdapter;
     }
 
