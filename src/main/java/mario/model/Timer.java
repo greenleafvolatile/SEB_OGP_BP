@@ -1,12 +1,11 @@
 package mario.model;
 
 /**
- * The type Timer.
+ * The type Timer, based on System nanoTime.
  */
 public class Timer {
 
     private long start;
-    private long end;
 
     /**
      * Start timer.
@@ -14,23 +13,6 @@ public class Timer {
     public void startTimer() {
         this.start = System.nanoTime();
     }
-
-    /**
-     * Stop timer.
-     */
-    public void stopTimer() {
-        this.end = System.nanoTime();
-    }
-
-    /**
-     * Gets total elapsed time when stopTimer is used.
-     *
-     * @return the total elapsed time
-     */
-    public double getTotalElapsedTime() {
-        return (this.end - this.start) / 1_000_000_000.0;
-    }
-
 
     /**
      * Gets elapsed time in seconds.
