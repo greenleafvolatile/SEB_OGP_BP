@@ -38,9 +38,10 @@ public class Button extends Image {
      * This method adds a mouseListener to the button.
      * @param listener a mouseListener.
      */
-    public void addListener(MouseAdapter listener) {
+    public void addMouseAdapter(MouseAdapter listener) {
         this.listener = listener;
     }
 
+    @Override
     public void update() {}
 }

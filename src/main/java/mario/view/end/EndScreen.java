@@ -2,7 +2,7 @@ package mario.view.end;
 
 import mario.MainApp;
 import mario.model.Player;
-import mario.model.score.Highscores;
+import mario.model.score.HighscoresHandler;
 import mario.model.score.Score;
 import mario.ui.Button;
 import mario.ui.MouseAdapter;
@@ -91,7 +91,7 @@ public class EndScreen extends Screen {
      * This method adds the high scores to the end screen.
      */
     private void addHighScores() {
-        final List<Score> highscores = Highscores.loadHighscores();
+        final List<Score> highscores = HighscoresHandler.loadHighscores();
         final int fontSize = 32;
         final float maxNameWidth = getMaxNameWidth(highscores, fontSize) / 10f; // To align the names you need to know the length of the longest name.
 
@@ -137,7 +137,7 @@ public class EndScreen extends Screen {
      */
     private Button createPlayAgainButton() {
         final Button playAgainButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/play_again_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
-        playAgainButton.addListener(new MouseAdapter() {
+        playAgainButton.addMouseAdapter(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {
@@ -154,7 +154,7 @@ public class EndScreen extends Screen {
      */
     private Button createMenuButton() {
         final Button createMenuButton = new Button(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/buttons/back_to_menu_button.png")), BUTTON_WIDTH, BUTTON_HEIGHT);
-        createMenuButton.addListener(new MouseAdapter() {
+        createMenuButton.addMouseAdapter(new MouseAdapter() {
 
             @Override
             public void mousePressed(int x, int y, int button) {

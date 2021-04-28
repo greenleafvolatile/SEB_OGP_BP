@@ -27,7 +27,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private static final float GROUND_SPEED = 5;
 
     private final Sound jumpSound;
-    private final Sound keyPickup;
+    private final Sound keyPickupSound;
     private final MainApp app;
     private final List<Key> keys = new ArrayList<>();
     private final String name;
@@ -42,7 +42,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/mario.png")), 7);
         this.jumpSound = new Sound(app, MainApp.MEDIA_URL.concat(("media/sounds/jump_11.wav")));
-        this.keyPickup = new Sound(app, MainApp.MEDIA_URL.concat("media/sounds/key_pickup.wav"));
+        this.keyPickupSound = new Sound(app, MainApp.MEDIA_URL.concat("media/sounds/key_pickup.wav"));
         this.app = app;
         this.name = name;
         this.keys.add(new Key(LEFT));
@@ -267,8 +267,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      * This method plays a sound when a key is picked up.
      */
     private void playKeyPickupSound() {
-        this.keyPickup.cue(0);
-        this.keyPickup.play();
+        this.keyPickupSound.cue(0);
+        this.keyPickupSound.play();
     }
 
     /**
