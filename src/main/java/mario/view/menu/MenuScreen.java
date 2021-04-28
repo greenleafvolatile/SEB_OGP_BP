@@ -70,7 +70,6 @@ public class MenuScreen extends Screen {
     /**
      * This method adds a label to the text field.
      */
-    // TODO Maybe create a class for text labels...?
     private void addTextFieldLabel() {
         final int fontSize = 40;
         final int yPos = 200;

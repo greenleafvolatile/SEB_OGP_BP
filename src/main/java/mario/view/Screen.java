@@ -1,7 +1,6 @@
 package mario.view;
 
 import mario.MainApp;
-import nl.han.ica.oopg.dashboard.Dashboard;
 import nl.han.ica.oopg.view.View;
 
 /**
@@ -12,14 +11,14 @@ public abstract class Screen {
     /**
      * The App.
      */
-    protected MainApp app;
+    protected final MainApp app;
 
     /**
      * Instantiates a new Screen.
      *
      * @param app the app
      */
-    public Screen(MainApp app) {
+    protected Screen(MainApp app) {
         this.app = app;
         dispose();
     }
