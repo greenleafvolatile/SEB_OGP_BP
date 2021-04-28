@@ -8,7 +8,6 @@ import mario.view.end.EndScreen;
 import nl.han.ica.oopg.collision.CollidedTile;
 import nl.han.ica.oopg.collision.ICollidableWithGameObjects;
 import nl.han.ica.oopg.collision.ICollidableWithTiles;
-import nl.han.ica.oopg.exceptions.TileNotFoundException;
 import nl.han.ica.oopg.objects.AnimatedSpriteObject;
 import nl.han.ica.oopg.objects.GameObject;
 import nl.han.ica.oopg.objects.Sprite;
@@ -193,8 +192,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
                 if (this.getY() + this.getHeight() <= object.getCenterY()) {
                     this.app.deleteGameObject(object);
                 } else {
-                    removeOneHealthPoint();
-                    moveToStart();
+                    this.playerDies();
                 }
             }
         }
@@ -208,38 +206,52 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
             PVector tileIndexLocation = this.app.getTileMap().getTileIndex(tile.getTile());
 
             if (tile.getTile() instanceof FloorTile) {
-
                 if (this.jump) {
-                    this.setCurrentFrameIndex(0);
-                    this.jump = false;
-                    this.airspeed = 4; // Reset airspeed to default value.
+                    resetFromJump();
                 }
-                parseCollisionSide(tile, tilePixelLocation);
+                this.parseCollisionSide(tile, tilePixelLocation);
 
             } else if (tile.getTile() instanceof LavaTile) {
-
-                this.removeOneHealthPoint();
-                this.moveToStart();
+                this.playerDies();
                 break;
 
             } else if (tile.getTile() instanceof KeyTile) {
-
-                try {
-                    pickupKey(tileIndexLocation);
-                } catch (TileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                this.pickupKey(tileIndexLocation);
+                this.playKeyPickupSound();
 
             } else if (tile.getTile() instanceof DoorTile && keysCollected == 5) {
-
-                this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-                this.successFull = true;
-                this.app.updateGame();
-                new EndScreen(this.app, this);
-                this.resetPlayer();
+                this.showEndScreen();
                 break;
             }
         }
+    }
+
+    /**
+     * This method shows the end screen.
+     */
+    private void showEndScreen() {
+        this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
+        this.successFull = true;
+        this.app.updateGame();
+        new EndScreen(this.app, this);
+        this.resetPlayer();
+    }
+
+    /**
+     * This method resets animation frame and airspeed after jump.
+     */
+    private void resetFromJump() {
+        this.setCurrentFrameIndex(0);
+        this.jump = false;
+        this.airspeed = 4; // Reset airspeed to default value.
+    }
+
+    /**
+     * This method performs actions when player dies.
+     */
+    private void playerDies() {
+        this.removeOneHealthPoint();
+        this.moveToStart();
     }
 
     /**
@@ -249,6 +261,12 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private void pickupKey(PVector tileIndexLocation) {
         this.app.getTileMap().setTile((int) tileIndexLocation.x, (int) tileIndexLocation.y, -1); // Set the location of the key tile in the map to -1 indicating that is now empty.
         this.keysCollected++;
+    }
+
+    /**
+     * This method plays a sound when a key is picked up.
+     */
+    private void playKeyPickupSound() {
         this.keyPickup.cue(0);
         this.keyPickup.play();
     }
