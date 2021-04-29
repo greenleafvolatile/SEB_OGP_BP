@@ -6,7 +6,7 @@ import nl.han.ica.oopg.sound.Sound;
 
 public class MainApp extends GameEngine {
 
-    public static String MEDIA_URL = "src/main/java/mario/resources/";
+    public static final String MEDIA_URL = "src/main/java/mario/resources/";
 
 
     public static void main(String[] args) {
