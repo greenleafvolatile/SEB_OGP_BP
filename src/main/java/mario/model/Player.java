@@ -37,7 +37,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
     private int healthPoints = 3;
     private boolean jump;
     private boolean onFloorTile;
-    private boolean successFull;
+    private boolean gameCompleted;
 
     public Player(MainApp app, String name) {
         super(new Sprite(MainApp.MEDIA_URL.concat("media/sprites/characters/mario.png")), 7);
@@ -231,7 +231,7 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
      */
     private void showEndScreen() {
         this.app.setTileMap(new TileMap(64, this.app.getTileMap().getTileTypes(), MapLoader.loadEmptyMap()));
-        this.successFull = true;
+        this.gameCompleted = true;
         this.app.updateGame();
         new EndScreen(this.app, this);
         this.resetPlayer();
@@ -327,8 +327,8 @@ public class Player extends AnimatedSpriteObject implements ICollidableWithTiles
         return healthPoints;
     }
 
-    public boolean isSuccessFull() {
-        return this.successFull;
+    public boolean isGameCompleted() {
+        return this.gameCompleted;
     }
 
     public int getKeysCollected() {

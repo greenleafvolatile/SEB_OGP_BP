@@ -90,7 +90,7 @@ public class GameDashboard extends Dashboard {
         removeHeart();
         addKey();
         this.time.setText(this.timer.formatToString(this.timer.getElapsedTime()));
-        if (this.player.isSuccessFull()) {
+        if (this.player.isGameCompleted()) {
             HighscoresHandler.addHighscore(new Score(this.player.getName(), this.timer.formatToString(this.timer.getElapsedTime())));
         }
     }
