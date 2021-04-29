@@ -39,7 +39,7 @@ public abstract class Screen {
     /**
      * Render Screen with instance of View and GameObjects.
      */
-    protected void render() {
+    public void render() {
         this.app.setView(createView());
         this.addObjects();
     }
@@ -47,7 +47,7 @@ public abstract class Screen {
     /**
      * Dispose all GameObjects and Dashboards.
      */
-    protected void dispose() {
+    public void dispose() {
         this.app.deleteAllGameOBjects();
         this.app.deleteAllDashboards();
     }
