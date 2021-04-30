@@ -41,7 +41,4 @@ public class Button extends Image {
     public void addMouseAdapter(MouseAdapter listener) {
         this.listener = listener;
     }
-
-    @Override
-    public void update() {}
 }

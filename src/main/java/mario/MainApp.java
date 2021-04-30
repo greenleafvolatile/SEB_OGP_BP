@@ -4,11 +4,22 @@ import mario.view.menu.MenuScreen;
 import nl.han.ica.oopg.engine.GameEngine;
 import nl.han.ica.oopg.sound.Sound;
 
+/**
+ * The Main app.
+ */
 public class MainApp extends GameEngine {
 
-    public static String MEDIA_URL = "src/main/java/mario/resources/";
+    /**
+     * The file path constant MEDIA_URL.
+     */
+    public static final String MEDIA_URL = "src/main/java/mario/resources/";
 
 
+    /**
+     * The entry point of the application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         MainApp app = new MainApp();
